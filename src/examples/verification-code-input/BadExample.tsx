@@ -6,6 +6,7 @@ const CODE_TO_COPY = "847291";
 
 export function BadExample() {
   const [values, setValues] = useState(["", "", "", "", "", ""]);
+  const [copied, setCopied] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -43,6 +44,8 @@ export function BadExample() {
 
   const copyCode = async () => {
     await navigator.clipboard.writeText(CODE_TO_COPY);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   if (isVerified) {
@@ -82,7 +85,9 @@ export function BadExample() {
         >
           {CODE_TO_COPY}
         </button>
-        <p className="text-xs text-muted-foreground mt-1">Click to copy</p>
+        <p className={`text-xs mt-1 transition-colors ${copied ? "text-green-600 font-medium" : "text-muted-foreground"}`}>
+          {copied ? "Copied!" : "Click to copy"}
+        </p>
       </div>
 
       <div className="space-y-2">
@@ -102,7 +107,7 @@ export function BadExample() {
               value={value}
               onChange={(e) => handleChange(index, e.target.value)}
               onKeyDown={(e) => handleKeyDown(index, e)}
-              className="h-12 w-10 text-center text-lg font-mono"
+              className="h-9 w-10 text-center text-lg font-mono"
             />
           ))}
         </div>

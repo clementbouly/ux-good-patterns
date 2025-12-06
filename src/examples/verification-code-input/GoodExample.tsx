@@ -1,63 +1,29 @@
-import { useState, useRef } from "react";
-import { Input } from "@/components/ui/input";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 
 const CODE_TO_COPY = "847291";
 
 export function GoodExample() {
-  const [values, setValues] = useState(["", "", "", "", "", ""]);
+  const [value, setValue] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [copied, setCopied] = useState(false);
-  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const handleChange = (index: number, value: string) => {
-    if (!/^\d*$/.test(value)) return;
-
-    const newValues = [...values];
-    newValues[index] = value.slice(-1);
-    setValues(newValues);
-
-    // Auto-focus next input
-    if (value && index < 5) {
-      inputRefs.current[index + 1]?.focus();
-    }
+  const handleOnChange = (newValue: string) => {
+    setValue(newValue);
   };
 
-  const handleKeyDown = (index: number, e: React.KeyboardEvent) => {
-    if (e.key === "Backspace" && !values[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
-
-  const handlePaste = (e: React.ClipboardEvent) => {
-    e.preventDefault();
-    const pastedData = e.clipboardData.getData("text").replace(/\D/g, "");
-
-    if (pastedData.length > 0) {
-      const newValues = [...values];
-      for (let i = 0; i < Math.min(pastedData.length, 6); i++) {
-        newValues[i] = pastedData[i];
-      }
-      setValues(newValues);
-
-      // Focus the next empty input or the last one
-      const nextEmptyIndex = newValues.findIndex((v) => !v);
-      const focusIndex = nextEmptyIndex === -1 ? 5 : nextEmptyIndex;
-      inputRefs.current[focusIndex]?.focus();
-    }
-  };
 
   const handleVerify = () => {
-    const code = values.join("");
-    if (code === CODE_TO_COPY) {
+    if (value === CODE_TO_COPY) {
       setIsVerified(true);
     }
   };
 
   const handleReset = () => {
-    setValues(["", "", "", "", "", ""]);
+    setValue("");
     setIsVerified(false);
-    inputRefs.current[0]?.focus();
   };
 
   const copyCode = async () => {
@@ -93,6 +59,7 @@ export function GoodExample() {
   }
 
   return (
+    
     <div className="space-y-4">
       <div className="rounded-md bg-muted p-3 text-center">
         <p className="text-xs text-muted-foreground mb-1">Your code:</p>
@@ -107,34 +74,34 @@ export function GoodExample() {
           {copied ? "Copied!" : "Click to copy"}
         </p>
       </div>
+ 
 
       <div className="space-y-2">
         <p className="text-sm text-center text-muted-foreground">
           Enter verification code
         </p>
-        <div className="flex justify-center gap-2">
-          {values.map((value, index) => (
-            <Input
-              key={index}
-              ref={(el) => {
-                inputRefs.current[index] = el;
-              }}
-              type="text"
-              inputMode="numeric"
-              maxLength={1}
-              value={value}
-              onChange={(e) => handleChange(index, e.target.value)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
-              onPaste={handlePaste}
-              className="h-12 w-10 text-center text-lg font-mono"
-            />
-          ))}
+      <div className="flex justify-center gap-2">
+        <InputOTP
+          maxLength={6}
+          onChange={handleOnChange}
+          pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+
+        >
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        </InputOTP>
         </div>
       </div>
 
       <Button
         onClick={handleVerify}
-        disabled={values.some((v) => !v)}
+        disabled={value.length < 6}
         className="w-full"
       >
         Verify
