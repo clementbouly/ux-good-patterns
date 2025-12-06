@@ -1,3 +1,6 @@
+import { GoodExample } from "./GoodExample";
+import { BadExample } from "./BadExample";
+
 export const meta = {
   id: "submit-button-loading",
   title: "Disable submit button during loading",
@@ -7,5 +10,10 @@ export const meta = {
   tags: ["button", "loading", "form", "mobile"],
 };
 
-export { GoodExample } from "./GoodExample";
-export { BadExample } from "./BadExample";
+export const BadExamples = [
+  { component: BadExample, label: "No disable" },
+];
+
+export const GoodExamples = [
+  { component: GoodExample, label: "With spinner" },
+];

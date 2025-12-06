@@ -1,3 +1,6 @@
+import { GoodExample } from "./GoodExample";
+import { BadExample } from "./BadExample";
+
 export const meta = {
   id: "verification-code-input",
   title: "Verification code paste support",
@@ -7,5 +10,10 @@ export const meta = {
   tags: ["input", "verification", "paste", "OTP", "mobile"],
 };
 
-export { GoodExample } from "./GoodExample";
-export { BadExample } from "./BadExample";
+export const BadExamples = [
+  { component: BadExample, label: "No paste" },
+];
+
+export const GoodExamples = [
+  { component: GoodExample, label: "With paste" },
+];

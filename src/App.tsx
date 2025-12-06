@@ -1,8 +1,48 @@
 import { useState } from "react";
-import { examples, type Example } from "@/examples";
+import { examples, type Example, type ExampleVariant } from "@/examples";
 import { Button } from "@/components/ui/button";
 
+function VariantSelector({
+  variants,
+  currentIndex,
+  onSelect,
+  color,
+}: {
+  variants: ExampleVariant[];
+  currentIndex: number;
+  onSelect: (index: number) => void;
+  color: "red" | "green";
+}) {
+  if (variants.length <= 1) return null;
+
+  const colorClasses = {
+    red: "border-red-300 bg-red-50 text-red-700 hover:bg-red-100 data-[active=true]:bg-red-600 data-[active=true]:text-white",
+    green: "border-green-300 bg-green-50 text-green-700 hover:bg-green-100 data-[active=true]:bg-green-600 data-[active=true]:text-white",
+  };
+
+  return (
+    <div className="flex gap-1">
+      {variants.map((variant, index) => (
+        <button
+          key={index}
+          onClick={() => onSelect(index)}
+          data-active={currentIndex === index}
+          className={`rounded-md border px-2 py-1 text-xs font-medium transition-colors ${colorClasses[color]}`}
+        >
+          {variant.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function ExampleCard({ example }: { example: Example }) {
+  const [badIndex, setBadIndex] = useState(0);
+  const [goodIndex, setGoodIndex] = useState(0);
+
+  const CurrentBadExample = example.BadExamples[badIndex]?.component;
+  const CurrentGoodExample = example.GoodExamples[goodIndex]?.component;
+
   return (
     <div className="rounded-lg border bg-card p-6">
       <div className="mb-4">
@@ -27,26 +67,42 @@ function ExampleCard({ example }: { example: Example }) {
 
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 text-xs text-red-600">
-              X
-            </span>
-            <h3 className="font-medium text-red-600">Bad example</h3>
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 text-xs text-red-600">
+                X
+              </span>
+              <h3 className="font-medium text-red-600">Bad example</h3>
+            </div>
+            <VariantSelector
+              variants={example.BadExamples}
+              currentIndex={badIndex}
+              onSelect={setBadIndex}
+              color="red"
+            />
           </div>
           <div className="rounded-md border border-red-200 bg-red-50/50 p-4">
-            <example.BadExample />
+            {CurrentBadExample && <CurrentBadExample />}
           </div>
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 text-xs text-green-600">
-              V
-            </span>
-            <h3 className="font-medium text-green-600">Good example</h3>
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 text-xs text-green-600">
+                V
+              </span>
+              <h3 className="font-medium text-green-600">Good example</h3>
+            </div>
+            <VariantSelector
+              variants={example.GoodExamples}
+              currentIndex={goodIndex}
+              onSelect={setGoodIndex}
+              color="green"
+            />
           </div>
           <div className="rounded-md border border-green-200 bg-green-50/50 p-4">
-            <example.GoodExample />
+            {CurrentGoodExample && <CurrentGoodExample />}
           </div>
         </div>
       </div>

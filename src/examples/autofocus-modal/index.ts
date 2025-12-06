@@ -1,3 +1,6 @@
+import { GoodExample } from "./GoodExample";
+import { BadExample } from "./BadExample";
+
 export const meta = {
   id: "autofocus-modal",
   title: "Autofocus on Modal input",
@@ -7,5 +10,10 @@ export const meta = {
   tags: ["modal", "input", "accessibility", "mobile"],
 };
 
-export { GoodExample } from "./GoodExample";
-export { BadExample } from "./BadExample";
+export const BadExamples = [
+  { component: BadExample, label: "No autofocus" },
+];
+
+export const GoodExamples = [
+  { component: GoodExample, label: "With autofocus" },
+];

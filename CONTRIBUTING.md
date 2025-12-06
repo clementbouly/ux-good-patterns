@@ -19,6 +19,9 @@ Each example requires 4 files:
 #### `index.ts` - Metadata and exports
 
 ```typescript
+import { GoodExample } from "./GoodExample";
+import { BadExample } from "./BadExample";
+
 export const meta = {
   id: "my-new-pattern",
   title: "Pattern Title",
@@ -27,8 +30,30 @@ export const meta = {
   tags: ["tag1", "tag2"],
 };
 
-export { GoodExample } from "./GoodExample";
-export { BadExample } from "./BadExample";
+export const BadExamples = [
+  { component: BadExample, label: "Default" },
+];
+
+export const GoodExamples = [
+  { component: GoodExample, label: "Default" },
+];
+```
+
+You can add multiple variants for each side:
+
+```typescript
+import { GoodExample } from "./GoodExample";
+import { GoodExampleAlternative } from "./GoodExampleAlternative";
+import { BadExample } from "./BadExample";
+
+export const BadExamples = [
+  { component: BadExample, label: "No feedback" },
+];
+
+export const GoodExamples = [
+  { component: GoodExample, label: "Custom" },
+  { component: GoodExampleAlternative, label: "With library" },
+];
 ```
 
 #### `GoodExample.tsx` - The correct example

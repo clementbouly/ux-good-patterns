@@ -13,8 +13,13 @@ export type ExampleMeta = {
   tags: string[];
 };
 
+export type ExampleVariant = {
+  component: React.ComponentType;
+  label: string;
+};
+
 export type Example = {
   meta: ExampleMeta;
-  GoodExample: React.ComponentType;
-  BadExample: React.ComponentType;
+  GoodExamples: ExampleVariant[];
+  BadExamples: ExampleVariant[];
 };
