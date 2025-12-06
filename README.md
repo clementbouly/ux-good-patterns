@@ -48,6 +48,17 @@ npm run preview  # Preview production build
 npm run lint     # Lint the code
 ```
 
+## Development Tools
+
+### Locator (Click to Component)
+
+This project is configured with [Locator](https://www.locatorjs.com/), a tool that lets you click on any component in the browser and jump directly to its source code in your IDE.
+
+**Setup:**
+1. Install the [Locator Chrome extension](https://chromewebstore.google.com/detail/locatorjs/npbfdllefekhdplbkdigpncggmojpefi)
+2. Run the app in development mode (`npm run dev`)
+3. Hold `Option` (Mac) or `Alt` (Windows/Linux) and click on any element to open it in your editor
+
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed instructions.
