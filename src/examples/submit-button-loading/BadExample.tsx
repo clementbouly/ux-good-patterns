@@ -1,33 +1,77 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function BadExample() {
-  const [_isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [submitCount, setSubmitCount] = useState(0);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     // No protection against multiple clicks!
-    setIsLoading(true);
     setSubmitCount((c) => c + 1);
 
     // Simulate API call
     setTimeout(() => {
-      setIsLoading(false);
+      setIsSuccess(true);
     }, 2000);
   };
 
-  return (
-    <div className="space-y-4">
-      <Button onClick={handleSubmit}>Submit</Button>
+  const handleNewPayment = () => {
+    setIsSuccess(false);
+    setSubmitCount(0);
+  };
 
-      <p className="text-sm text-muted-foreground">
-        Form submitted: <span className="font-mono font-bold">{submitCount}</span> time(s)
-      </p>
-      {submitCount > 1 && (
-        <p className="text-sm text-red-500">
-          Multiple submissions detected!
+  if (isSuccess) {
+    return (
+      <div className="space-y-4 text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+          <svg
+            className="h-6 w-6 text-green-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        </div>
+        <h3 className="text-lg font-semibold">Payment successful!</h3>
+        <p className="text-sm text-muted-foreground">
+          Total payments: <span className="font-mono font-bold">{submitCount}</span>
         </p>
-      )}
-    </div>
+        {submitCount > 1 && (
+          <p className="text-sm text-red-500 font-medium">
+            You were charged {submitCount} times!
+          </p>
+        )}
+        <Button variant="outline" onClick={handleNewPayment} className="w-full">
+          New payment
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div className="grid gap-2">
+        <Label htmlFor="email-bad">Email</Label>
+        <Input id="email-bad" type="email" defaultValue="john@example.com" />
+      </div>
+
+      <div className="grid gap-2">
+        <Label htmlFor="amount-bad">Amount</Label>
+        <Input id="amount-bad" type="text" defaultValue="99.00 €" />
+      </div>
+
+      <Button type="submit" className="w-full">
+        Pay now
+      </Button>
+    </form>
   );
 }

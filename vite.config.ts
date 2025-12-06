@@ -6,7 +6,15 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), checker({ typescript: { tsconfigPath: './tsconfig.app.json' } })],
+  plugins: [
+    react({
+      babel: {
+        plugins: [['@locator/babel-jsx/dist', { env: 'development' }]],
+      },
+    }),
+    tailwindcss(),
+    checker({ typescript: { tsconfigPath: './tsconfig.app.json' } }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

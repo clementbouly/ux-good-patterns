@@ -105,6 +105,8 @@ function App() {
         <p>
           Open source -{" "}
           <a
+            target="_blank"
+            rel="noopener noreferrer"
             href="https://github.com/clementbouly/ux-good-patterns"
             className="underline hover:text-foreground"
           >
