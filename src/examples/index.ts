@@ -1,6 +1,7 @@
 import * as autofocusModal from "./autofocus-modal";
+import * as submitButtonLoading from "./submit-button-loading";
 
-export const examples = [autofocusModal];
+export const examples = [autofocusModal, submitButtonLoading];
 
 export type ExampleMeta = {
   id: string;

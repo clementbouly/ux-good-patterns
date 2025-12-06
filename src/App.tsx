@@ -66,7 +66,7 @@ function App() {
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold">UX Good Patterns</h1>
+          <h1 className="text-3xl font-bold">The Good, The Bad and The UX</h1>
           <p className="text-muted-foreground">
             A collection of UX patterns with comparative examples
           </p>
@@ -105,7 +105,7 @@ function App() {
         <p>
           Open source -{" "}
           <a
-            href="https://github.com"
+            href="https://github.com/clementbouly/ux-good-patterns"
             className="underline hover:text-foreground"
           >
             Contribute on GitHub
