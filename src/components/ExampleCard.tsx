@@ -86,7 +86,7 @@ export function ExampleCard({
           {example.meta.category}
         </span>
         {title}
-        <p className="text-sm text-muted-foreground">
+        <p className="my-1 text-sm text-muted-foreground">
           {example.meta.description}
         </p>
         <div className="mt-2 flex flex-wrap gap-1">
@@ -101,8 +101,8 @@ export function ExampleCard({
         </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="space-y-2">
+      <div className="grid gap-6 md:grid-cols-2 items-stretch">
+        <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 dark:bg-red-950">
@@ -117,12 +117,12 @@ export function ExampleCard({
               color="red"
             />
           </div>
-          <div className="rounded-md border border-red-200 bg-red-50/50 p-4 dark:border-red-900 dark:bg-red-950/50">
+          <div className="flex-1 rounded-md border border-red-200 bg-red-50/50 p-4 dark:border-red-900 dark:bg-red-950/50">
             {CurrentBadExample && <CurrentBadExample />}
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 dark:bg-green-950">
@@ -137,7 +137,7 @@ export function ExampleCard({
               color="green"
             />
           </div>
-          <div className="rounded-md border border-green-200 bg-green-50/50 p-4 dark:border-green-900 dark:bg-green-950/50">
+          <div className="flex-1 rounded-md border border-green-200 bg-green-50/50 p-4 dark:border-green-900 dark:bg-green-950/50">
             {CurrentGoodExample && <CurrentGoodExample />}
           </div>
         </div>

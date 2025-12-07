@@ -26,7 +26,7 @@ function RootLayout() {
         <Outlet />
       </main>
 
-      <footer className="border-t py-8 text-center text-sm text-muted-foreground">
+      <footer className="bg-[#0a0a0a] border-t py-8 text-center text-sm text-muted-foreground">
         <p className="mb-2">Open source project - Want to contribute?</p>
         <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-4">
           <a

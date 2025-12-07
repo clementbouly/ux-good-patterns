@@ -1,50 +1,44 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+import { Check } from "lucide-react";
 import { CopyableCode } from "@/components/CopyableCode";
 
-const CODE_TO_COPY = "847291";
+const VALID_CODE = "123456";
 
-export function GoodExample() {
+export function BadExample() {
   const [value, setValue] = useState("");
   const [isVerified, setIsVerified] = useState(false);
-
-  const handleOnChange = (newValue: string) => {
-    setValue(newValue);
-  };
+  const [error, setError] = useState(false);
 
   const handleVerify = () => {
-    if (value === CODE_TO_COPY) {
+    if (value === VALID_CODE) {
       setIsVerified(true);
+      setError(false);
+    } else {
+      setError(true);
     }
   };
 
   const handleReset = () => {
     setValue("");
     setIsVerified(false);
+    setError(false);
   };
 
   if (isVerified) {
     return (
       <div className="space-y-4 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-          <svg
-            className="h-6 w-6 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
+          <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="text-lg font-semibold">Code verified!</h3>
-        <Button variant="outline" onClick={handleReset} className="w-full">
+        <p className="font-medium">Code verified!</p>
+        <Button variant="outline" size="sm" onClick={handleReset}>
           Try again
         </Button>
       </div>
@@ -53,18 +47,21 @@ export function GoodExample() {
 
   return (
     <div className="space-y-4">
-      <CopyableCode code={CODE_TO_COPY} label="Your code:" />
+      <CopyableCode code={VALID_CODE} />
 
       <div className="space-y-2">
         <p className="text-sm text-center text-muted-foreground">
           Enter verification code
         </p>
-        <div className="flex justify-center gap-2">
+        <div className="flex justify-center">
           <InputOTP
             maxLength={6}
             value={value}
-            onChange={handleOnChange}
-            pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+            onChange={(newValue) => {
+              setValue(newValue);
+              setError(false);
+            }}
+            pattern={REGEXP_ONLY_DIGITS}
             onKeyDown={(e) => {
               if (e.key === "Enter" && value.length === 6) {
                 handleVerify();
@@ -81,6 +78,11 @@ export function GoodExample() {
             </InputOTPGroup>
           </InputOTP>
         </div>
+        {error && (
+          <p className="text-sm text-center text-red-500">
+            Invalid code. Try again.
+          </p>
+        )}
       </div>
 
       <Button
@@ -90,6 +92,9 @@ export function GoodExample() {
       >
         Verify
       </Button>
+      <p className="text-xs text-center text-muted-foreground">
+        Press Enter or click Verify
+      </p>
     </div>
   );
 }
