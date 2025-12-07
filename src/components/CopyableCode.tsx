@@ -15,10 +15,9 @@ export function CopyableCode({ code, label = "Test code:" }: CopyableCodeProps) 
   };
 
   return (
-    <div className="rounded-md bg-muted p-3 text-center">
+    <div className="rounded-md bg-muted p-3 text-center cursor-pointer" onClick={handleCopy}>
       <p className="text-xs text-muted-foreground mb-1">{label}</p>
       <button
-        onClick={handleCopy}
         className="font-mono text-lg font-bold tracking-widest hover:text-primary transition-colors cursor-pointer"
         title="Click to copy"
       >
