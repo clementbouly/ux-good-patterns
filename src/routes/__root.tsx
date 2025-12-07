@@ -10,16 +10,23 @@ function RootLayout() {
   return (
     <div className="min-h-screen bg-background bg-dotted dark:bg-dotted">
       <header className="border-b bg-[#0a0a0a] text-white">
-        <div className="container mx-auto flex items-start justify-between px-4 py-6">
+        {/* Mobile sticky nav */}
+        <div className="sticky top-0 z-50 flex items-center justify-end gap-2 bg-[#0a0a0a] px-4 py-2 md:hidden">
+          <CommandMenu variant="icon" />
+          <ThemeToggle />
+        </div>
+
+        <div className="container mx-auto flex items-start justify-between px-4 py-6 pt-2 md:pt-6">
           <div>
             <Link to="/" className="hover:opacity-80">
-              <h1 className="text-5xl font-bold">The Good, The Bad and The UX</h1>
+              <h1 className="text-3xl font-bold md:text-5xl">The Good, The Bad and The UX</h1>
             </Link>
-            <p className="mt-5 text-2xl text-white/70">
+            <p className="mt-3 text-lg text-white/70 md:mt-5 md:text-2xl">
               A collection of UX patterns with comparative examples
             </p>
           </div>
-          <div className="flex items-center gap-3">
+          {/* Desktop controls */}
+          <div className="hidden items-center gap-3 md:flex">
             <CommandMenu />
             <ThemeToggle />
           </div>

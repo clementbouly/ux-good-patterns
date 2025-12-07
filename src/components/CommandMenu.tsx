@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { FileText } from "lucide-react";
+import { FileText, Search } from "lucide-react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -11,7 +11,11 @@ import {
 } from "@/components/ui/command";
 import { examples, type Example } from "@/examples";
 
-export function CommandMenu() {
+type CommandMenuProps = {
+  variant?: "full" | "icon";
+};
+
+export function CommandMenu({ variant = "full" }: CommandMenuProps) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -34,15 +38,26 @@ export function CommandMenu() {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-2 rounded-md border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/70 hover:bg-white/10 hover:text-white transition-colors"
-      >
-        <span>Search...</span>
-        <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border border-white/20 bg-white/10 px-1.5 font-mono text-[10px] font-medium sm:flex">
-          <span className="text-xs">⌘</span>K
-        </kbd>
-      </button>
+      {variant === "icon" ? (
+        <button
+          onClick={() => setOpen(true)}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-md text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+          aria-label="Search"
+        >
+          <Search className="h-5 w-5" />
+        </button>
+      ) : (
+        <button
+          onClick={() => setOpen(true)}
+          className="inline-flex w-64 items-center gap-2 rounded-md border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+        >
+          <Search className="h-4 w-4" />
+          <span className="flex-1 text-left">Search</span>
+          <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border border-white/20 bg-white/10 px-1.5 font-mono text-[10px] font-medium sm:flex">
+            <span className="text-xs">⌘</span>K
+          </kbd>
+        </button>
+      )}
 
       <CommandDialog
         open={open}
