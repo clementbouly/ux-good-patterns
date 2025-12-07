@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { X, Check } from "lucide-react";
+import { X, Check, ArrowRight } from "lucide-react";
 import { type Example, type ExampleVariant } from "@/examples";
 import { ShareButton } from "./ShareButton";
 
@@ -45,11 +45,7 @@ type ExampleCardProps = {
   linkTitle?: boolean;
 };
 
-export function ExampleCard({
-  example,
-  titleAs = "h2",
-  linkTitle = true,
-}: ExampleCardProps) {
+export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: ExampleCardProps) {
   const [badIndex, setBadIndex] = useState(0);
   const [goodIndex, setGoodIndex] = useState(0);
 
@@ -57,8 +53,7 @@ export function ExampleCard({
   const CurrentGoodExample = example.GoodExamples[goodIndex]?.component;
 
   const TitleTag = titleAs;
-  const titleClassName =
-    titleAs === "h1" ? "text-2xl font-semibold" : "text-xl font-semibold";
+  const titleClassName = titleAs === "h1" ? "text-2xl font-semibold" : "text-xl font-semibold";
 
   const title = linkTitle ? (
     <Link
@@ -82,14 +77,10 @@ export function ExampleCard({
       <ShareButton url={shareUrl} className="absolute right-4 top-4" />
 
       <div className="mb-4">
-        <span className="text-xs font-medium text-muted-foreground">
-          {example.meta.category}
-        </span>
+        <span className="text-xs font-medium text-muted-foreground">{example.meta.category}</span>
         {title}
-        <p className="my-1 text-sm text-muted-foreground">
-          {example.meta.description}
-        </p>
-        <div className="mt-2 flex flex-wrap gap-1">
+        <p className="my-1 text-sm text-muted-foreground">{example.meta.description}</p>
+        <div className="mt-2 flex flex-wrap items-center gap-1">
           {example.meta.tags.map((tag) => (
             <span
               key={tag}
@@ -98,6 +89,16 @@ export function ExampleCard({
               {tag}
             </span>
           ))}
+          {linkTitle && (
+            <Link
+              to="/example/$exampleId"
+              params={{ exampleId: example.meta.id }}
+              className="ml-auto inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+            >
+              See details
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          )}
         </div>
       </div>
 
