@@ -73,14 +73,14 @@ export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: Examp
       : `/example/${example.meta.id}`;
 
   return (
-    <div className="relative rounded-lg border bg-card p-6">
+    <div className="group relative rounded-lg border bg-card p-6">
       <ShareButton url={shareUrl} className="absolute right-4 top-4" />
 
       <div className="mb-4">
         <span className="text-xs font-medium text-muted-foreground">{example.meta.category}</span>
         {title}
         <p className="my-1 text-sm text-muted-foreground">{example.meta.description}</p>
-        <div className="mt-2 flex flex-wrap items-center gap-1">
+        <div className="mt-2 flex flex-wrap gap-1">
           {example.meta.tags.map((tag) => (
             <span
               key={tag}
@@ -89,16 +89,6 @@ export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: Examp
               {tag}
             </span>
           ))}
-          {linkTitle && (
-            <Link
-              to="/example/$exampleId"
-              params={{ exampleId: example.meta.id }}
-              className="ml-auto inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
-            >
-              See details
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          )}
         </div>
       </div>
 
@@ -143,6 +133,19 @@ export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: Examp
           </div>
         </div>
       </div>
+
+      {linkTitle && (
+        <div className="mt-4 flex justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+          <Link
+            to="/example/$exampleId"
+            params={{ exampleId: example.meta.id }}
+            className="inline-flex w-full md:w-auto items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium hover:bg-muted transition-colors"
+          >
+            Learn more
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
