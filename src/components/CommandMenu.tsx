@@ -15,6 +15,11 @@ type CommandMenuProps = {
   variant?: "full" | "icon";
 };
 
+const getModifierKey = () => {
+  if (typeof navigator === "undefined") return "Ctrl";
+  return /Mac|iPhone|iPad/.test(navigator.userAgent) ? "⌘" : "Ctrl";
+};
+
 export function CommandMenu({ variant = "full" }: CommandMenuProps) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -54,7 +59,7 @@ export function CommandMenu({ variant = "full" }: CommandMenuProps) {
           <Search className="h-4 w-4" />
           <span className="flex-1 text-left">Search</span>
           <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border border-white/20 bg-white/10 px-1.5 font-mono text-[10px] font-medium sm:flex">
-            <span className="text-xs">⌘</span>K
+            <span className="text-xs">{getModifierKey()}</span> + K
           </kbd>
         </button>
       )}
