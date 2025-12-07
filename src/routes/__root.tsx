@@ -1,4 +1,5 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const rootRoute = createRootRoute({
   component: RootLayout,
@@ -8,13 +9,16 @@ function RootLayout() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b">
-        <div className="container mx-auto px-4 py-6">
-          <Link to="/" className="hover:opacity-80">
-            <h1 className="text-3xl font-bold">The Good, The Bad and The UX</h1>
-          </Link>
-          <p className="text-muted-foreground">
-            A collection of UX patterns with comparative examples
-          </p>
+        <div className="container mx-auto flex items-start justify-between px-4 py-6">
+          <div>
+            <Link to="/" className="hover:opacity-80">
+              <h1 className="text-3xl font-bold">The Good, The Bad and The UX</h1>
+            </Link>
+            <p className="text-muted-foreground">
+              A collection of UX patterns with comparative examples
+            </p>
+          </div>
+          <ThemeToggle />
         </div>
       </header>
 

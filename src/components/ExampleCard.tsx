@@ -18,9 +18,9 @@ function VariantSelector({
   if (variants.length <= 1) return null;
 
   const colorClasses = {
-    red: "border-red-300 bg-red-50 text-red-700 hover:bg-red-100 data-[active=true]:bg-red-600 data-[active=true]:text-white",
+    red: "border-red-300 bg-red-50 text-red-700 hover:bg-red-100 data-[active=true]:bg-red-600 data-[active=true]:text-white dark:border-red-800 dark:bg-red-950 dark:text-red-400 dark:hover:bg-red-900 dark:data-[active=true]:bg-red-700",
     green:
-      "border-green-300 bg-green-50 text-green-700 hover:bg-green-100 data-[active=true]:bg-green-600 data-[active=true]:text-white",
+      "border-green-300 bg-green-50 text-green-700 hover:bg-green-100 data-[active=true]:bg-green-600 data-[active=true]:text-white dark:border-green-800 dark:bg-green-950 dark:text-green-400 dark:hover:bg-green-900 dark:data-[active=true]:bg-green-700",
   };
 
   return (
@@ -105,10 +105,10 @@ export function ExampleCard({
         <div className="space-y-2">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100">
-                <X className="h-3 w-3 text-red-600" />
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 dark:bg-red-950">
+                <X className="h-3 w-3 text-red-600 dark:text-red-400" />
               </span>
-              <h3 className="font-medium text-red-600">Bad example</h3>
+              <h3 className="font-medium text-red-600 dark:text-red-400">Bad example</h3>
             </div>
             <VariantSelector
               variants={example.BadExamples}
@@ -117,7 +117,7 @@ export function ExampleCard({
               color="red"
             />
           </div>
-          <div className="rounded-md border border-red-200 bg-red-50/50 p-4">
+          <div className="rounded-md border border-red-200 bg-red-50/50 p-4 dark:border-red-900 dark:bg-red-950/50">
             {CurrentBadExample && <CurrentBadExample />}
           </div>
         </div>
@@ -125,10 +125,10 @@ export function ExampleCard({
         <div className="space-y-2">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
-              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
-                <Check className="h-3 w-3 text-green-600" />
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 dark:bg-green-950">
+                <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
               </span>
-              <h3 className="font-medium text-green-600">Good example</h3>
+              <h3 className="font-medium text-green-600 dark:text-green-400">Good example</h3>
             </div>
             <VariantSelector
               variants={example.GoodExamples}
@@ -137,7 +137,7 @@ export function ExampleCard({
               color="green"
             />
           </div>
-          <div className="rounded-md border border-green-200 bg-green-50/50 p-4">
+          <div className="rounded-md border border-green-200 bg-green-50/50 p-4 dark:border-green-900 dark:bg-green-950/50">
             {CurrentGoodExample && <CurrentGoodExample />}
           </div>
         </div>
