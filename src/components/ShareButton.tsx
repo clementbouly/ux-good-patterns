@@ -29,7 +29,7 @@ export function ShareButton({ url, className }: ShareButtonProps) {
       whileTap={{ scale: 0.98 }}
       onClick={handleCopy}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors",
+        "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors cursor-pointer",
         isCopied
           ? "border-green-300 bg-green-50 text-green-700"
           : "border-border bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground",
