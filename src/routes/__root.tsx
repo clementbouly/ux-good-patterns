@@ -8,13 +8,13 @@ export const rootRoute = createRootRoute({
 function RootLayout() {
   return (
     <div className="min-h-screen bg-background bg-dotted dark:bg-dotted">
-      <header className="border-b bg-white dark:bg-[#0a0a0a]">
+      <header className="border-b bg-[#0a0a0a] text-white">
         <div className="container mx-auto flex items-start justify-between px-4 py-6">
           <div>
             <Link to="/" className="hover:opacity-80">
-              <h1 className="text-3xl font-bold">The Good, The Bad and The UX</h1>
+              <h1 className="text-5xl font-bold">The Good, The Bad and The UX</h1>
             </Link>
-            <p className="text-muted-foreground">
+            <p className="mt-5 text-2xl text-white/70">
               A collection of UX patterns with comparative examples
             </p>
           </div>
