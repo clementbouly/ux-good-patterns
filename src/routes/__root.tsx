@@ -24,7 +24,7 @@ function RootLayout() {
 
       <footer className="border-t py-8 text-center text-sm text-muted-foreground">
         <p className="mb-2">Open source project - Want to contribute?</p>
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center sm:gap-4">
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -33,7 +33,7 @@ function RootLayout() {
           >
             Contribute code on GitHub
           </a>
-          <span className="text-border">|</span>
+          <span className="hidden text-border sm:inline">|</span>
           <a
             target="_blank"
             rel="noopener noreferrer"
