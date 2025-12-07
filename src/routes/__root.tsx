@@ -1,5 +1,6 @@
 import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { CommandMenu } from "@/components/CommandMenu";
 
 export const rootRoute = createRootRoute({
   component: RootLayout,
@@ -18,7 +19,10 @@ function RootLayout() {
               A collection of UX patterns with comparative examples
             </p>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-3">
+            <CommandMenu />
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
