@@ -21,6 +21,9 @@ Each example requires 4 files:
 ```typescript
 import { GoodExample } from "./GoodExample";
 import { BadExample } from "./BadExample";
+import content from "./README.md?raw";
+
+export { content };
 
 export const meta = {
   id: "my-new-pattern",
@@ -45,6 +48,9 @@ You can add multiple variants for each side:
 import { GoodExample } from "./GoodExample";
 import { GoodExampleAlternative } from "./GoodExampleAlternative";
 import { BadExample } from "./BadExample";
+import content from "./README.md?raw";
+
+export { content };
 
 export const BadExamples = [
   { component: BadExample, label: "No feedback" },
@@ -78,6 +84,8 @@ export function BadExample() {
 
 #### `README.md` - Documentation
 
+This file is displayed on the example's detail page (accessible via `/example/{id}`).
+
 ```markdown
 # Pattern Title
 
@@ -89,12 +97,6 @@ Explanation of the UX problem and solution.
 
 - Point 1
 - Point 2
-
-## Implementation
-
-\`\`\`tsx
-// Code example
-\`\`\`
 
 ## When to apply
 
@@ -127,7 +129,10 @@ export const examples = [
 npm run dev
 ```
 
-Verify that your example displays correctly on the home page.
+Verify that:
+- Your example displays correctly on the home page
+- The detail page (`/example/{id}`) shows the README content
+- The share button copies the correct URL
 
 ## Best Practices
 

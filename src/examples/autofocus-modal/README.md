@@ -10,16 +10,6 @@ When a modal opens with a single input (or a primary field), it should be automa
 - **Accessibility**: Keyboard users don't need to navigate to find the input
 - **User experience**: Reduces friction and speeds up interactions
 
-## Implementation
-
-```tsx
-// Good example - with autoFocus
-<Input autoFocus placeholder="Enter a name..." />
-
-// Bad example - without autoFocus
-<Input placeholder="Enter a name..." />
-```
-
 ## When to apply
 
 - Modals with a single input field

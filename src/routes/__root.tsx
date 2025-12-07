@@ -22,18 +22,27 @@ function RootLayout() {
         <Outlet />
       </main>
 
-      <footer className="border-t py-6 text-center text-sm text-muted-foreground">
-        <p>
-          Open source -{" "}
+      <footer className="border-t py-8 text-center text-sm text-muted-foreground">
+        <p className="mb-2">Open source project - Want to contribute?</p>
+        <div className="flex justify-center gap-4">
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://github.com/clementbouly/ux-good-patterns"
             className="underline hover:text-foreground"
           >
-            Contribute on GitHub
+            Contribute code on GitHub
           </a>
-        </p>
+          <span className="text-border">|</span>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/clementbouly/ux-good-patterns/issues"
+            className="underline hover:text-foreground"
+          >
+            Suggest a pattern (no code required)
+          </a>
+        </div>
       </footer>
     </div>
   );

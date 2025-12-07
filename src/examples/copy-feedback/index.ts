@@ -1,6 +1,9 @@
 import { GoodExample } from "./GoodExample";
 import { GoodExampleShadcn } from "./GoodExampleShadcn";
 import { BadExample } from "./BadExample";
+import content from "./README.md?raw";
+
+export { content };
 
 export const meta = {
   id: "copy-feedback",

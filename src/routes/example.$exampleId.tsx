@@ -1,4 +1,5 @@
 import { createRoute, Link } from "@tanstack/react-router";
+import Markdown from "react-markdown";
 import { examples } from "@/examples";
 import { ExampleCard } from "@/components/ExampleCard";
 import { rootRoute } from "./__root";
@@ -38,6 +39,14 @@ function ExamplePage() {
       </Link>
 
       <ExampleCard example={example} titleAs="h1" linkTitle={false} />
+
+      {(example as { content?: string }).content && (
+        <div className="mt-8 rounded-lg border bg-card p-6">
+          <div className="prose prose-neutral max-w-none dark:prose-invert">
+            <Markdown>{(example as { content?: string }).content}</Markdown>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

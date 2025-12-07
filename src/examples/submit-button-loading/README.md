@@ -10,25 +10,6 @@ When a form is being submitted, the submit button should be disabled and show a 
 - **Clear feedback**: Users know their action was registered
 - **Reduces anxiety**: Visual feedback reassures users something is happening
 
-## Implementation
-
-```tsx
-// Good example - disabled with spinner
-<Button onClick={handleSubmit} disabled={isLoading}>
-  {isLoading ? (
-    <>
-      <Spinner className="mr-2" />
-      Submitting...
-    </>
-  ) : (
-    "Submit"
-  )}
-</Button>
-
-// Bad example - no protection
-<Button onClick={handleSubmit}>Submit</Button>
-```
-
 ## When to apply
 
 - Form submissions (login, signup, checkout)

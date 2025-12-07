@@ -6,14 +6,16 @@ An open source collection of UX patterns with comparative examples. Each pattern
 
 - **Framework**: React 19 + TypeScript
 - **Build**: Vite
+- **Routing**: TanStack Router
 - **Styles**: Tailwind CSS
 - **Components**: shadcn/ui
+- **Markdown**: react-markdown + @tailwindcss/typography
 
 ## Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/ux-good-patterns.git
+git clone https://github.com/clementbouly/ux-good-patterns.git
 cd ux-good-patterns
 
 # Install dependencies
@@ -27,15 +29,21 @@ npm run dev
 
 ```
 /src
-  /components/ui        # shadcn/ui components
+  /components
+    /ui                 # shadcn/ui components
+    ExampleCard.tsx     # Reusable example card component
+    ShareButton.tsx     # Copy URL to clipboard button
   /examples             # Each UX example is a standalone module
     /autofocus-modal
       index.ts          # Metadata + exports
       GoodExample.tsx   # Correct example
       BadExample.tsx    # Example to avoid
-      README.md         # Pattern documentation
-  /layouts              # Reusable layouts
-  App.tsx               # Main page
+      README.md         # Pattern documentation (displayed on detail page)
+  /routes               # TanStack Router routes
+    __root.tsx          # Root layout (header, footer)
+    index.tsx           # Home page (examples list)
+    example.$exampleId.tsx  # Example detail page
+  router.tsx            # Router configuration
   main.tsx              # Entry point
 ```
 

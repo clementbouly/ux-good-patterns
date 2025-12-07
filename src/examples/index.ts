@@ -22,4 +22,5 @@ export type Example = {
   meta: ExampleMeta;
   GoodExamples: ExampleVariant[];
   BadExamples: ExampleVariant[];
+  content?: string;
 };
