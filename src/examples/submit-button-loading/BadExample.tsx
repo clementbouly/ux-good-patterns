@@ -66,7 +66,7 @@ export function BadExample() {
 
       <div className="grid gap-2">
         <Label htmlFor="amount-bad">Amount</Label>
-        <Input id="amount-bad" type="text" defaultValue="99.00 €" />
+        <Input id="amount-bad" type="number" defaultValue={99} />
       </div>
 
       <Button type="submit" className="w-full">

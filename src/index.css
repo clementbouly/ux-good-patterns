@@ -119,3 +119,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@utility bg-dotted {
+  background-image: radial-gradient(#dadada 1px, #fff 1px);
+  background-size: 20px 20px;
+
+  .dark & {
+    background-image: radial-gradient(#333 1px, #0a0a0a 1px);
+  }
+}

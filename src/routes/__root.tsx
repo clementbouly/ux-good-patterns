@@ -7,8 +7,8 @@ export const rootRoute = createRootRoute({
 
 function RootLayout() {
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b">
+    <div className="min-h-screen bg-background bg-dotted dark:bg-dotted">
+      <header className="border-b bg-white dark:bg-[#0a0a0a]">
         <div className="container mx-auto flex items-start justify-between px-4 py-6">
           <div>
             <Link to="/" className="hover:opacity-80">
