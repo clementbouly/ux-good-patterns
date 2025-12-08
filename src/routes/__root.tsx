@@ -1,4 +1,4 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Link, Outlet, useMatchRoute } from "@tanstack/react-router";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { CommandMenu } from "@/components/CommandMenu";
 
@@ -7,6 +7,9 @@ export const rootRoute = createRootRoute({
 });
 
 function RootLayout() {
+  const matchRoute = useMatchRoute();
+  const isHome = Boolean(matchRoute({ to: "/" }));
+
   return (
     <div className="min-h-screen bg-background bg-dotted dark:bg-dotted">
       <header className="border-b bg-[#0a0a0a] text-white">
@@ -18,7 +21,7 @@ function RootLayout() {
 
         <div className="container mx-auto flex items-start justify-between px-4 py-6 pt-2 md:pt-6">
           <div>
-            <Link to="/" className="hover:opacity-80">
+            <Link to="/" className={isHome ? "" : "hover:opacity-80"} disabled={isHome}>
               <h1 className="text-3xl font-bold md:text-5xl">The Good, The Bad and The UX</h1>
             </Link>
             <p className="mt-3 text-lg text-white/70 md:mt-5 md:text-2xl">
