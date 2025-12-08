@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
@@ -28,20 +29,8 @@ export function GoodExample() {
   if (isVerified) {
     return (
       <div className="space-y-4 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-          <svg
-            className="h-6 w-6 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
+          <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
         <h3 className="text-lg font-semibold">Code verified!</h3>
         <Button variant="outline" onClick={handleReset} className="w-full">
@@ -56,9 +45,7 @@ export function GoodExample() {
       <CopyableCode code={CODE_TO_COPY} label="Your code:" />
 
       <div className="space-y-2">
-        <p className="text-sm text-center text-muted-foreground">
-          Enter verification code
-        </p>
+        <p className="text-sm text-center text-muted-foreground">Enter verification code</p>
         <div className="flex justify-center gap-2">
           <InputOTP
             maxLength={6}
@@ -83,11 +70,7 @@ export function GoodExample() {
         </div>
       </div>
 
-      <Button
-        onClick={handleVerify}
-        disabled={value.length < 6}
-        className="w-full"
-      >
+      <Button onClick={handleVerify} disabled={value.length < 6} className="w-full">
         Verify
       </Button>
     </div>

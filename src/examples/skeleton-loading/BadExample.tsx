@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { RefreshCw } from "lucide-react";
+import { cn, getInitials } from "@/lib/utils";
 
 type User = {
   id: number;
@@ -38,13 +39,8 @@ export function BadExample() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium">Team Members</h3>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={loadUsers}
-          disabled={isLoading}
-        >
-          <RefreshCw className={`size-3.5 ${isLoading ? "animate-spin" : ""}`} />
+        <Button variant="secondary" size="sm" onClick={loadUsers} disabled={isLoading}>
+          <RefreshCw className={cn("size-3.5", isLoading && "animate-spin")} />
           Reload to test
         </Button>
       </div>
@@ -57,12 +53,9 @@ export function BadExample() {
           </div>
         ) : (
           users?.map((user) => (
-            <div
-              key={user.id}
-              className="flex items-center gap-3 rounded-lg border p-3"
-            >
+            <div key={user.id} className="flex items-center gap-3 rounded-lg border p-3">
               <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium">
-                {user.name.split(" ").map((n) => n[0]).join("")}
+                {getInitials(user.name)}
               </div>
               <div>
                 <p className="font-medium text-sm">{user.name}</p>

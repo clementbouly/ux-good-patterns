@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { RefreshCw } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { motion, AnimatePresence } from "motion/react";
-import { RefreshCw } from "lucide-react";
+import { cn, getInitials } from "@/lib/utils";
 
 type User = {
   id: number;
@@ -37,7 +38,7 @@ function UserCard({ user }: { user: User }) {
       className="flex items-center gap-3 rounded-lg border p-3"
     >
       <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium">
-        {user.name.split(" ").map((n) => n[0]).join("")}
+        {getInitials(user.name)}
       </div>
       <div>
         <p className="font-medium text-sm">{user.name}</p>
@@ -70,13 +71,8 @@ export function GoodExample() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-medium">Team Members</h3>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={loadUsers}
-          disabled={isLoading}
-        >
-          <RefreshCw className={`size-3.5 ${isLoading ? "animate-spin" : ""}`} />
+        <Button variant="secondary" size="sm" onClick={loadUsers} disabled={isLoading}>
+          <RefreshCw className={cn("size-3.5", isLoading && "animate-spin")} />
           Reload to test
         </Button>
       </div>

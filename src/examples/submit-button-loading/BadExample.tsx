@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,29 +27,15 @@ export function BadExample() {
   if (isSuccess) {
     return (
       <div className="space-y-4 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-          <svg
-            className="h-6 w-6 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
+          <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
         <h3 className="text-lg font-semibold">Payment successful!</h3>
         <p className="text-sm text-muted-foreground">
           Total payments: <span className="font-mono font-bold">{submitCount}</span>
         </p>
         {submitCount > 1 && (
-          <p className="text-sm text-red-500 font-medium">
-            You were charged {submitCount} times!
-          </p>
+          <p className="text-sm text-red-500 font-medium">You were charged {submitCount} times!</p>
         )}
         <Button variant="outline" onClick={handleNewPayment} className="w-full">
           New payment

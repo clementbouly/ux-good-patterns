@@ -17,7 +17,7 @@ function getRelatedExamples(currentId: string, currentCategory: string, count = 
     (e) => e.meta.id !== currentId && e.meta.category !== currentCategory
   );
 
-  const shuffledOthers = others.sort(() => Math.random() - 0.5);
+  const shuffledOthers = [...others].sort(() => Math.random() - 0.5);
 
   return [...sameCategory, ...shuffledOthers].slice(0, count);
 }

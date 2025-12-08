@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 type CopyableCodeProps = {
   code: string;
@@ -24,9 +25,10 @@ export function CopyableCode({ code, label = "Test code:" }: CopyableCodeProps) 
         {code}
       </button>
       <p
-        className={`text-xs mt-1 transition-colors ${
-          copied ? "text-green-600 font-medium" : "text-muted-foreground"
-        }`}
+        className={cn(
+          "text-xs mt-1 transition-colors",
+          copied ? "text-green-600 dark:text-green-400 font-medium" : "text-muted-foreground"
+        )}
       >
         {copied ? "Copied!" : "Click to copy"}
       </p>

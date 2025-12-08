@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Home, SearchX } from "lucide-react";
 import { useRandomGif } from "@/hooks/useRandomGif";
-import { Button } from "./ui/button";
-import { Skeleton } from "./ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type NotFoundProps = {
   title?: string;

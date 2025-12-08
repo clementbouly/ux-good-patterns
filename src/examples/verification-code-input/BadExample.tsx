@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
+import { Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const CODE_TO_COPY = "847291";
 
@@ -51,20 +53,8 @@ export function BadExample() {
   if (isVerified) {
     return (
       <div className="space-y-4 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-          <svg
-            className="h-6 w-6 text-green-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
+          <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
         <h3 className="text-lg font-semibold">Code verified!</h3>
         <Button variant="outline" onClick={handleReset} className="w-full">
@@ -85,15 +75,18 @@ export function BadExample() {
         >
           {CODE_TO_COPY}
         </button>
-        <p className={`text-xs mt-1 transition-colors ${copied ? "text-green-600 font-medium" : "text-muted-foreground"}`}>
+        <p
+          className={cn(
+            "text-xs mt-1 transition-colors",
+            copied ? "text-green-600 dark:text-green-400 font-medium" : "text-muted-foreground"
+          )}
+        >
           {copied ? "Copied!" : "Click to copy"}
         </p>
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm text-center text-muted-foreground">
-          Enter verification code
-        </p>
+        <p className="text-sm text-center text-muted-foreground">Enter verification code</p>
         <div className="flex justify-center gap-2">
           {values.map((value, index) => (
             <Input
@@ -113,11 +106,7 @@ export function BadExample() {
         </div>
       </div>
 
-      <Button
-        onClick={handleVerify}
-        disabled={values.some((v) => !v)}
-        className="w-full"
-      >
+      <Button onClick={handleVerify} disabled={values.some((v) => !v)} className="w-full">
         Verify
       </Button>
     </div>
