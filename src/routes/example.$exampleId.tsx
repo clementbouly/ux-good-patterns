@@ -4,6 +4,7 @@ import Markdown from "react-markdown";
 import { examples } from "@/examples";
 import { ExampleCard } from "@/components/ExampleCard";
 import { NotFound } from "@/components/NotFound";
+import { RelatedExamples } from "@/components/RelatedExamples";
 import { Button } from "@/components/ui/button";
 import { rootRoute } from "./__root";
 
@@ -52,6 +53,12 @@ function ExamplePage() {
           </div>
         </div>
       )}
+
+      <RelatedExamples
+        currentExampleId={example.meta.id}
+        currentCategory={example.meta.category}
+        searchCategory={category}
+      />
     </div>
   );
 }
