@@ -6,24 +6,36 @@ import { ExampleCard } from "@/components/ExampleCard";
 import { Button } from "@/components/ui/button";
 import { rootRoute } from "./__root";
 
+type SearchParams = {
+  category?: string;
+};
+
 export const exampleRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/example/$exampleId",
   component: ExamplePage,
+  validateSearch: (search: Record<string, unknown>): SearchParams => {
+    return {
+      category: typeof search.category === "string" ? search.category : undefined,
+    };
+  },
 });
 
 function ExamplePage() {
   const { exampleId } = exampleRoute.useParams();
+  const { category } = exampleRoute.useSearch();
 
   const example = examples.find((e) => e.meta.id === exampleId);
+  const backSearch = category ? { category } : undefined;
+  const backLabel = category ? `Back to ${category}` : "Back to all examples";
 
   if (!example) {
     return (
       <div className="text-center">
         <h2 className="text-2xl font-semibold">Example not found</h2>
         <p className="mt-2 text-muted-foreground">The example "{exampleId}" does not exist.</p>
-        <Link to="/" className="mt-4 inline-block text-primary hover:underline">
-          Back to all examples
+        <Link to="/" search={backSearch} className="mt-4 inline-block text-primary hover:underline">
+          {backLabel}
         </Link>
       </div>
     );
@@ -32,9 +44,9 @@ function ExamplePage() {
   return (
     <div>
       <Button variant="ghost" size="sm" asChild className="mb-4">
-        <Link to="/">
+        <Link to="/" search={backSearch}>
           <ArrowLeft />
-          Back to all examples
+          {backLabel}
         </Link>
       </Button>
 

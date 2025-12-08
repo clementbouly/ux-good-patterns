@@ -1,31 +1,47 @@
-import { createRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { createRoute, useNavigate } from "@tanstack/react-router";
 import { examples } from "@/examples";
 import { Button } from "@/components/ui/button";
 import { ExampleCard } from "@/components/ExampleCard";
 import { rootRoute } from "./__root";
 
+type SearchParams = {
+  category?: string;
+};
+
 export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   component: IndexPage,
+  validateSearch: (search: Record<string, unknown>): SearchParams => {
+    return {
+      category: typeof search.category === "string" ? search.category : undefined,
+    };
+  },
 });
 
 function IndexPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { category: selectedCategory } = indexRoute.useSearch();
+  const navigate = useNavigate();
 
   const categories = [...new Set(examples.map((e) => e.meta.category))];
   const filteredExamples = selectedCategory
     ? examples.filter((e) => e.meta.category === selectedCategory)
     : examples;
 
+  const setSelectedCategory = (category: string | undefined) => {
+    navigate({
+      to: "/",
+      search: category ? { category } : {},
+    });
+  };
+
   return (
     <>
       <div className="mb-6 flex flex-wrap gap-2">
         <Button
-          variant={selectedCategory === null ? "default" : "outline"}
+          variant={!selectedCategory ? "default" : "outline"}
           size="sm"
-          onClick={() => setSelectedCategory(null)}
+          onClick={() => setSelectedCategory(undefined)}
         >
           All
         </Button>

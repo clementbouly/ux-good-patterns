@@ -16,6 +16,11 @@ export const router = createRouter({
         return ["none"];
       }
 
+      // No animation when only search params change (same pathname)
+      if (fromLocation.pathname === toLocation.pathname) {
+        return ["none"];
+      }
+
       const fromDepth = fromLocation.pathname.split("/").filter(Boolean).length;
       const toDepth = toLocation.pathname.split("/").filter(Boolean).length;
 

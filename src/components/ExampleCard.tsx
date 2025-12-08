@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useSearch } from "@tanstack/react-router";
 import { X, Check, ArrowRight } from "lucide-react";
 import { type Example, type ExampleVariant } from "@/examples";
 import { ShareButton } from "./ShareButton";
@@ -48,6 +48,7 @@ type ExampleCardProps = {
 export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: ExampleCardProps) {
   const [badIndex, setBadIndex] = useState(0);
   const [goodIndex, setGoodIndex] = useState(0);
+  const { category } = useSearch({ strict: false });
 
   const CurrentBadExample = example.BadExamples[badIndex]?.component;
   const CurrentGoodExample = example.GoodExamples[goodIndex]?.component;
@@ -55,10 +56,13 @@ export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: Examp
   const TitleTag = titleAs;
   const titleClassName = titleAs === "h1" ? "text-2xl font-semibold" : "text-xl font-semibold";
 
+  const linkSearch = category ? { category } : undefined;
+
   const title = linkTitle ? (
     <Link
       to="/example/$exampleId"
       params={{ exampleId: example.meta.id }}
+      search={linkSearch}
       className="block hover:underline"
     >
       <TitleTag className={titleClassName}>{example.meta.title}</TitleTag>
@@ -139,6 +143,7 @@ export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: Examp
           <Link
             to="/example/$exampleId"
             params={{ exampleId: example.meta.id }}
+            search={linkSearch}
             className="inline-flex w-full md:w-auto items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium hover:bg-muted transition-colors"
           >
             Learn more
