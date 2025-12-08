@@ -4,6 +4,9 @@ import { RouterProvider } from "@tanstack/react-router";
 import "./index.css";
 import { router } from "./router";
 import { ThemeProvider } from "./providers/ThemeProvider";
+import { setDevFavicon } from "./utils/devFavicon";
+
+setDevFavicon();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
