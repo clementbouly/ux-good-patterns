@@ -128,3 +128,77 @@
     background-image: radial-gradient(#333 1px, #0a0a0a 1px);
   }
 }
+
+/* View Transitions */
+
+/* No animation on first load */
+:root:active-view-transition-type(none) {
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* Forward navigation (home -> example): slide from right */
+:root:active-view-transition-type(slide-forward) {
+  &::view-transition-old(root) {
+    animation: slide-out-left 0.25s ease-out;
+  }
+  &::view-transition-new(root) {
+    animation: slide-in-right 0.25s ease-out;
+  }
+}
+
+/* Backward navigation (example -> home): slide from left */
+:root:active-view-transition-type(slide-backward) {
+  &::view-transition-old(root) {
+    animation: slide-out-right 0.25s ease-out;
+  }
+  &::view-transition-new(root) {
+    animation: slide-in-left 0.25s ease-out;
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30%);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30%);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

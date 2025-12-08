@@ -9,6 +9,21 @@ export const router = createRouter({
   routeTree,
   scrollRestoration: true,
   defaultPreloadStaleTime: 0,
+  defaultViewTransition: {
+    types: ({ fromLocation, toLocation }) => {
+      // No animation on first load
+      if (!fromLocation) {
+        return ["none"];
+      }
+
+      const fromDepth = fromLocation.pathname.split("/").filter(Boolean).length;
+      const toDepth = toLocation.pathname.split("/").filter(Boolean).length;
+
+      // Going deeper (home -> example) = forward
+      // Going back (example -> home) = backward
+      return toDepth > fromDepth ? ["slide-forward"] : ["slide-backward"];
+    },
+  },
 });
 
 declare module "@tanstack/react-router" {
