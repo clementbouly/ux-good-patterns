@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import Markdown from "react-markdown";
 import { examples } from "@/examples";
 import { ExampleCard } from "@/components/ExampleCard";
+import { NotFound } from "@/components/NotFound";
 import { Button } from "@/components/ui/button";
 import { rootRoute } from "./__root";
 
@@ -30,15 +31,7 @@ function ExamplePage() {
   const backLabel = category ? `Back to ${category}` : "Back to all examples";
 
   if (!example) {
-    return (
-      <div className="text-center">
-        <h2 className="text-2xl font-semibold">Example not found</h2>
-        <p className="mt-2 text-muted-foreground">The example "{exampleId}" does not exist.</p>
-        <Link to="/" search={backSearch} className="mt-4 inline-block text-primary hover:underline">
-          {backLabel}
-        </Link>
-      </div>
-    );
+    return <NotFound title="Example not found" backSearch={backSearch} backLabel={backLabel} />;
   }
 
   return (

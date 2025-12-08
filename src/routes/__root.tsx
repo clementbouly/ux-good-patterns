@@ -11,7 +11,7 @@ function RootLayout() {
   const isHome = Boolean(matchRoute({ to: "/" }));
 
   return (
-    <div className="min-h-screen bg-background bg-dotted dark:bg-dotted">
+    <div className="flex min-h-screen flex-col bg-background bg-dotted dark:bg-dotted">
       <header className="border-b bg-[#0a0a0a] text-white">
         {/* Mobile sticky nav */}
         <div className="sticky top-0 z-50 flex items-center justify-end gap-2 bg-[#0a0a0a] px-4 py-2 md:hidden">
@@ -36,7 +36,7 @@ function RootLayout() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto flex-1 px-4 py-8">
         <Outlet />
       </main>
 
