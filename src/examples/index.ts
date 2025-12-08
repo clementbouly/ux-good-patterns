@@ -5,6 +5,7 @@ import * as copyFeedback from "./copy-feedback";
 import * as skeletonLoading from "./skeleton-loading";
 import * as autoSubmitCode from "./auto-submit-code";
 import * as progressiveLoadingMessages from "./progressive-loading-messages";
+import * as formValidationFeedback from "./form-validation-feedback";
 
 export const examples = [
   autofocusModal,
@@ -14,6 +15,7 @@ export const examples = [
   skeletonLoading,
   autoSubmitCode,
   progressiveLoadingMessages,
+  formValidationFeedback,
 ];
 
 export type ExampleMeta = {
