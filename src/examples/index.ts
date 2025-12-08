@@ -4,8 +4,17 @@ import * as verificationCodeInput from "./verification-code-input";
 import * as copyFeedback from "./copy-feedback";
 import * as skeletonLoading from "./skeleton-loading";
 import * as autoSubmitCode from "./auto-submit-code";
+import * as progressiveLoadingMessages from "./progressive-loading-messages";
 
-export const examples = [autofocusModal, submitButtonLoading, verificationCodeInput, copyFeedback, skeletonLoading, autoSubmitCode];
+export const examples = [
+  autofocusModal,
+  submitButtonLoading,
+  verificationCodeInput,
+  copyFeedback,
+  skeletonLoading,
+  autoSubmitCode,
+  progressiveLoadingMessages,
+];
 
 export type ExampleMeta = {
   id: string;
