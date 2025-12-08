@@ -1,0 +1,63 @@
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { CopyButton } from "@/components/ui/shadcn-io/copy-button";
+
+const TEST_CARD = "4242424242424242";
+const TEST_IBAN = "FR7630006000011234567890189";
+const TEST_PHONE = "2025551234";
+
+export function BadExample() {
+  const [cardNumber, setCardNumber] = useState("");
+  const [iban, setIban] = useState("");
+  const [phone, setPhone] = useState("");
+
+  return (
+    <div className="space-y-4">
+      <div className="grid gap-2">
+        <div className="flex items-center gap-2">
+          <Label htmlFor="card-bad">Credit Card Number</Label>
+          <CopyButton content={TEST_CARD} variant="ghost" size="sm" />
+        </div>
+        <Input
+          id="card-bad"
+          type="text"
+          placeholder="Enter card number"
+          value={cardNumber}
+          onChange={(e) => setCardNumber(e.target.value)}
+          maxLength={16}
+        />
+      </div>
+
+      <div className="grid gap-2">
+        <div className="flex items-center gap-2">
+          <Label htmlFor="iban-bad">IBAN</Label>
+          <CopyButton content={TEST_IBAN} variant="ghost" size="sm" />
+        </div>
+        <Input
+          id="iban-bad"
+          type="text"
+          placeholder="Enter IBAN"
+          value={iban}
+          onChange={(e) => setIban(e.target.value.toUpperCase())}
+          maxLength={34}
+        />
+      </div>
+
+      <div className="grid gap-2">
+        <div className="flex items-center gap-2">
+          <Label htmlFor="phone-bad">Phone Number</Label>
+          <CopyButton content={TEST_PHONE} variant="ghost" size="sm" />
+        </div>
+        <Input
+          id="phone-bad"
+          type="text"
+          placeholder="Enter phone number"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          maxLength={10}
+        />
+      </div>
+    </div>
+  );
+}
