@@ -1,7 +1,9 @@
 import { createRoute, Link } from "@tanstack/react-router";
+import { ArrowLeft } from "lucide-react";
 import Markdown from "react-markdown";
 import { examples } from "@/examples";
 import { ExampleCard } from "@/components/ExampleCard";
+import { Button } from "@/components/ui/button";
 import { rootRoute } from "./__root";
 
 export const exampleRoute = createRoute({
@@ -19,9 +21,7 @@ function ExamplePage() {
     return (
       <div className="text-center">
         <h2 className="text-2xl font-semibold">Example not found</h2>
-        <p className="mt-2 text-muted-foreground">
-          The example "{exampleId}" does not exist.
-        </p>
+        <p className="mt-2 text-muted-foreground">The example "{exampleId}" does not exist.</p>
         <Link to="/" className="mt-4 inline-block text-primary hover:underline">
           Back to all examples
         </Link>
@@ -31,12 +31,12 @@ function ExamplePage() {
 
   return (
     <div>
-      <Link
-        to="/"
-        className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
-      >
-        <span>←</span> Back to all examples
-      </Link>
+      <Button variant="ghost" size="sm" asChild className="mb-4">
+        <Link to="/">
+          <ArrowLeft />
+          Back to all examples
+        </Link>
+      </Button>
 
       <ExampleCard example={example} titleAs="h1" linkTitle={false} />
 
