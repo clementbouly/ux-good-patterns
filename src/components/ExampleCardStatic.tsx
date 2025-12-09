@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X, Check, ArrowRight } from "lucide-react";
-import { type Example, type ExampleVariant } from "@/examples";
+import { examples, type ExampleMeta, type ExampleVariant } from "@/examples";
 import { ShareButton } from "./ShareButton";
 
 function VariantSelector({
@@ -38,53 +38,50 @@ function VariantSelector({
   );
 }
 
-type ExampleCardProps = {
-  example: Example;
-  titleAs?: "h1" | "h2";
-  linkTitle?: boolean;
-  category?: string;
+type ExampleCardStaticProps = {
+  exampleId: string;
+  meta: ExampleMeta;
 };
 
-export function ExampleCard({
-  example,
-  titleAs = "h2",
-  linkTitle = true,
-  category,
-}: ExampleCardProps) {
+export function ExampleCardStatic({ exampleId, meta }: ExampleCardStaticProps) {
   const [badIndex, setBadIndex] = useState(0);
   const [goodIndex, setGoodIndex] = useState(0);
+
+  // Find the example to get the components
+  const example = examples.find((e) => e.meta.id === exampleId);
+  if (!example) return null;
 
   const CurrentBadExample = example.BadExamples[badIndex]?.component;
   const CurrentGoodExample = example.GoodExamples[goodIndex]?.component;
 
-  const TitleTag = titleAs;
-  const titleClassName = titleAs === "h1" ? "text-2xl font-semibold" : "text-xl font-semibold";
-
-  const exampleUrl = `/example/${example.meta.id}${category ? `?category=${category}` : ""}`;
-
-  const title = linkTitle ? (
-    <a href={exampleUrl} className="block hover:underline">
-      <TitleTag className={titleClassName}>{example.meta.title}</TitleTag>
-    </a>
-  ) : (
-    <TitleTag className={titleClassName}>{example.meta.title}</TitleTag>
-  );
+  const exampleUrl = `/example/${meta.id}`;
 
   const shareUrl =
     typeof window !== "undefined"
-      ? `${window.location.origin}/example/${example.meta.id}`
-      : `/example/${example.meta.id}`;
+      ? `${window.location.origin}/example/${meta.id}`
+      : `/example/${meta.id}`;
 
   return (
-    <div className="group relative rounded-lg border bg-card p-6">
+    <div
+      className="group relative rounded-lg border bg-card p-6"
+      data-example-category={meta.category}
+    >
       <ShareButton url={shareUrl} className="absolute right-4 top-4" />
 
       <div className="mb-4">
-        <span className="text-xs font-medium text-muted-foreground">{example.meta.category}</span>
-        {title}
-        <p className="my-1 text-sm text-muted-foreground">{example.meta.description}</p>
+        <span className="text-xs font-medium text-muted-foreground">
+          {meta.category}
+        </span>
+        <a
+          href={exampleUrl}
+          data-example-link={exampleUrl}
+          className="block hover:underline"
+        >
+          <h2 className="text-xl font-semibold">{meta.title}</h2>
+        </a>
+        <p className="my-1 text-sm text-muted-foreground">{meta.description}</p>
         <div className="mt-2 flex flex-wrap gap-1">
-          {example.meta.tags.map((tag) => (
+          {meta.tags.map((tag) => (
             <span
               key={tag}
               className="rounded bg-secondary px-2 py-0.5 text-xs text-secondary-foreground"
@@ -102,7 +99,9 @@ export function ExampleCard({
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 dark:bg-red-950">
                 <X className="h-3 w-3 text-red-600 dark:text-red-400" />
               </span>
-              <h3 className="font-medium text-red-600 dark:text-red-400">Bad example</h3>
+              <h3 className="font-medium text-red-600 dark:text-red-400">
+                Bad example
+              </h3>
             </div>
             <VariantSelector
               variants={example.BadExamples}
@@ -122,7 +121,9 @@ export function ExampleCard({
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 dark:bg-green-950">
                 <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
               </span>
-              <h3 className="font-medium text-green-600 dark:text-green-400">Good example</h3>
+              <h3 className="font-medium text-green-600 dark:text-green-400">
+                Good example
+              </h3>
             </div>
             <VariantSelector
               variants={example.GoodExamples}
@@ -131,23 +132,22 @@ export function ExampleCard({
               color="green"
             />
           </div>
-          <div className="flex-1 rounded-md border border-green-200 bg-green-50/50 p-4 dark:border-green-900 dark:bg-green-950/50">
+          <div className="min-h-[120px] flex-1 rounded-md border border-green-200 bg-green-50/50 p-4 dark:border-green-900 dark:bg-green-950/50">
             {CurrentGoodExample && <CurrentGoodExample />}
           </div>
         </div>
       </div>
 
-      {linkTitle && (
-        <div className="mt-4 flex justify-center transition-opacity md:opacity-0 md:group-hover:opacity-100">
-          <a
-            href={exampleUrl}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted md:w-auto"
-          >
-            Learn more
-            <ArrowRight className="h-4 w-4" />
-          </a>
-        </div>
-      )}
+      <div className="mt-4 flex justify-center transition-opacity md:opacity-0 md:group-hover:opacity-100">
+        <a
+          href={exampleUrl}
+          data-example-link={exampleUrl}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted md:w-auto"
+        >
+          Learn more
+          <ArrowRight className="h-4 w-4" />
+        </a>
+      </div>
     </div>
   );
 }

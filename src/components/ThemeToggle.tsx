@@ -4,17 +4,18 @@ import { Button } from "@/components/ui/button";
 
 type Theme = "light" | "dark";
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-  return document.documentElement.classList.contains("dark") ? "dark" : "light";
-}
-
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  // Start with "light" for SSR, then sync with DOM
+  const [theme, setTheme] = useState<Theme>("light");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Sync with actual DOM state on mount
-    setTheme(getInitialTheme());
+    // Read theme from DOM after mount
+    const currentTheme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+    setTheme(currentTheme);
+    setMounted(true);
   }, []);
 
   const toggleTheme = () => {
@@ -25,6 +26,10 @@ export default function ThemeToggle() {
     localStorage.setItem("theme", newTheme);
   };
 
+  // Always render Moon during SSR to match the light theme default
+  // This prevents hydration mismatch and CLS
+  const Icon = !mounted || theme === "light" ? Moon : Sun;
+
   return (
     <Button
       variant="ghost"
@@ -33,7 +38,7 @@ export default function ThemeToggle() {
       aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
       className="text-white hover:bg-white/10 hover:text-white"
     >
-      {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+      <Icon className="h-5 w-5" />
     </Button>
   );
 }

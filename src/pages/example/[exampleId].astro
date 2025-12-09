@@ -27,7 +27,7 @@ const htmlContent = example.content ? marked.parse(example.content) : null;
   title={`${example.meta.title} | The Good, The Bad and The UX`}
   description={example.meta.description}
 >
-  <ExamplePageContent client:only="react" exampleId={example.meta.id} category={category} />
+  <ExamplePageContent client:load exampleId={example.meta.id} category={category} />
 
   {
     htmlContent && (
