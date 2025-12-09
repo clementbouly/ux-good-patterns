@@ -11,6 +11,36 @@ function InputOTP({
 }: React.ComponentProps<typeof OTPInput> & {
   containerClassName?: string
 }) {
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Render placeholder with same dimensions during SSR to prevent hydration mismatch
+  // input-otp renders <noscript> on server but <div> on client
+  if (!mounted) {
+    const slotCount = props.maxLength || 6
+    return (
+      <div
+        data-slot="input-otp"
+        className={cn(
+          "flex items-center gap-2 has-disabled:opacity-50",
+          containerClassName
+        )}
+      >
+        <div className="flex items-center">
+          {Array.from({ length: slotCount }).map((_, i) => (
+            <div
+              key={i}
+              className="border-input relative flex h-9 w-9 items-center justify-center border-y border-r text-sm shadow-xs first:rounded-l-md first:border-l last:rounded-r-md"
+            />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <OTPInput
       data-slot="input-otp"

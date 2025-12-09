@@ -111,7 +111,7 @@ export function ExampleCard({
               color="red"
             />
           </div>
-          <div className="min-h-[120px] flex-1 rounded-md border border-red-200 bg-red-50/50 p-4 dark:border-red-900 dark:bg-red-950/50">
+          <div className="flex-1 rounded-md border border-red-200 bg-red-50/50 p-4 dark:border-red-900 dark:bg-red-950/50">
             {CurrentBadExample && <CurrentBadExample />}
           </div>
         </div>
