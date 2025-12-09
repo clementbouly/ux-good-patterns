@@ -1,0 +1,45 @@
+---
+import ThemeToggle from "@/components/ThemeToggle";
+import CommandMenu from "@/components/CommandMenu";
+
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === "/";
+---
+
+<header class="border-b bg-[#0a0a0a] text-white">
+  <!-- Mobile sticky nav -->
+  <div
+    class="sticky top-0 z-50 flex items-center justify-end gap-2 bg-[#0a0a0a] px-4 py-2 md:hidden"
+  >
+    <CommandMenu client:load variant="icon" />
+    <ThemeToggle client:only="react" />
+  </div>
+
+  <div
+    class="container mx-auto flex items-start justify-between px-4 py-6 pt-2 md:pt-6"
+  >
+    <div>
+      {
+        isHome ? (
+          <h1 class="text-3xl font-bold md:text-5xl">
+            The Good, The Bad and The UX
+          </h1>
+        ) : (
+          <a href="/" class="hover:opacity-80">
+            <h1 class="text-3xl font-bold md:text-5xl">
+              The Good, The Bad and The UX
+            </h1>
+          </a>
+        )
+      }
+      <p class="mt-3 text-lg text-white/70 md:mt-5 md:text-2xl">
+        A collection of UX patterns with comparative examples
+      </p>
+    </div>
+    <!-- Desktop controls -->
+    <div class="hidden items-center gap-3 md:flex">
+      <CommandMenu client:load />
+      <ThemeToggle client:only="react" />
+    </div>
+  </div>
+</header>

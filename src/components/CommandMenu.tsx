@@ -1,5 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { FileText, Search } from "lucide-react";
 import {
   CommandDialog,
@@ -11,17 +10,18 @@ import {
 } from "@/components/ui/command";
 import { examples, type Example } from "@/examples";
 
-// Context to share command menu state across all triggers
-const CommandMenuContext = createContext<{
-  open: boolean;
-  setOpen: (open: boolean) => void;
-} | null>(null);
+type CommandMenuProps = {
+  variant?: "full" | "icon";
+};
 
-export function CommandMenuProvider({ children }: { children: ReactNode }) {
+const getModifierKey = () => {
+  if (typeof navigator === "undefined") return "Ctrl";
+  return /Mac|iPhone|iPad/.test(navigator.userAgent) ? "⌘" : "Ctrl";
+};
+
+export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
 
-  // Single global keyboard listener
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
@@ -36,12 +36,33 @@ export function CommandMenuProvider({ children }: { children: ReactNode }) {
 
   const handleSelect = (example: Example) => {
     setOpen(false);
-    navigate({ to: "/example/$exampleId", params: { exampleId: example.meta.id } });
+    // Use native navigation for Astro
+    window.location.href = `/example/${example.meta.id}`;
   };
 
   return (
-    <CommandMenuContext.Provider value={{ open, setOpen }}>
-      {children}
+    <>
+      {variant === "icon" ? (
+        <button
+          onClick={() => setOpen(true)}
+          className="inline-flex h-9 w-9 items-center justify-center rounded-md text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+          aria-label="Search"
+        >
+          <Search className="h-5 w-5" />
+        </button>
+      ) : (
+        <button
+          onClick={() => setOpen(true)}
+          className="inline-flex w-64 items-center gap-2 rounded-md border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+        >
+          <Search className="h-4 w-4" />
+          <span className="flex-1 text-left text-white/50">Search...</span>
+          <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border border-white/20 bg-white/10 px-1.5 font-mono text-[10px] font-medium sm:flex">
+            <span className="text-xs">{getModifierKey()}</span> + K
+          </kbd>
+        </button>
+      )}
+
       <CommandDialog
         open={open}
         onOpenChange={setOpen}
@@ -71,50 +92,6 @@ export function CommandMenuProvider({ children }: { children: ReactNode }) {
           </CommandGroup>
         </CommandList>
       </CommandDialog>
-    </CommandMenuContext.Provider>
-  );
-}
-
-type CommandMenuTriggerProps = {
-  variant?: "full" | "icon";
-};
-
-const getModifierKey = () => {
-  if (typeof navigator === "undefined") return "Ctrl";
-  return /Mac|iPhone|iPad/.test(navigator.userAgent) ? "⌘" : "Ctrl";
-};
-
-export function CommandMenu({ variant = "full" }: CommandMenuTriggerProps) {
-  const context = useContext(CommandMenuContext);
-
-  if (!context) {
-    throw new Error("CommandMenu must be used within CommandMenuProvider");
-  }
-
-  const { setOpen } = context;
-
-  if (variant === "icon") {
-    return (
-      <button
-        onClick={() => setOpen(true)}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-md text-white/70 hover:bg-white/10 hover:text-white transition-colors"
-        aria-label="Search"
-      >
-        <Search className="h-5 w-5" />
-      </button>
-    );
-  }
-
-  return (
-    <button
-      onClick={() => setOpen(true)}
-      className="inline-flex w-64 items-center gap-2 rounded-md border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/70 hover:bg-white/10 hover:text-white transition-colors"
-    >
-      <Search className="h-4 w-4" />
-      <span className="flex-1 text-left text-white/50">Search...</span>
-      <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border border-white/20 bg-white/10 px-1.5 font-mono text-[10px] font-medium sm:flex">
-        <span className="text-xs">{getModifierKey()}</span> + K
-      </kbd>
-    </button>
+    </>
   );
 }

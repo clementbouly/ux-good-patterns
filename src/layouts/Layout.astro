@@ -1,0 +1,93 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import "@/index.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "The Good, The Bad and The UX",
+  description = "A collection of UX patterns with comparative examples",
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const isDev = import.meta.env.DEV;
+const favicon = isDev ? "/logo-dev.png" : "/logo.png";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href={favicon} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="The Good, The Bad and The UX" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Theme script (inline to prevent flash) -->
+    <script is:inline>
+      function applyTheme() {
+        const theme =
+          localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(theme);
+      }
+      applyTheme();
+      // Re-apply theme after View Transitions navigation
+      document.addEventListener("astro:after-swap", applyTheme);
+
+      // View Transitions direction detection
+      let transitionDirection = "none";
+
+      document.addEventListener("astro:before-preparation", (event) => {
+        const currentPath = event.from.pathname;
+        const targetPath = event.to.pathname;
+
+        const isGoingToExample =
+          !currentPath.startsWith("/example/") &&
+          targetPath.startsWith("/example/");
+        const isGoingBackFromExample =
+          currentPath.startsWith("/example/") &&
+          !targetPath.startsWith("/example/");
+
+        if (isGoingToExample) {
+          transitionDirection = "forward";
+        } else if (isGoingBackFromExample) {
+          transitionDirection = "backward";
+        } else {
+          transitionDirection = "none";
+        }
+
+        document.documentElement.dataset.transition = transitionDirection;
+      });
+
+      document.addEventListener("astro:after-swap", () => {
+        document.documentElement.dataset.transition = transitionDirection;
+      });
+    </script>
+
+    <ViewTransitions />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

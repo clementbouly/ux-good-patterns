@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link, useSearch } from "@tanstack/react-router";
 import { X, Check, ArrowRight } from "lucide-react";
 import { type Example, type ExampleVariant } from "@/examples";
 import { ShareButton } from "./ShareButton";
@@ -43,12 +42,17 @@ type ExampleCardProps = {
   example: Example;
   titleAs?: "h1" | "h2";
   linkTitle?: boolean;
+  category?: string;
 };
 
-export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: ExampleCardProps) {
+export function ExampleCard({
+  example,
+  titleAs = "h2",
+  linkTitle = true,
+  category,
+}: ExampleCardProps) {
   const [badIndex, setBadIndex] = useState(0);
   const [goodIndex, setGoodIndex] = useState(0);
-  const { category } = useSearch({ strict: false });
 
   const CurrentBadExample = example.BadExamples[badIndex]?.component;
   const CurrentGoodExample = example.GoodExamples[goodIndex]?.component;
@@ -56,17 +60,12 @@ export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: Examp
   const TitleTag = titleAs;
   const titleClassName = titleAs === "h1" ? "text-2xl font-semibold" : "text-xl font-semibold";
 
-  const linkSearch = category ? { category } : undefined;
+  const exampleUrl = `/example/${example.meta.id}${category ? `?category=${category}` : ""}`;
 
   const title = linkTitle ? (
-    <Link
-      to="/example/$exampleId"
-      params={{ exampleId: example.meta.id }}
-      search={linkSearch}
-      className="block hover:underline"
-    >
+    <a href={exampleUrl} className="block hover:underline">
       <TitleTag className={titleClassName}>{example.meta.title}</TitleTag>
-    </Link>
+    </a>
   ) : (
     <TitleTag className={titleClassName}>{example.meta.title}</TitleTag>
   );
@@ -96,7 +95,7 @@ export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: Examp
         </div>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 items-stretch">
+      <div className="grid items-stretch gap-6 md:grid-cols-2">
         <div className="flex flex-col gap-2">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
@@ -139,16 +138,14 @@ export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: Examp
       </div>
 
       {linkTitle && (
-        <div className="mt-4 flex justify-center md:opacity-0 md:group-hover:opacity-100 transition-opacity">
-          <Link
-            to="/example/$exampleId"
-            params={{ exampleId: example.meta.id }}
-            search={linkSearch}
-            className="inline-flex w-full md:w-auto items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium hover:bg-muted transition-colors"
+        <div className="mt-4 flex justify-center transition-opacity md:opacity-0 md:group-hover:opacity-100">
+          <a
+            href={exampleUrl}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted md:w-auto"
           >
             Learn more
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </a>
         </div>
       )}
     </div>

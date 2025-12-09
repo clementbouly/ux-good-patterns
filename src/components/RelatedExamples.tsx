@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { examples, type Example } from "@/examples";
 
@@ -31,18 +30,17 @@ export function RelatedExamples({
 
   if (related.length === 0) return null;
 
-  const linkSearch = searchCategory ? { category: searchCategory } : undefined;
+  const buildUrl = (exampleId: string) =>
+    `/example/${exampleId}${searchCategory ? `?category=${searchCategory}` : ""}`;
 
   return (
     <section className="mt-12">
       <h2 className="mb-4 text-lg font-semibold">Explore more examples</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {related.map((example) => (
-          <Link
+          <a
             key={example.meta.id}
-            to="/example/$exampleId"
-            params={{ exampleId: example.meta.id }}
-            search={linkSearch}
+            href={buildUrl(example.meta.id)}
             className="group rounded-lg border bg-card p-4 transition-colors hover:border-foreground/20 hover:bg-muted/50"
           >
             <span className="text-xs font-medium text-muted-foreground">
@@ -56,7 +54,7 @@ export function RelatedExamples({
               View example
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </div>
-          </Link>
+          </a>
         ))}
       </div>
     </section>

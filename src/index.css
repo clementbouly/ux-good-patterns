@@ -131,32 +131,26 @@
 
 /* View Transitions */
 
-/* No animation on first load */
-:root:active-view-transition-type(none) {
-  &::view-transition-old(root),
-  &::view-transition-new(root) {
-    animation: none;
-  }
+/* No animation by default */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
 }
 
 /* Forward navigation (home -> example): slide from right */
-:root:active-view-transition-type(slide-forward) {
-  &::view-transition-old(root) {
-    animation: slide-out-left 0.25s ease-out;
-  }
-  &::view-transition-new(root) {
-    animation: slide-in-right 0.25s ease-out;
-  }
+:root[data-transition="forward"]::view-transition-old(root) {
+  animation: slide-out-left 0.25s ease-out;
+}
+:root[data-transition="forward"]::view-transition-new(root) {
+  animation: slide-in-right 0.25s ease-out;
 }
 
 /* Backward navigation (example -> home): slide from left */
-:root:active-view-transition-type(slide-backward) {
-  &::view-transition-old(root) {
-    animation: slide-out-right 0.25s ease-out;
-  }
-  &::view-transition-new(root) {
-    animation: slide-in-left 0.25s ease-out;
-  }
+:root[data-transition="backward"]::view-transition-old(root) {
+  animation: slide-out-right 0.25s ease-out;
+}
+:root[data-transition="backward"]::view-transition-new(root) {
+  animation: slide-in-left 0.25s ease-out;
 }
 
 @keyframes slide-out-left {
