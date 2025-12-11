@@ -6,17 +6,17 @@ const currentPath = Astro.url.pathname;
 const isHome = currentPath === "/";
 ---
 
-<header class="border-b bg-[#0a0a0a] text-white">
-  <!-- Mobile sticky nav -->
-  <div
-    class="sticky top-0 z-50 flex items-center justify-end gap-2 bg-[#0a0a0a] px-4 py-2 md:hidden"
-  >
-    <CommandMenu client:load variant="icon" />
-    <ThemeToggle client:load />
-  </div>
+<!-- Mobile sticky nav -->
+<div
+  class="sticky top-0 z-50 flex items-center justify-end gap-2 border-b bg-[#0a0a0a] px-4 py-2 text-white md:hidden"
+>
+  <CommandMenu client:load variant="icon" />
+  <ThemeToggle client:load />
+</div>
 
+<header class="border-b bg-[#0a0a0a] text-white md:border-b-0">
   <div
-    class="container mx-auto flex items-start justify-between px-4 py-6 pt-2 md:pt-6"
+    class="container mx-auto flex items-start justify-between px-4 py-6 md:pt-6"
   >
     <div>
       {

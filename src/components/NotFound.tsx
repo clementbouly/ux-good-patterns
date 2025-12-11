@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Home, SearchX } from "lucide-react";
 import { useRandomGif } from "@/hooks/useRandomGif";
 import { Button } from "@/components/ui/button";
@@ -18,16 +19,16 @@ const funMessages = [
   "This cat pushed your page off the table.",
 ];
 
-function getRandomMessage() {
-  return funMessages[Math.floor(Math.random() * funMessages.length)];
-}
-
 export function NotFound({
   title = "Page not found",
   backTo = "/",
   backLabel = "Back to home",
 }: NotFoundProps) {
-  const displayMessage = getRandomMessage();
+  const [displayMessage, setDisplayMessage] = useState(funMessages[0]);
+
+  useEffect(() => {
+    setDisplayMessage(funMessages[Math.floor(Math.random() * funMessages.length)]);
+  }, []);
   const { gif, isLoading } = useRandomGif();
 
   return (
