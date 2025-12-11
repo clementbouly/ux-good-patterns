@@ -51,6 +51,15 @@ const favicon = isDev ? "/logo-dev.png" : "/logo.png";
     <!-- Google Search Console -->
     <meta name="google-site-verification" content="LRl2AzVBmKI2eHLLFBBJOTzTs0luaOiW9PXM64Mhr1E" />
 
+    <!-- Google Analytics 4 -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-C05KMV8GMM"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-C05KMV8GMM');
+    </script>
+
     <!-- Theme script (inline to prevent flash) -->
     <script is:inline>
       function applyTheme() {
