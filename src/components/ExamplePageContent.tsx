@@ -2,14 +2,15 @@ import { ArrowLeft } from "lucide-react";
 import { examples } from "@/examples";
 import { ExampleCard } from "@/components/ExampleCard";
 import { Button } from "@/components/ui/button";
+import { useSearchParam } from "@/hooks/useSearchParam";
 
 type ExamplePageContentProps = {
   exampleId: string;
-  category?: string;
 };
 
-export function ExamplePageContent({ exampleId, category }: ExamplePageContentProps) {
+export function ExamplePageContent({ exampleId }: ExamplePageContentProps) {
   const example = examples.find((e) => e.meta.id === exampleId);
+  const [category] = useSearchParam("category");
 
   if (!example) {
     return <div>Example not found</div>;

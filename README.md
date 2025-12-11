@@ -6,12 +6,11 @@ An open source collection of UX patterns with comparative examples. Each pattern
 
 ## Tech Stack
 
-- **Framework**: React 19 + TypeScript
-- **Build**: Vite
-- **Routing**: TanStack Router
+- **Framework**: Astro + React 19 + TypeScript
+- **Rendering**: Static Site Generation (SSG)
 - **Styles**: Tailwind CSS
 - **Components**: shadcn/ui
-- **Markdown**: react-markdown + @tailwindcss/typography
+- **Markdown**: marked + @tailwindcss/typography
 
 ## Installation
 
@@ -33,6 +32,7 @@ npm run dev
 /src
   /components
     /ui                 # shadcn/ui components
+    /layout             # Header, Footer (Astro components)
     ExampleCard.tsx     # Reusable example card component
     ShareButton.tsx     # Copy URL to clipboard button
   /examples             # Each UX example is a standalone module
@@ -41,12 +41,12 @@ npm run dev
       GoodExample.tsx   # Correct example
       BadExample.tsx    # Example to avoid
       README.md         # Pattern documentation (displayed on detail page)
-  /routes               # TanStack Router routes
-    __root.tsx          # Root layout (header, footer)
-    index.tsx           # Home page (examples list)
-    example.$exampleId.tsx  # Example detail page
-  router.tsx            # Router configuration
-  main.tsx              # Entry point
+  /layouts              # Astro layouts
+    Layout.astro        # Base layout (head, meta, scripts)
+    PageLayout.astro    # Page layout with Header/Footer
+  /pages                # Astro pages (file-based routing)
+    index.astro         # Home page
+    example/[exampleId].astro  # Example detail page
 ```
 
 ## Available Scripts
@@ -57,17 +57,6 @@ npm run build    # Build for production
 npm run preview  # Preview production build
 npm run lint     # Lint the code
 ```
-
-## Development Tools
-
-### Locator (Click to Component)
-
-This project is configured with [Locator](https://www.locatorjs.com/), a tool that lets you click on any component in the browser and jump directly to its source code in your IDE.
-
-**Setup:**
-1. Install the [Locator Chrome extension](https://chromewebstore.google.com/detail/locatorjs/npbfdllefekhdplbkdigpncggmojpefi)
-2. Run the app in development mode (`npm run dev`)
-3. Hold `Option` (Mac) or `Alt` (Windows/Linux) and click on any element to open it in your editor
 
 ## Contributing
 

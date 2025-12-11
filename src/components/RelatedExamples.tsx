@@ -1,10 +1,10 @@
 import { ArrowRight } from "lucide-react";
 import { examples, type Example } from "@/examples";
+import { useSearchParam } from "@/hooks/useSearchParam";
 
 type RelatedExamplesProps = {
   currentExampleId: string;
   currentCategory: string;
-  searchCategory?: string;
 };
 
 function getRelatedExamples(currentId: string, currentCategory: string, count = 3): Example[] {
@@ -16,17 +16,19 @@ function getRelatedExamples(currentId: string, currentCategory: string, count = 
     (e) => e.meta.id !== currentId && e.meta.category !== currentCategory
   );
 
-  const shuffledOthers = [...others].sort(() => Math.random() - 0.5);
+  // Use deterministic sort based on example id to avoid SSR hydration mismatch
+  // Math.random() would generate different results on server vs client
+  const sortedOthers = [...others].sort((a, b) => a.meta.id.localeCompare(b.meta.id));
 
-  return [...sameCategory, ...shuffledOthers].slice(0, count);
+  return [...sameCategory, ...sortedOthers].slice(0, count);
 }
 
 export function RelatedExamples({
   currentExampleId,
   currentCategory,
-  searchCategory,
 }: RelatedExamplesProps) {
   const related = getRelatedExamples(currentExampleId, currentCategory);
+  const [searchCategory] = useSearchParam("category");
 
   if (related.length === 0) return null;
 

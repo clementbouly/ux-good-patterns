@@ -12,8 +12,6 @@ export function getStaticPaths() {
 }
 
 const { exampleId } = Astro.params;
-const category = Astro.url.searchParams.get("category") || undefined;
-
 const example = examples.find((e) => e.meta.id === exampleId);
 
 if (!example) {
@@ -27,7 +25,7 @@ const htmlContent = example.content ? marked.parse(example.content) : null;
   title={`${example.meta.title} | The Good, The Bad and The UX`}
   description={example.meta.description}
 >
-  <ExamplePageContent client:load exampleId={example.meta.id} category={category} />
+  <ExamplePageContent client:load exampleId={example.meta.id} />
 
   {
     htmlContent && (
@@ -44,6 +42,5 @@ const htmlContent = example.content ? marked.parse(example.content) : null;
     client:load
     currentExampleId={example.meta.id}
     currentCategory={example.meta.category}
-    searchCategory={category}
   />
 </PageLayout>

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, Check, ArrowRight } from "lucide-react";
 import { type Example, type ExampleVariant } from "@/examples";
 import { ShareButton } from "./ShareButton";
+import { useSearchParam } from "@/hooks/useSearchParam";
 
 function VariantSelector({
   variants,
@@ -42,17 +43,16 @@ type ExampleCardProps = {
   example: Example;
   titleAs?: "h1" | "h2";
   linkTitle?: boolean;
-  category?: string;
 };
 
 export function ExampleCard({
   example,
   titleAs = "h2",
   linkTitle = true,
-  category,
 }: ExampleCardProps) {
   const [badIndex, setBadIndex] = useState(0);
   const [goodIndex, setGoodIndex] = useState(0);
+  const [category] = useSearchParam("category");
 
   const CurrentBadExample = example.BadExamples[badIndex]?.component;
   const CurrentGoodExample = example.GoodExamples[goodIndex]?.component;
@@ -70,10 +70,11 @@ export function ExampleCard({
     <TitleTag className={titleClassName}>{example.meta.title}</TitleTag>
   );
 
-  const shareUrl =
-    typeof window !== "undefined"
-      ? `${window.location.origin}/example/${example.meta.id}`
-      : `/example/${example.meta.id}`;
+  // Build share URL after hydration to avoid SSR mismatch
+  const [shareUrl, setShareUrl] = useState(`/example/${example.meta.id}`);
+  useEffect(() => {
+    setShareUrl(`${window.location.origin}/example/${example.meta.id}`);
+  }, [example.meta.id]);
 
   return (
     <div className="group relative rounded-lg border bg-card p-6">
