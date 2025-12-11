@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import "@/index.css";
 
 interface Props {
@@ -105,7 +105,7 @@ const favicon = isDev ? "/logo-dev.png" : "/logo.png";
       });
     </script>
 
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
