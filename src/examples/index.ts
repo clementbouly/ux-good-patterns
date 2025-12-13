@@ -7,6 +7,7 @@ import * as autoSubmitCode from "./auto-submit-code";
 import * as progressiveLoadingMessages from "./progressive-loading-messages";
 import * as formValidationFeedback from "./form-validation-feedback";
 import * as inputAutoFormat from "./input-auto-format";
+import * as scrollToTop from "./scroll-to-top";
 
 export const examples = [
   autofocusModal,
@@ -18,6 +19,7 @@ export const examples = [
   progressiveLoadingMessages,
   formValidationFeedback,
   inputAutoFormat,
+  scrollToTop,
 ];
 
 export type ExampleMeta = {
