@@ -58,13 +58,15 @@ const navLinks = [
         A collection of UX patterns with comparative examples
       </p>
       <!-- Desktop nav -->
-      <nav class="mt-4 hidden gap-6 md:flex">
+      <nav class="mt-4 hidden gap-1 md:flex">
         {navLinks.map((link) => (
           <a
             href={link.href}
             class:list={[
-              "text-sm font-medium transition-colors",
-              link.active ? "text-white" : "text-white/60 hover:text-white",
+              "rounded-md px-3 py-1.5 text-base font-medium transition-all duration-200",
+              link.active
+                ? "bg-white/15 text-white"
+                : "text-white/60 hover:bg-white/10 hover:text-white",
             ]}
           >
             {link.label}
