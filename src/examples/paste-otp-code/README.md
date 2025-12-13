@@ -17,9 +17,24 @@ Users receiving an OTP often have it in their clipboard already (from email, SMS
 
 This follows the principle of "recognition over recall" from Nielsen's heuristics.
 
-## Browser considerations
+## Browser permission: is it a UX problem?
 
-The Clipboard API (`navigator.clipboard.readText()`) requires:
+The Clipboard API (`navigator.clipboard.readText()`) triggers a browser permission prompt on first use. **This is not a deal-breaker**, here's why:
+
+### Why the permission is acceptable
+
+1. **One-time only**: Once granted, the permission persists for the site. Users won't see the prompt again.
+2. **Contextually appropriate**: The prompt appears right after clicking "Paste" — it's expected, not intrusive.
+3. **Still faster**: Even with the permission step, the flow is: click → accept (once) → code filled. That's 2 clicks vs typing 6 characters manually.
+4. **Covers real use cases**: WebOTP and `autocomplete="one-time-code"` are primarily for mobile/SMS. On desktop with email codes, the paste button remains valuable.
+
+### The trade-off
+
+- **Desktop**: Paste button is highly useful (email codes, password managers)
+- **Mobile**: Prefer `autocomplete="one-time-code"` which has no permission friction
+
+### Technical requirements
+
 - HTTPS (or localhost)
 - User interaction (the button click satisfies this)
 - Permission grant (browser will prompt on first use)
