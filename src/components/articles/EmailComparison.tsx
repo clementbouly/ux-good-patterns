@@ -2,7 +2,7 @@ import { X, Check } from "lucide-react";
 
 function BadEmailMockup() {
   return (
-    <div className="h-full rounded-lg border bg-white p-4 text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <div className="h-full rounded-lg border bg-gray-50 p-4 text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-200">
       <div className="mb-3 flex items-center gap-2 border-b pb-2">
         <div className="h-8 w-8 shrink-0 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold">
           A
@@ -31,7 +31,7 @@ function BadEmailMockup() {
 
 function GoodEmailMockup() {
   return (
-    <div className="h-full rounded-lg border bg-white p-4 text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+    <div className="h-full rounded-lg border bg-gray-50 p-4 text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-200">
       <div className="mb-3 flex items-center gap-2 border-b pb-2">
         <div className="h-8 w-8 shrink-0 rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-bold">
           A
