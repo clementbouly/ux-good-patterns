@@ -11,7 +11,9 @@ type ShareButtonProps = {
 export function ShareButton({ url, className }: ShareButtonProps) {
   const [isCopied, setIsCopied] = useState(false);
 
-  const handleCopy = async () => {
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (isCopied) return;
 
     try {

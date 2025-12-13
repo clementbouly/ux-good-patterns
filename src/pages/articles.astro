@@ -1,16 +1,10 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import { ArrowRight } from "lucide-react";
+import { ShareButton } from "@/components/ShareButton";
+import { articles } from "@/articles";
 
-// For now, manually list articles. Could be automated with glob later.
-const articles = [
-  {
-    slug: "otp-ux-guide",
-    title: "The Complete Guide to OTP UX",
-    description: "Best practices for verification code inputs, from email design to form implementation",
-    tags: ["OTP", "Forms", "Verification"],
-  },
-];
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") || "";
 ---
 
 <PageLayout title="Articles | The Good, The Bad and The UX" description="In-depth articles about UX patterns and best practices">
@@ -22,10 +16,15 @@ const articles = [
       {articles.map((article) => (
         <a
           href={`/article/${article.slug}`}
-          class="group rounded-lg border bg-card p-6 transition-colors hover:bg-muted/50"
+          class="group relative rounded-lg border bg-card p-6 transition-colors hover:bg-muted/50"
         >
-          <h2 class="text-xl font-semibold group-hover:underline">{article.title}</h2>
-          <p class="mt-1 text-muted-foreground">{article.description}</p>
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <h2 class="text-xl font-semibold group-hover:underline">{article.title}</h2>
+              <p class="mt-1 text-muted-foreground">{article.description}</p>
+            </div>
+            <ShareButton client:load url={`${siteUrl}/article/${article.slug}`} />
+          </div>
           <div class="mt-3 flex flex-wrap gap-2">
             {article.tags.map((tag) => (
               <span class="rounded bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">

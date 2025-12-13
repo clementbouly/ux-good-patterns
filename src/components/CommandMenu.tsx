@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FileText, Search } from "lucide-react";
+import { FileText, Search, BookOpen } from "lucide-react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -9,6 +9,7 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { examples, type Example } from "@/examples";
+import { articles, type Article } from "@/articles";
 
 type CommandMenuProps = {
   variant?: "full" | "icon";
@@ -34,10 +35,14 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
-  const handleSelect = (example: Example) => {
+  const handleSelectExample = (example: Example) => {
     setOpen(false);
-    // Use native navigation for Astro
     window.location.href = `/example/${example.meta.id}`;
+  };
+
+  const handleSelectArticle = (article: Article) => {
+    setOpen(false);
+    window.location.href = `/article/${article.slug}`;
   };
 
   return (
@@ -77,7 +82,7 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
               <CommandItem
                 key={example.meta.id}
                 value={`${example.meta.title} ${example.meta.description} ${example.meta.tags.join(" ")}`}
-                onSelect={() => handleSelect(example)}
+                onSelect={() => handleSelectExample(example)}
                 className="cursor-pointer"
               >
                 <FileText className="mr-2 h-4 w-4" />
@@ -85,6 +90,24 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
                   <span>{example.meta.title}</span>
                   <span className="text-xs text-muted-foreground">
                     {example.meta.category} · {example.meta.tags.slice(0, 3).join(", ")}
+                  </span>
+                </div>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+          <CommandGroup heading="Articles">
+            {articles.map((article) => (
+              <CommandItem
+                key={article.slug}
+                value={`${article.title} ${article.description} ${article.tags.join(" ")}`}
+                onSelect={() => handleSelectArticle(article)}
+                className="cursor-pointer"
+              >
+                <BookOpen className="mr-2 h-4 w-4" />
+                <div className="flex flex-col">
+                  <span>{article.title}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {article.tags.slice(0, 3).join(", ")}
                   </span>
                 </div>
               </CommandItem>
