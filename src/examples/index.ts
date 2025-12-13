@@ -8,6 +8,7 @@ import * as progressiveLoadingMessages from "./progressive-loading-messages";
 import * as formValidationFeedback from "./form-validation-feedback";
 import * as inputAutoFormat from "./input-auto-format";
 import * as scrollToTop from "./scroll-to-top";
+import * as pasteOtpCode from "./paste-otp-code";
 
 export const examples = [
   autofocusModal,
@@ -20,6 +21,7 @@ export const examples = [
   formValidationFeedback,
   inputAutoFormat,
   scrollToTop,
+  pasteOtpCode,
 ];
 
 export type ExampleMeta = {
