@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from "astro:transitions";
 import "@/index.css";
 
 interface Props {
@@ -62,7 +61,7 @@ const favicon = isDev ? "/logo-dev.png" : "/logo.png";
 
     <!-- Theme script (inline to prevent flash) -->
     <script is:inline>
-      function applyTheme() {
+      (function() {
         const theme =
           localStorage.getItem("theme") ||
           (window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -70,42 +69,8 @@ const favicon = isDev ? "/logo-dev.png" : "/logo.png";
             : "light");
         document.documentElement.classList.remove("light", "dark");
         document.documentElement.classList.add(theme);
-      }
-      applyTheme();
-      // Re-apply theme after View Transitions navigation
-      document.addEventListener("astro:after-swap", applyTheme);
-
-      // View Transitions direction detection
-      let transitionDirection = "none";
-
-      document.addEventListener("astro:before-preparation", (event) => {
-        const currentPath = event.from.pathname;
-        const targetPath = event.to.pathname;
-
-        const isGoingToExample =
-          !currentPath.startsWith("/example/") &&
-          targetPath.startsWith("/example/");
-        const isGoingBackFromExample =
-          currentPath.startsWith("/example/") &&
-          !targetPath.startsWith("/example/");
-
-        if (isGoingToExample) {
-          transitionDirection = "forward";
-        } else if (isGoingBackFromExample) {
-          transitionDirection = "backward";
-        } else {
-          transitionDirection = "none";
-        }
-
-        document.documentElement.dataset.transition = transitionDirection;
-      });
-
-      document.addEventListener("astro:after-swap", () => {
-        document.documentElement.dataset.transition = transitionDirection;
-      });
+      })();
     </script>
-
-    <ClientRouter />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

@@ -1,0 +1,50 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import { ArrowRight } from "lucide-react";
+
+// For now, manually list articles. Could be automated with glob later.
+const articles = [
+  {
+    slug: "otp-ux-guide",
+    title: "The Complete Guide to OTP UX",
+    description: "Best practices for verification code inputs, from email design to form implementation",
+    tags: ["OTP", "Forms", "Verification"],
+  },
+];
+---
+
+<PageLayout title="Articles | The Good, The Bad and The UX" description="In-depth articles about UX patterns and best practices">
+  <div class="mx-auto max-w-4xl">
+    <h1 class="text-3xl font-bold mb-2">Articles</h1>
+    <p class="text-muted-foreground mb-8">In-depth guides combining multiple UX patterns</p>
+
+    <div class="grid gap-4">
+      {articles.map((article) => (
+        <a
+          href={`/article/${article.slug}`}
+          class="group rounded-lg border bg-card p-6 transition-colors hover:bg-muted/50"
+        >
+          <h2 class="text-xl font-semibold group-hover:underline">{article.title}</h2>
+          <p class="mt-1 text-muted-foreground">{article.description}</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            {article.tags.map((tag) => (
+              <span class="rounded bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <div class="mt-4 flex items-center gap-1 text-sm font-medium text-primary">
+            Read article
+            <ArrowRight className="h-4 w-4" />
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {articles.length === 0 && (
+      <div class="rounded-lg border border-dashed p-8 text-center text-muted-foreground">
+        No articles yet. Check back soon!
+      </div>
+    )}
+  </div>
+</PageLayout>

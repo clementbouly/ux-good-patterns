@@ -1,0 +1,115 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "The Complete Guide to OTP UX"
+description: "Best practices for verification code inputs, from email design to form implementation"
+---
+
+import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+import { EmailComparison } from "@/components/articles/EmailComparison";
+
+# The Complete Guide to OTP UX
+
+One-Time Passwords (OTP) are everywhere: account verification, two-factor authentication, password resets. Yet, the UX around them is often an afterthought. This guide covers **4 key areas** to make your OTP flow seamless.
+
+---
+
+## 1. Email Design: Make the Code Scannable
+
+Before users even interact with your form, they need to find the code in their inbox. This is where many services fail.
+
+<EmailComparison client:load />
+
+### Why it matters
+
+- Users scan emails in **2-3 seconds** looking for the code
+- A code buried in text forces them to read the entire email
+- Clear visual hierarchy = faster copy/paste = less frustration
+
+### Best practices
+
+1. **Center the code** with generous whitespace
+2. **Use a large, monospace font** for the digits
+3. **Add visual contrast** (background box, different color)
+4. **Show expiration time** clearly
+5. **Keep the email short** — users don't read marketing copy when they need a code
+
+---
+
+## 2. Input Design: Separate Fields vs Single Input
+
+The visual design of your OTP input affects perceived usability.
+
+<ExampleEmbed id="verification-code-input" client:load />
+
+### The trade-off
+
+- **Separate fields**: More visual feedback, feels modern, but can be tricky to implement
+- **Single input**: Simpler, but less engaging
+
+Most modern implementations use **separate fields with auto-advance** — each digit gets its own box, and focus moves automatically.
+
+---
+
+## 3. Auto-Submit: Remove the Extra Click
+
+Once all digits are entered, why make users click "Verify"?
+
+<ExampleEmbed id="auto-submit-code" client:load />
+
+### Why auto-submit wins
+
+- **Saves one interaction** (no button click needed)
+- **Feels faster** even if the actual time is the same
+- **Reduces cognitive load** — users don't have to decide when to submit
+
+### Implementation notes
+
+- Trigger validation when `value.length === maxLength`
+- Show a loading state immediately
+- Handle errors gracefully (clear input, show message)
+
+---
+
+## 4. Paste Button: The Hidden Accelerator
+
+On mobile, pasting requires multiple steps: long press → context menu → tap "Paste". A visible paste button reduces this to a single tap.
+
+<ExampleEmbed id="paste-otp-code" client:load />
+
+### The browser permission question
+
+Yes, the Clipboard API triggers a permission prompt. But:
+
+1. **It's one-time** — users won't see it again after accepting
+2. **It's contextual** — the prompt appears right after clicking "Paste"
+3. **It's still faster** than typing 6 digits manually
+
+### When to use it
+
+- **Desktop**: Highly recommended (email codes, password managers)
+- **Mobile**: Optional fallback — `autocomplete="one-time-code"` handles most cases
+
+---
+
+## The Ultimate OTP Flow
+
+Combine all patterns for the best experience:
+
+1. **Email**: Code prominently displayed, easy to copy
+2. **Input**: Separate fields with auto-advance
+3. **Behavior**: Auto-submit when complete
+4. **Fallback**: Visible paste button for power users
+
+The goal is simple: **minimize the time between receiving the code and being verified**.
+
+---
+
+## Technical Checklist
+
+- [ ] Use `autocomplete="one-time-code"` for mobile autofill
+- [ ] Support paste (Ctrl+V) in all input fields
+- [ ] Auto-advance focus between fields
+- [ ] Auto-submit when all digits are entered
+- [ ] Show clear error states with retry option
+- [ ] Consider a visible paste button for desktop users
+- [ ] Design emails with the code as the visual focal point

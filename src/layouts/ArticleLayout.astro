@@ -1,0 +1,29 @@
+---
+import PageLayout from "./PageLayout.astro";
+import { ArrowLeft } from "lucide-react";
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<PageLayout title={`${frontmatter.title} | The Good, The Bad and The UX`} description={frontmatter.description}>
+  <div class="mx-auto max-w-4xl">
+    <a
+      href="/articles"
+      class="mb-6 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+    >
+      <ArrowLeft className="h-4 w-4" />
+      Back to articles
+    </a>
+
+    <article class="prose prose-neutral max-w-none dark:prose-invert prose-headings:scroll-mt-20 prose-h1:text-3xl prose-h2:text-2xl prose-h2:border-b prose-h2:pb-2 prose-h2:mt-10 prose-h3:text-xl prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+      <slot />
+    </article>
+  </div>
+</PageLayout>

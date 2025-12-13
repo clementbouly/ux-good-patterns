@@ -4,14 +4,36 @@ import CommandMenu from "@/components/CommandMenu";
 
 const currentPath = Astro.url.pathname;
 const isHome = currentPath === "/";
+const isExamples = currentPath === "/" || currentPath.startsWith("/example");
+const isArticles = currentPath.startsWith("/article");
+
+const navLinks = [
+  { href: "/", label: "Examples", active: isExamples },
+  { href: "/articles", label: "Articles", active: isArticles },
+];
 ---
 
 <!-- Mobile sticky nav -->
 <div
-  class="sticky top-0 z-50 flex items-center justify-end gap-2 border-b bg-[#0a0a0a] px-4 py-2 text-white md:hidden"
+  class="sticky top-0 z-50 flex items-center justify-between gap-2 border-b bg-[#0a0a0a] px-4 py-2 text-white md:hidden"
 >
-  <CommandMenu client:load variant="icon" />
-  <ThemeToggle client:load />
+  <nav class="flex gap-4">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class:list={[
+          "text-sm font-medium transition-colors",
+          link.active ? "text-white" : "text-white/60 hover:text-white",
+        ]}
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+  <div class="flex items-center gap-2">
+    <CommandMenu client:load variant="icon" />
+    <ThemeToggle client:load />
+  </div>
 </div>
 
 <header class="border-b bg-[#0a0a0a] text-white md:border-b-0">
@@ -26,15 +48,29 @@ const isHome = currentPath === "/";
           </h1>
         ) : (
           <a href="/" class="hover:opacity-80">
-            <h1 class="text-3xl font-bold md:text-5xl">
+            <p class="text-3xl font-bold md:text-5xl">
               The Good, The Bad and The UX
-            </h1>
+            </p>
           </a>
         )
       }
       <p class="mt-3 text-lg text-white/70 md:mt-5 md:text-2xl">
         A collection of UX patterns with comparative examples
       </p>
+      <!-- Desktop nav -->
+      <nav class="mt-4 hidden gap-6 md:flex">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm font-medium transition-colors",
+              link.active ? "text-white" : "text-white/60 hover:text-white",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
     </div>
     <!-- Desktop controls -->
     <div class="hidden items-center gap-3 md:flex">
