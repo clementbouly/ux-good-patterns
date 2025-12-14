@@ -35,18 +35,27 @@ Before users even interact with your form, they need to find the code in their i
 
 ---
 
-## 2. Input Design: Separate Fields vs Single Input
+## 2. Paste Support: The Make-or-Break Feature
 
-The visual design of your OTP input affects perceived usability.
+Users almost always have the code in their clipboard (from email, SMS, or password manager). If they can't paste it, frustration kicks in immediately.
 
 <ExampleEmbed id="verification-code-input" client:load />
 
-### The trade-off
+### The problem with naive implementations
 
-- **Separate fields**: More visual feedback, feels modern, but can be tricky to implement
-- **Single input**: Simpler, but less engaging
+Many "separate fields" implementations break paste:
+- Each input only accepts one character
+- Pasting fills only the first field and discards the rest
+- Users are forced to type digit by digit
 
-Most modern implementations use **separate fields with auto-advance** — each digit gets its own box, and focus moves automatically.
+### The solution
+
+Handle the `paste` event properly:
+1. Intercept `Ctrl+V` / `Cmd+V` on any field
+2. Extract digits from the pasted content
+3. Distribute them across all fields automatically
+
+Modern OTP libraries (like `input-otp`) handle this out of the box. If building custom inputs, **paste support is non-negotiable**.
 
 ---
 
@@ -96,20 +105,8 @@ Yes, the Clipboard API triggers a permission prompt. But:
 Combine all patterns for the best experience:
 
 1. **Email**: Code prominently displayed, easy to copy
-2. **Input**: Separate fields with auto-advance
+2. **Input**: Full paste support (Ctrl+V fills all fields)
 3. **Behavior**: Auto-submit when complete
 4. **Fallback**: Visible paste button for power users
 
 The goal is simple: **minimize the time between receiving the code and being verified**.
-
----
-
-## Technical Checklist
-
-- [ ] Use `autocomplete="one-time-code"` for mobile autofill
-- [ ] Support paste (Ctrl+V) in all input fields
-- [ ] Auto-advance focus between fields
-- [ ] Auto-submit when all digits are entered
-- [ ] Show clear error states with retry option
-- [ ] Consider a visible paste button for desktop users
-- [ ] Design emails with the code as the visual focal point

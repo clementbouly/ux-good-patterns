@@ -71,10 +71,10 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
       <CommandDialog
         open={open}
         onOpenChange={setOpen}
-        title="Search examples"
+        title="Search examples and articles"
         description="Search for UX patterns and examples"
       >
-        <CommandInput placeholder="Search examples..." />
+        <CommandInput placeholder="Search examples, articles..." />
         <CommandList>
           <CommandEmpty>No examples found.</CommandEmpty>
           <CommandGroup heading="Examples">
