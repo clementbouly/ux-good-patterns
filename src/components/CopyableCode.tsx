@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 
 type CopyableCodeProps = {
   code: string;
@@ -7,16 +7,10 @@ type CopyableCodeProps = {
 };
 
 export function CopyableCode({ code, label = "Test code:" }: CopyableCodeProps) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  const { copied, copy } = useCopyToClipboard();
 
   return (
-    <div className="rounded-md bg-muted p-3 text-center cursor-pointer" onClick={handleCopy}>
+    <div className="rounded-md bg-muted p-3 text-center cursor-pointer" onClick={() => copy(code)}>
       <p className="text-xs text-muted-foreground mb-1">{label}</p>
       <button
         className="font-mono text-lg font-bold tracking-widest hover:text-primary transition-colors cursor-pointer"

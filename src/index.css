@@ -151,3 +151,37 @@
   }
 }
 
+/* AI Context link gradient effect */
+.ai-link-gradient {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    oklch(0.7 0.15 280) 0%,
+    oklch(0.6 0.2 320) 50%,
+    oklch(0.7 0.15 280) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+.ai-link-gradient:hover {
+  background: linear-gradient(
+    135deg,
+    oklch(0.75 0.18 280) 0%,
+    oklch(0.65 0.23 320) 50%,
+    oklch(0.75 0.18 280) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-shift 2s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+

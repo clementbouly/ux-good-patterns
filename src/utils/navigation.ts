@@ -2,18 +2,21 @@ export type NavLink = {
   href: string;
   label: string;
   active: boolean;
+  highlight?: boolean;
 };
 
 type NavConfig = {
   href: string;
   label: string;
   segments: string[];
+  highlight?: boolean;
 };
 
 const NAV_CONFIG: NavConfig[] = [
   { href: "/", label: "Examples", segments: ["", "example"] },
   { href: "/articles", label: "Articles", segments: ["article", "articles"] },
   { href: "/resources", label: "Resources", segments: ["resources"] },
+  { href: "/ai", label: "AI Context", segments: ["ai"], highlight: true },
 ];
 
 /**
@@ -28,5 +31,6 @@ export function getNavLinks(pathname: string): NavLink[] {
     href: config.href,
     label: config.label,
     active: config.segments.includes(segment),
+    highlight: config.highlight,
   }));
 }

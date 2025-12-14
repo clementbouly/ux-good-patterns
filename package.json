@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "npm run generate:ai && astro build",
+    "generate:ai": "npx tsx scripts/generate-ai-context.ts",
     "preview": "astro preview",
     "lint": "eslint .",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json,astro}\"",

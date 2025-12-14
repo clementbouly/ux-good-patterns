@@ -47,11 +47,14 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
             href={link.href}
             class:list={[
               "rounded-md px-3 py-1.5 text-base font-medium transition-all duration-200",
-              link.active
-                ? "bg-white/15 text-white"
-                : "text-white/60 hover:bg-white/10 hover:text-white",
+              link.highlight && !link.active
+                ? "ai-link-gradient text-white"
+                : link.active
+                  ? "bg-white/15 text-white"
+                  : "text-white/60 hover:bg-white/10 hover:text-white",
             ]}
           >
+            {link.highlight && <span class="mr-1.5">✨</span>}
             {link.label}
           </a>
         ))}
