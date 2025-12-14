@@ -2,18 +2,10 @@
 import ThemeToggle from "@/components/ThemeToggle";
 import CommandMenu from "@/components/CommandMenu";
 import { MobileNav } from "@/components/MobileNav";
+import { getNavLinks } from "@/utils/navigation";
 
-const currentPath = Astro.url.pathname;
-const isHome = currentPath === "/";
-const isExamples = currentPath === "/" || currentPath.startsWith("/example");
-const isArticles = currentPath.startsWith("/article");
-const isResources = currentPath === "/resources";
-
-const navLinks = [
-  { href: "/", label: "Examples", active: isExamples },
-  { href: "/articles", label: "Articles", active: isArticles },
-  { href: "/resources", label: "Resources", active: isResources },
-];
+const navLinks = getNavLinks(Astro.url.pathname);
+const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
 ---
 
 <!-- Mobile sticky nav -->
