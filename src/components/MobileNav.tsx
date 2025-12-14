@@ -34,7 +34,7 @@ export function MobileNav({ navLinks }: MobileNavProps) {
           />
 
           {/* Menu */}
-          <nav className="absolute left-0 top-full z-50 mt-2 w-48 rounded-lg border border-white/10 bg-[#0a0a0a] py-2 shadow-xl">
+          <nav className="absolute left-0 top-full z-50 mt-2 w-48 rounded-lg border border-white/10 bg-[#171717] py-2 shadow-xl">
             {navLinks.map((link) => (
               <a
                 key={link.href}
