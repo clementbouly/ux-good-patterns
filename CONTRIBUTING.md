@@ -1,6 +1,6 @@
 # Contributing to UX Good Patterns
 
-Thank you for your interest in contributing! This guide explains how to add a new UX example.
+Thank you for your interest in contributing! This guide explains how to add new UX examples and articles.
 
 ## Adding a New Example
 
@@ -148,6 +148,73 @@ Verify that:
 - `Feedback`: User feedback (loading, errors, success)
 - `Accessibility`: Accessibility patterns
 - `Performance`: Perceived performance patterns
+
+## Adding a New Article
+
+Articles are in-depth guides that combine multiple examples into a comprehensive resource. They use MDX format, allowing you to embed interactive examples.
+
+### 1. Create the MDX file
+
+Create a new file in `/src/pages/article/`:
+
+```bash
+touch src/pages/article/my-article.mdx
+```
+
+### 2. Add frontmatter and content
+
+```mdx
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "Article Title"
+description: "Short description of the article"
+---
+
+import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+
+# Article Title
+
+Your content here...
+
+## Section with Interactive Example
+
+<ExampleEmbed id="example-id" client:load />
+
+More content...
+```
+
+### 3. Register the article
+
+Add metadata in `/src/articles.ts`:
+
+```typescript
+export const articles: Article[] = [
+  // ... existing articles
+  {
+    slug: "my-article",           // Must match filename (without .mdx)
+    title: "Article Title",
+    description: "Short description",
+    tags: ["Tag1", "Tag2"],
+  },
+];
+```
+
+### 4. Test
+
+```bash
+npm run dev
+```
+
+Verify that:
+- Article appears on `/articles` page
+- Article renders correctly at `/article/my-article`
+- Embedded examples are interactive
+- Share button works
+
+### Available Components for Articles
+
+- `ExampleEmbed`: Embeds an interactive example by its ID
+- `EmailComparison`: Side-by-side email mockup comparison (for specific use cases)
 
 ## Submitting a Pull Request
 

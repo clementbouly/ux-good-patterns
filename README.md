@@ -10,7 +10,7 @@ An open source collection of UX patterns with comparative examples. Each pattern
 - **Rendering**: Static Site Generation (SSG)
 - **Styles**: Tailwind CSS
 - **Components**: shadcn/ui
-- **Markdown**: marked + @tailwindcss/typography
+- **Articles**: MDX with embedded interactive examples
 
 ## Installation
 
@@ -44,9 +44,13 @@ npm run dev
   /layouts              # Astro layouts
     Layout.astro        # Base layout (head, meta, scripts)
     PageLayout.astro    # Page layout with Header/Footer
+    ArticleLayout.astro # Layout for MDX articles
   /pages                # Astro pages (file-based routing)
     index.astro         # Home page
+    articles.astro      # Articles listing page
     example/[exampleId].astro  # Example detail page
+    article/*.mdx       # MDX articles with interactive examples
+  articles.ts           # Articles metadata registry
 ```
 
 ## Available Scripts
