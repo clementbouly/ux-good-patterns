@@ -52,8 +52,8 @@ export function GoodExample() {
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="amount-good">Amount</Label>
-        <Input id="amount-good" type="text" defaultValue="99.00 €" disabled={isLoading} />
+        <Label htmlFor="amount-good">Amount (€)</Label>
+        <Input id="amount-good" type="number" defaultValue={99} disabled={isLoading} />
       </div>
 
       <Button type="submit" disabled={isLoading} className="w-full">
