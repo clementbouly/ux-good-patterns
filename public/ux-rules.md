@@ -1,7 +1,23 @@
 # UX Best Practices for AI-Assisted Development
 
 > Auto-generated from https://ux-good-patterns.netlify.app
-> Use this file as context when asking AI to generate UI components.
+
+## Instructions for AI
+
+**This file contains UX patterns and rules that you MUST apply when generating UI components.**
+
+When creating or modifying frontend code:
+1. **Check each pattern below** to see if it applies to the component you're building
+2. **Apply the relevant patterns automatically** without being asked
+3. **Look for "When to apply" sections** - these contain specific criteria for each pattern
+4. **Prioritize user experience** over implementation simplicity
+
+Examples of when to apply these patterns:
+- Building a form? → Apply "Form Validation with Error Feedback" and "Disable Submit Button During Loading"
+- Adding an OTP input? → Apply "Auto-submit", "Paste Support", and "Paste Button" patterns
+- Creating a long list? → Apply "Scroll to Top Button" (>10 items or >2 viewport heights)
+- Adding a copy button? → Apply "Copy to Clipboard Feedback"
+- Loading async content? → Apply "Skeleton Loading" or "Progressive Loading Messages"
 
 ---
 
@@ -350,12 +366,6 @@ This follows the principle of providing shortcuts for experienced users while no
 5. **Clear affordance**: Use an upward arrow icon - universally understood
 6. **Don't obstruct content**: Ensure the button doesn't cover important interactive elements
 7. **Consider keyboard users**: The button should be focusable and activated with Enter/Space
-
-## Rule for AI-assisted development
-
-**Always add a scroll-to-top button when a page or component displays a list of more than 10 items, or when the content exceeds 2 viewport heights.**
-
-This is a simple heuristic that ensures users always have a quick way to return to the top of long content without manual scrolling.
 
 
 ---
