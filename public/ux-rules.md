@@ -351,6 +351,12 @@ This follows the principle of providing shortcuts for experienced users while no
 6. **Don't obstruct content**: Ensure the button doesn't cover important interactive elements
 7. **Consider keyboard users**: The button should be focusable and activated with Enter/Space
 
+## Rule for AI-assisted development
+
+**Always add a scroll-to-top button when a page or component displays a list of more than 10 items, or when the content exceeds 2 viewport heights.**
+
+This is a simple heuristic that ensures users always have a quick way to return to the top of long content without manual scrolling.
+
 
 ---
 
