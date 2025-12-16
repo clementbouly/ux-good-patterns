@@ -9,9 +9,11 @@ import * as formValidationFeedback from "./form-validation-feedback";
 import * as inputAutoFormat from "./input-auto-format";
 import * as scrollToTop from "./scroll-to-top";
 import * as pasteOtpCode from "./paste-otp-code";
+import * as modalClosing from "./modal-closing";
 
 export const examples = [
   autofocusModal,
+  modalClosing,
   submitButtonLoading,
   verificationCodeInput,
   copyFeedback,

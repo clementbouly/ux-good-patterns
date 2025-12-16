@@ -12,7 +12,7 @@ const FRICTIONS = [
     title: "Modal closing",
     bad: "Only the X button works",
     good: "X button + click outside + Escape key",
-    link: null,
+    link: "/example/modal-closing",
   },
   {
     title: "Code copy",
