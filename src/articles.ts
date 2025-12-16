@@ -13,4 +13,11 @@ export const articles: Article[] = [
       "Best practices for verification code inputs, from email design to form implementation",
     tags: ["OTP", "Forms", "Verification"],
   },
+  {
+    slug: "ux-speed-game",
+    title: "The UX Speed Challenge",
+    description:
+      "Experience firsthand how small UX frictions compound into major slowdowns",
+    tags: ["Interactive", "Game", "Micro-interactions"],
+  },
 ];
