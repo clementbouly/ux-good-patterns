@@ -29,7 +29,7 @@ export function UxSpeedGame({ children }: UxSpeedGameProps) {
           )}
         >
           {bothCompleted && (
-            <span className="absolute top-3 right-2 text-s font-bold text-red-500 border-2 border-red-500 px-2 py-0.5 rounded rotate-6 opacity-90 uppercase tracking-wide z-20 pointer-events-none">
+            <span className="absolute top-3 right-2 font-bold text-red-500 border-2 border-red-500 px-2 py-0.5 rounded rotate-6 opacity-90 uppercase tracking-wide z-20 pointer-events-none">
               Bad UX
             </span>
           )}
@@ -48,7 +48,7 @@ export function UxSpeedGame({ children }: UxSpeedGameProps) {
           )}
         >
           {bothCompleted && (
-            <span className="absolute top-3 right-2 text-s font-bold text-green-500 border-2 border-green-500 px-2 py-0.5 rounded rotate-6 opacity-90 uppercase tracking-wide z-20 pointer-events-none">
+            <span className="absolute top-3 right-2 font-bold text-green-500 border-2 border-green-500 px-2 py-0.5 rounded rotate-6 opacity-90 uppercase tracking-wide z-20 pointer-events-none">
               Good UX
             </span>
           )}

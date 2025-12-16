@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 export function useGameTimer(isRunning: boolean) {
   const [startTime, setStartTime] = useState<number | null>(null);
@@ -7,27 +7,27 @@ export function useGameTimer(isRunning: boolean) {
 
   useEffect(() => {
     if (!startTime || !isRunning) return;
-    const interval = setInterval(() => setElapsedTime(Date.now() - startTime), 10);
+    const interval = setInterval(() => setElapsedTime(Date.now() - startTime), 100);
     return () => clearInterval(interval);
   }, [startTime, isRunning]);
 
-  const start = useCallback(() => {
+  const start = () => {
     setStartTime(Date.now());
     setElapsedTime(0);
     setFinalTime(null);
-  }, []);
+  };
 
-  const stop = useCallback(() => {
+  const stop = () => {
     const time = Date.now() - (startTime || 0);
     setFinalTime(time);
     return time;
-  }, [startTime]);
+  };
 
-  const reset = useCallback(() => {
+  const reset = () => {
     setStartTime(null);
     setElapsedTime(0);
     setFinalTime(null);
-  }, []);
+  };
 
   return { displayTime: finalTime ?? elapsedTime, start, stop, reset };
 }
