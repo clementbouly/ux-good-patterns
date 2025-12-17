@@ -122,7 +122,7 @@ export function ExampleCard({
 
       <div className="grid items-stretch gap-6 md:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 dark:bg-red-950">
                 <X className="h-3 w-3 text-red-600 dark:text-red-400" />
@@ -142,7 +142,7 @@ export function ExampleCard({
         </div>
 
         <div className="flex flex-col gap-2">
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
             <div className="flex items-center gap-2">
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 dark:bg-green-950">
                 <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
