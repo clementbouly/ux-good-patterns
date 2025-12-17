@@ -10,6 +10,7 @@ import * as inputAutoFormat from "./input-auto-format";
 import * as scrollToTop from "./scroll-to-top";
 import * as pasteOtpCode from "./paste-otp-code";
 import * as modalClosing from "./modal-closing";
+import * as dropdownUsability from "./dropdown-usability";
 
 export const examples = [
   autofocusModal,
@@ -24,6 +25,7 @@ export const examples = [
   inputAutoFormat,
   scrollToTop,
   pasteOtpCode,
+  dropdownUsability,
 ];
 
 export type ExampleMeta = {
