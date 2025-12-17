@@ -17,7 +17,7 @@ export function ExampleEmbed({ id }: ExampleEmbedProps) {
   }
 
   return (
-    <div className="not-prose">
+    <div className="not-prose -mx-6 md:mx-0">
       <ExampleCard example={example} titleAs="h2" linkTitle={true} />
     </div>
   );
