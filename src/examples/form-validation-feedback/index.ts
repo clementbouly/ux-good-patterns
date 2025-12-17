@@ -11,6 +11,7 @@ export const meta = {
     "Keep submit buttons enabled and show clear error messages on submit instead of disabling buttons on incomplete forms.",
   category: "Forms",
   tags: ["form", "validation", "error", "button", "accessibility", "feedback"],
+  createdAt: "2025-12-08",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Disabled button until valid" }];

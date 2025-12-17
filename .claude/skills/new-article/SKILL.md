@@ -60,6 +60,7 @@ export const articles: Article[] = [
     title: "Article Title",
     description: "Brief description",
     tags: ["Tag1", "Tag2"],
+    createdAt: "YYYY-MM-DD",  // Today's date in ISO format
   },
 ];
 ```

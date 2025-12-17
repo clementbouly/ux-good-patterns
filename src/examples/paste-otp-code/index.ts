@@ -11,6 +11,7 @@ export const meta = {
     "Add a visible paste button to let users quickly fill the OTP from clipboard",
   category: "Forms",
   tags: ["verification", "otp", "paste", "clipboard", "input", "ux"],
+  createdAt: "2025-12-13",
 };
 
 export const BadExamples = [

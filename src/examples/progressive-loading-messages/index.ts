@@ -10,6 +10,7 @@ export const meta = {
   description: "Show evolving status messages during long operations to keep users informed",
   category: "Feedback",
   tags: ["loading", "feedback", "progress", "status", "ux"],
+  createdAt: "2025-12-08",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Static 'Loading...'" }];

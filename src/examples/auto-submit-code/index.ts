@@ -11,6 +11,7 @@ export const meta = {
     "Automatically validate the code when all digits are entered instead of requiring manual submission",
   category: "Forms",
   tags: ["verification", "otp", "auto-submit", "input", "ux"],
+  createdAt: "2025-12-07",
 };
 
 export const BadExamples = [

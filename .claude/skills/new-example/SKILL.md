@@ -40,6 +40,7 @@ export const meta = {
   description: "Brief description of the pattern",
   category: "Forms",  // One of: Forms, Navigation, Feedback, Accessibility, Performance, Modals
   tags: ["tag1", "tag2"],
+  createdAt: "YYYY-MM-DD",  // Today's date in ISO format
 };
 
 export const BadExamples = [

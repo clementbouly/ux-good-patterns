@@ -11,6 +11,7 @@ export const meta = {
     "Allow users to paste verification codes instead of typing digit by digit",
   category: "Forms",
   tags: ["input", "verification", "paste", "OTP", "mobile"],
+  createdAt: "2025-12-06",
 };
 
 export const BadExamples = [

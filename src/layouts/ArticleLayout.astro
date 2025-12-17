@@ -2,6 +2,8 @@
 import PageLayout from "./PageLayout.astro";
 import { ArrowLeft } from "lucide-react";
 import { ShareButton } from "@/components/ShareButton";
+import { articles } from "@/articles";
+import { formatDate } from "@/lib/dateUtils";
 
 interface Props {
   frontmatter: {
@@ -12,6 +14,10 @@ interface Props {
 
 const { frontmatter } = Astro.props;
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
+
+// Get article slug from URL path
+const slug = Astro.url.pathname.replace(/^\/article\//, "").replace(/\/$/, "");
+const article = articles.find((a) => a.slug === slug);
 ---
 
 <PageLayout title={`${frontmatter.title} | The Good, The Bad and The UX`} description={frontmatter.description}>
@@ -28,6 +34,9 @@ const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
     </div>
 
     <article class="prose prose-neutral max-w-none dark:prose-invert prose-headings:scroll-mt-20 prose-h1:text-3xl prose-h2:text-2xl prose-h2:mt-10 prose-h3:text-xl prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-hr:hidden rounded-lg border bg-card p-6 md:p-8">
+      {article && (
+        <p class="text-sm text-muted-foreground not-prose mb-4">{formatDate(article.createdAt)}</p>
+      )}
       <slot />
     </article>
   </div>

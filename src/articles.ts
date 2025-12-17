@@ -3,6 +3,7 @@ export type Article = {
   title: string;
   description: string;
   tags: string[];
+  createdAt: string; // ISO date format: YYYY-MM-DD
 };
 
 export const articles: Article[] = [
@@ -12,6 +13,7 @@ export const articles: Article[] = [
     description:
       "Best practices for verification code inputs, from email design to form implementation",
     tags: ["OTP", "Forms", "Verification"],
+    createdAt: "2025-12-13",
   },
   {
     slug: "ux-speed-game",
@@ -19,5 +21,6 @@ export const articles: Article[] = [
     description:
       "Experience firsthand how small UX frictions compound into major slowdowns",
     tags: ["Interactive", "Game", "Micro-interactions"],
+    createdAt: "2025-12-16",
   },
 ];

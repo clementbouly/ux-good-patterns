@@ -11,6 +11,7 @@ export const meta = {
     "When a modal opens with a single input, it should be automatically focused",
   category: "Modals",
   tags: ["modal", "input", "accessibility", "mobile"],
+  createdAt: "2025-12-06",
 };
 
 export const BadExamples = [

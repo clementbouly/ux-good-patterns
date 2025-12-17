@@ -11,6 +11,7 @@ export const meta = {
     "When a select has many options, add search to help users find their choice quickly",
   category: "Forms",
   tags: ["form", "select", "input", "accessibility", "mobile"],
+  createdAt: "2025-12-17",
 };
 
 export const BadExamples = [

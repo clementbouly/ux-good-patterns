@@ -36,6 +36,7 @@ export type ExampleMeta = {
   description: string;
   category: string;
   tags: string[];
+  createdAt: string; // ISO date format: YYYY-MM-DD
 };
 
 export type ExampleVariant = {

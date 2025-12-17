@@ -11,6 +11,7 @@ export const meta = {
     "Provide a quick way to return to the top on long scrollable content",
   category: "Navigation",
   tags: ["scroll", "navigation", "button", "accessibility", "ux"],
+  createdAt: "2025-12-13",
 };
 
 export const BadExamples = [

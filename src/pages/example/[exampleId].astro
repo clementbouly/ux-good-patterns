@@ -4,6 +4,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import { ExamplePageContent } from "@/components/ExamplePageContent";
 import { RelatedExamples } from "@/components/RelatedExamples";
 import { examples } from "@/examples";
+import { formatDate } from "@/lib/dateUtils";
 
 export function getStaticPaths() {
   return examples.map((example) => ({
@@ -34,6 +35,7 @@ const htmlContent = example.content ? marked.parse(example.content) : null;
           class="prose prose-neutral max-w-none dark:prose-invert"
           set:html={htmlContent}
         />
+        <p class="mt-6 text-xs text-muted-foreground">Published on {formatDate(example.meta.createdAt)}</p>
       </div>
     )
   }

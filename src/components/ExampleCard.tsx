@@ -3,6 +3,7 @@ import { X, Check, ArrowRight } from "lucide-react";
 import { type Example, type ExampleVariant } from "@/examples";
 import { ShareButton } from "./ShareButton";
 import { useSearchParam } from "@/hooks/useSearchParam";
+import { isNew } from "@/lib/dateUtils";
 
 function VariantSelector({
   variants,
@@ -97,7 +98,14 @@ export function ExampleCard({
       <ShareButton url={shareUrl} className="absolute right-4 top-4" />
 
       <div className="mb-4">
-        <span className="text-xs font-medium text-muted-foreground">{example.meta.category}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-medium text-muted-foreground">{example.meta.category}</span>
+          {isNew(example.meta.createdAt) && (
+            <span className="inline-flex items-center rounded-full bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
+              New
+            </span>
+          )}
+        </div>
         {title}
         <p className="my-3 text-sm text-muted-foreground">{example.meta.description}</p>
         <div className="mt-2 flex flex-wrap gap-1">

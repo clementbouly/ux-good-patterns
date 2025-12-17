@@ -11,6 +11,7 @@ export const meta = {
     "Prevent double submissions by disabling the button and showing a spinner",
   category: "Forms",
   tags: ["button", "loading", "form", "mobile"],
+  createdAt: "2025-12-06",
 };
 
 export const BadExamples = [

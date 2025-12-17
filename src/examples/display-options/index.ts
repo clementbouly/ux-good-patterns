@@ -11,6 +11,7 @@ export const meta = {
     "For a small set of options, display them directly instead of hiding them in a select",
   category: "Forms",
   tags: ["form", "select", "input", "accessibility"],
+  createdAt: "2025-12-17",
 };
 
 export const BadExamples = [

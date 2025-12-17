@@ -11,6 +11,7 @@ export const meta = {
     "Show content structure with animated placeholders instead of a generic spinner",
   category: "Feedback",
   tags: ["loading", "skeleton", "spinner", "placeholder", "ux"],
+  createdAt: "2025-12-07",
 };
 
 export const BadExamples = [

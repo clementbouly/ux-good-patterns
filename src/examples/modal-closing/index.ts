@@ -11,6 +11,7 @@ export const meta = {
     "A modal should provide multiple ways to close: X button, click outside, and Escape key",
   category: "Modals",
   tags: ["modal", "accessibility", "keyboard", "ux"],
+  createdAt: "2025-12-16",
 };
 
 export const BadExamples = [

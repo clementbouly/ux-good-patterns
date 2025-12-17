@@ -12,6 +12,7 @@ export const meta = {
     "Provide visual feedback when content is copied to clipboard",
   category: "Feedback",
   tags: ["copy", "clipboard", "feedback", "toast"],
+  createdAt: "2025-12-06",
 };
 
 export const BadExamples = [

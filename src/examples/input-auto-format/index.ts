@@ -11,6 +11,7 @@ export const meta = {
     "Automatically format structured inputs (credit card, IBAN, phone) with proper spacing and show the appropriate mobile keyboard.",
   category: "Forms",
   tags: ["form", "input", "format", "mobile", "keyboard", "iban", "credit-card", "accessibility"],
+  createdAt: "2025-12-08",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Plain text input" }];
