@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/*.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
