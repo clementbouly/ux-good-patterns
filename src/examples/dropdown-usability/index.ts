@@ -7,9 +7,8 @@ export { content };
 export const meta = {
   id: "dropdown-usability",
   title: "Dropdown usability",
-  description:
-    "A dropdown should only be used when the list of options is small and easy to scan",
-  category: "Modals",
+  description: "A dropdown should only be used when the list of options is small and easy to scan",
+  category: "Forms",
   tags: ["form", "input", "accessibility", "mobile"],
 };
 
