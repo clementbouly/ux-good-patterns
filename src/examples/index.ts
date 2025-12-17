@@ -11,6 +11,7 @@ import * as scrollToTop from "./scroll-to-top";
 import * as pasteOtpCode from "./paste-otp-code";
 import * as modalClosing from "./modal-closing";
 import * as dropdownUsability from "./dropdown-usability";
+import * as displayOptions from "./display-options";
 
 export const examples = [
   autofocusModal,
@@ -26,6 +27,7 @@ export const examples = [
   scrollToTop,
   pasteOtpCode,
   dropdownUsability,
+  displayOptions,
 ];
 
 export type ExampleMeta = {
