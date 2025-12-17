@@ -24,17 +24,33 @@ function VariantSelector({
   };
 
   return (
-    <div className="flex gap-1">
-      {variants.map((variant, index) => (
-        <button
-          key={index}
-          onClick={() => onSelect(index)}
-          data-active={currentIndex === index}
-          className={`rounded-md border px-2 py-1 text-xs font-medium transition-colors ${colorClasses[color]}`}
-        >
-          {variant.label}
-        </button>
-      ))}
+    <div className="flex items-center gap-2">
+      {color === "green" && (
+        <div className="group/dot relative hidden md:block">
+          <span className="relative flex h-3 w-3">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
+          </span>
+          <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 opacity-0 transition-opacity duration-300 group-hover/dot:opacity-100">
+            <div className="whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background">
+              Multiple good examples!
+            </div>
+            <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-foreground"></div>
+          </div>
+        </div>
+      )}
+      <div className="flex gap-1">
+        {variants.map((variant, index) => (
+          <button
+            key={index}
+            onClick={() => onSelect(index)}
+            data-active={currentIndex === index}
+            className={`cursor-pointer rounded-md border px-2 py-1 text-xs font-medium transition-colors ${colorClasses[color]}`}
+          >
+            {variant.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -83,7 +99,7 @@ export function ExampleCard({
       <div className="mb-4">
         <span className="text-xs font-medium text-muted-foreground">{example.meta.category}</span>
         {title}
-        <p className="my-1 text-sm text-muted-foreground">{example.meta.description}</p>
+        <p className="my-3 text-sm text-muted-foreground">{example.meta.description}</p>
         <div className="mt-2 flex flex-wrap gap-1">
           {example.meta.tags.map((tag) => (
             <span

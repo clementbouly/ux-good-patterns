@@ -5,29 +5,34 @@ import { useSearchParam } from "@/hooks/useSearchParam";
 type RelatedExamplesProps = {
   currentExampleId: string;
   currentCategory: string;
+  currentTags: string[];
 };
 
-function getRelatedExamples(currentId: string, currentCategory: string, count = 3): Example[] {
-  const sameCategory = examples.filter(
-    (e) => e.meta.id !== currentId && e.meta.category === currentCategory
-  );
+function getRelatedExamples(currentId: string, currentCategory: string, currentTags: string[], count = 3): Example[] {
+  const otherExamples = examples.filter((e) => e.meta.id !== currentId);
 
-  const others = examples.filter(
-    (e) => e.meta.id !== currentId && e.meta.category !== currentCategory
-  );
+  // Score examples by relevance: shared tags + same category bonus
+  const scored = otherExamples.map((example) => {
+    const sharedTags = example.meta.tags.filter((tag) => currentTags.includes(tag)).length;
+    const categoryBonus = example.meta.category === currentCategory ? 2 : 0;
+    return { example, score: sharedTags + categoryBonus };
+  });
 
-  // Use deterministic sort based on example id to avoid SSR hydration mismatch
-  // Math.random() would generate different results on server vs client
-  const sortedOthers = [...others].sort((a, b) => a.meta.id.localeCompare(b.meta.id));
+  // Sort by score (desc), then by id for deterministic order (avoids SSR mismatch)
+  scored.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return a.example.meta.id.localeCompare(b.example.meta.id);
+  });
 
-  return [...sameCategory, ...sortedOthers].slice(0, count);
+  return scored.slice(0, count).map((s) => s.example);
 }
 
 export function RelatedExamples({
   currentExampleId,
   currentCategory,
+  currentTags,
 }: RelatedExamplesProps) {
-  const related = getRelatedExamples(currentExampleId, currentCategory);
+  const related = getRelatedExamples(currentExampleId, currentCategory, currentTags);
   const [searchCategory] = useSearchParam("category");
 
   if (related.length === 0) return null;
@@ -52,6 +57,16 @@ export function RelatedExamples({
             <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
               {example.meta.description}
             </p>
+            <div className="mt-2 flex flex-wrap gap-1">
+              {example.meta.tags.slice(0, 4).map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded bg-secondary px-2 py-0.5 text-xs text-secondary-foreground"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
             <div className="mt-3 flex items-center gap-1 text-sm font-medium text-muted-foreground group-hover:text-foreground">
               View example
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
