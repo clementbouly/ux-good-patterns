@@ -4,8 +4,6 @@
 
 A modal should provide multiple ways to close: clicking the X button, clicking outside the modal (on the overlay), and pressing the Escape key. This gives users flexibility and matches their expectations across different contexts and preferences.
 
-> **⚠️ Exception**: This pattern applies to standard modals. For critical confirmations, important notifications, or destructive actions, you should **disable click-outside closing** to prevent accidental dismissal. See "When not to apply" below.
-
 ## Why it matters
 
 - **User autonomy**: Different users have different preferences for how they interact with modals
@@ -31,13 +29,12 @@ Restricting closure to only one method (like the X button) breaks user expectati
 
 ## When not to apply
 
-- **Critical confirmations** where accidental closure could be problematic (e.g., "Delete account", "Discard unsaved changes")
-- **Important notifications** that require user acknowledgment (e.g., security alerts, payment confirmations, error messages that need action)
-- **Multi-step wizards** where clicking outside might indicate confusion rather than intent to close
-- **Loading/processing states** that should not be dismissed mid-operation
-- **Destructive action confirmations** where the user must consciously choose to proceed or cancel
+- Critical confirmations where accidental closure could be problematic (e.g., "You have unsaved changes" warnings)
+- Multi-step wizards where clicking outside might indicate confusion rather than intent to close
+- Loading states or processing modals that should not be dismissed mid-operation
+- Forced acknowledgment dialogs (though these should be used sparingly)
 
-In these cases, disable click-outside closing, but **always** provide explicit "Cancel" and "Confirm" buttons as clear exit options.
+In these cases, you might disable click-outside or Escape, but **always** provide a clear "Cancel" or "Close" button as an explicit exit option.
 
 ## Implementation tips
 
