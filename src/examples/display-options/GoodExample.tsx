@@ -81,7 +81,7 @@ export function GoodExampleCards() {
               )}
             >
               {selected === plan.id && (
-                <div className="h-1.5 w-1.5 rounded-full bg-white" />
+                <div className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
               )}
             </div>
             <div className="grid gap-0.5">
