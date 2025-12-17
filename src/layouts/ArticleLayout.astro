@@ -27,7 +27,7 @@ const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
       <ShareButton client:load url={currentUrl} />
     </div>
 
-    <article class="prose prose-neutral max-w-none dark:prose-invert prose-headings:scroll-mt-20 prose-h1:text-3xl prose-h2:text-2xl prose-h2:border-b prose-h2:pb-2 prose-h2:mt-10 prose-h3:text-xl prose-a:text-primary prose-a:no-underline hover:prose-a:underline">
+    <article class="prose prose-neutral max-w-none dark:prose-invert prose-headings:scroll-mt-20 prose-h1:text-3xl prose-h2:text-2xl prose-h2:mt-10 prose-h3:text-xl prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-hr:hidden rounded-lg border bg-card p-6 md:p-8">
       <slot />
     </article>
   </div>
