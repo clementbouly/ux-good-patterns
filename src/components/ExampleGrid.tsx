@@ -10,6 +10,18 @@ const categories = [NEW_CATEGORY, ...new Set(examples.map((e) => e.meta.category
 // Sort all examples by date (newest first)
 const sortedExamples = sortByDate(examples);
 
+// Count examples per category
+const categoryCounts = categories.reduce(
+  (acc, category) => {
+    acc[category] =
+      category === NEW_CATEGORY
+        ? sortedExamples.filter((e) => isNew(e.meta.createdAt)).length
+        : sortedExamples.filter((e) => e.meta.category === category).length;
+    return acc;
+  },
+  {} as Record<string, number>
+);
+
 export function ExampleGrid() {
   const [selectedCategory, setSelectedCategory] = useSearchParam("category");
 
@@ -20,9 +32,6 @@ export function ExampleGrid() {
         ? sortedExamples.filter((e) => e.meta.category === selectedCategory)
         : sortedExamples;
 
-  // Count new examples for the badge
-  const newCount = sortedExamples.filter((e) => isNew(e.meta.createdAt)).length;
-
   return (
     <>
       <div className="mb-6 flex flex-wrap gap-2">
@@ -30,8 +39,12 @@ export function ExampleGrid() {
           variant={!selectedCategory ? "default" : "outline"}
           size="sm"
           onClick={() => setSelectedCategory(undefined)}
+          className="gap-1.5"
         >
           All
+          <span className="text-xs text-muted-foreground">
+            {sortedExamples.length}
+          </span>
         </Button>
         {categories.map((category) => (
           <Button
@@ -39,12 +52,16 @@ export function ExampleGrid() {
             variant={selectedCategory === category ? "default" : "outline"}
             size="sm"
             onClick={() => setSelectedCategory(category)}
-            className={category === NEW_CATEGORY ? "gap-1.5" : ""}
+            className="gap-1.5"
           >
             {category}
-            {category === NEW_CATEGORY && newCount > 0 && (
+            {category === NEW_CATEGORY && categoryCounts[category] > 0 ? (
               <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-xs font-semibold text-white">
-                {newCount}
+                {categoryCounts[category]}
+              </span>
+            ) : (
+              <span className="text-xs text-muted-foreground">
+                {categoryCounts[category]}
               </span>
             )}
           </Button>

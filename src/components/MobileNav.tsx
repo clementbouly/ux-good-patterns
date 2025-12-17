@@ -41,11 +41,9 @@ export function MobileNav({ navLinks }: MobileNavProps) {
                 key={link.href}
                 href={link.href}
                 className={`block px-4 py-2 text-sm font-medium transition-colors ${
-                  link.highlight && !link.active
-                    ? "ai-link-gradient text-white"
-                    : link.active
-                      ? "bg-white/10 text-white"
-                      : "text-white/60 hover:bg-white/5 hover:text-white"
+                  link.active
+                    ? "bg-white/10 text-white"
+                    : "text-white/90 hover:bg-white/5 hover:text-white"
                 }`}
                 onClick={() => setIsOpen(false)}
               >
