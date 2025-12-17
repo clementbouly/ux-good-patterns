@@ -76,12 +76,12 @@ export function GoodExampleCards() {
               className={cn(
                 "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                 selected === plan.id
-                  ? "border-primary bg-primary"
+                  ? "border-primary"
                   : "border-muted-foreground"
               )}
             >
               {selected === plan.id && (
-                <div className="h-1.5 w-1.5 rounded-full bg-primary-foreground" />
+                <div className="h-2 w-2 rounded-full bg-primary" />
               )}
             </div>
             <div className="grid gap-0.5">
