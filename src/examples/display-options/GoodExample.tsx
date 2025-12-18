@@ -6,17 +6,17 @@ const PLANS = [
   {
     id: "basic",
     name: "Basic",
-    description: "1000 emails, 7 days log retention, support by email",
+    description: "1000 emails",
   },
   {
     id: "standard",
     name: "Standard",
-    description: "5000 emails, 30 days log retention, support by email",
+    description: "5000 emails",
   },
   {
     id: "professional",
     name: "Professional",
-    description: "10 000 emails, 365 days log retention, personal manager",
+    description: "10 000 emails",
   },
 ];
 
