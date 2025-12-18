@@ -20,6 +20,19 @@ const PLANS = [
   },
 ];
 
+function RadioCircle({ checked }: { checked: boolean }) {
+  return (
+    <div
+      className={cn(
+        "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+        checked ? "border-primary" : "border-muted-foreground"
+      )}
+    >
+      {checked && <div className="h-2 w-2 rounded-full bg-primary" />}
+    </div>
+  );
+}
+
 export function GoodExample() {
   const [selected, setSelected] = useState("basic");
 
@@ -33,18 +46,19 @@ export function GoodExample() {
             key={plan.id}
             className="flex cursor-pointer items-center gap-3 rounded py-1.5 transition-colors hover:bg-accent/50"
           >
+            <RadioCircle checked={selected === plan.id} />
+            <div>
+              <span className="font-medium">{plan.name}</span>
+              <span className="text-sm text-muted-foreground"> — {plan.description}</span>
+            </div>
             <input
               type="radio"
               name="plan"
               value={plan.id}
               checked={selected === plan.id}
               onChange={(e) => setSelected(e.target.value)}
-              className="h-4 w-4 accent-primary"
+              className="sr-only"
             />
-            <div>
-              <span className="font-medium">{plan.name}</span>
-              <span className="text-sm text-muted-foreground"> — {plan.description}</span>
-            </div>
           </label>
         ))}
       </div>
@@ -66,29 +80,15 @@ export function GoodExampleCards() {
             type="button"
             onClick={() => setSelected(plan.id)}
             className={cn(
-              "flex cursor-pointer items-start gap-3 rounded-lg border p-4 text-left transition-colors hover:bg-accent/50",
+              "cursor-pointer rounded-lg border p-4 text-left transition-colors hover:bg-accent/50",
               selected === plan.id
                 ? "border-primary bg-accent/30 ring-1 ring-primary"
                 : "border-input"
             )}
           >
-            <div
-              className={cn(
-                "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                selected === plan.id
-                  ? "border-primary"
-                  : "border-muted-foreground"
-              )}
-            >
-              {selected === plan.id && (
-                <div className="h-2 w-2 rounded-full bg-primary" />
-              )}
-            </div>
             <div className="grid gap-0.5">
               <span className="font-medium">{plan.name}</span>
-              <span className="text-sm text-muted-foreground">
-                {plan.description}
-              </span>
+              <span className="text-sm text-muted-foreground">{plan.description}</span>
             </div>
           </button>
         ))}
