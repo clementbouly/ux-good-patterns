@@ -46,26 +46,28 @@ export function ExampleGrid() {
             {sortedExamples.length}
           </span>
         </Button>
-        {categories.map((category) => (
-          <Button
-            key={category}
-            variant={selectedCategory === category ? "default" : "outline"}
-            size="sm"
-            onClick={() => setSelectedCategory(category)}
-            className="gap-1.5"
-          >
-            {category}
-            {category === NEW_CATEGORY && categoryCounts[category] > 0 ? (
-              <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-xs font-semibold text-white">
-                {categoryCounts[category]}
-              </span>
-            ) : (
-              <span className="text-xs text-muted-foreground">
-                {categoryCounts[category]}
-              </span>
-            )}
-          </Button>
-        ))}
+        {categories
+          .filter((category) => categoryCounts[category] > 0)
+          .map((category) => (
+            <Button
+              key={category}
+              variant={selectedCategory === category ? "default" : "outline"}
+              size="sm"
+              onClick={() => setSelectedCategory(category)}
+              className="gap-1.5"
+            >
+              {category}
+              {category === NEW_CATEGORY && categoryCounts[category] > 0 ? (
+                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-xs font-semibold text-white">
+                  {categoryCounts[category]}
+                </span>
+              ) : (
+                <span className="text-xs text-muted-foreground">
+                  {categoryCounts[category]}
+                </span>
+              )}
+            </Button>
+          ))}
       </div>
 
       <div className="grid gap-6">
