@@ -1,12 +1,6 @@
-export type Screen = "home" | "setup" | "ready" | "play" | "roundEnd" | "gameEnd";
-
-export interface GameConfig {
-  teams: string[];
-  categories: string[];
-  turnDuration: number; // in seconds
-}
-
-export interface GameState {
-  screen: Screen;
-  config: GameConfig | null;
-}
+// Re-export types from store for backwards compatibility
+export type {
+  Screen,
+  Player,
+  Team,
+} from "../store/useGameStore";

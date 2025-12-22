@@ -26,13 +26,15 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "immer": "^11.1.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.556.0",
     "marked": "^17.0.1",
     "motion": "^12.23.25",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

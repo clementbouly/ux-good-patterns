@@ -176,3 +176,27 @@
   animation: shake 0.5s ease-in-out;
 }
 
+/* Wiggle animation for playful buttons */
+@keyframes wiggle {
+  0%,
+  20%,
+  40%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-3px);
+  }
+  30% {
+    transform: translateX(3px);
+  }
+}
+
+.animate-wiggle {
+  animation: wiggle 1.2s ease-in-out infinite;
+}
+
+.animate-wiggle:hover {
+  animation-play-state: paused;
+}
+
