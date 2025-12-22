@@ -83,6 +83,49 @@ Créer une version améliorée du jeu "Complicité" de VERBAM (https://app.verba
 
 ---
 
+## Plan de refonte UX (AVANT → APRÈS)
+
+Le flow complet comporte **8 écrans**. Les étapes 4→7 bouclent tant qu'il reste des manches (12 manches au total).
+
+| # | Écran | Description | Statut refonte |
+|---|-------|-------------|----------------|
+| 1 | **HOME** | Écran d'accueil avec titre + bouton | ❌ À designer |
+| 2 | **Sélection du mode** | Découverte / À plusieurs | ❌ À designer |
+| 3 | **Ajout joueurs & équipes** | Configuration des équipes | ✅ Maquette prête |
+| 4 | **Annonce du joueur** | "Au tour de [Joueur]" + confirmation | ❌ À designer |
+| 5 | **Manche de jeu** | Carte face cachée → révélation mot | ❌ À designer |
+| 6 | **Sélection Gagnant** | Choix équipe gagnante de la manche | ❌ À designer |
+| 7 | **Affichage Classement** | Scores en cours de partie | ❌ À designer |
+| 8 | **Classement Final** | Résultats après toutes les manches | ❌ À designer |
+
+### Maquette écran 3 : Ajout joueurs & équipes
+
+**Amélioration clé** : Remplacer le système dropdown confus par des emplacements visuels directs.
+
+```
+┌─────────────────────────────────┐
+│          Complicité             │
+├─────────────────────────────────┤
+│ Equipe 1                        │
+│ ┌──────────┐ ┌──────────┐ ┌──────────┐ │
+│ │ajouter   │ │ajouter   │ │ajouter   │ │
+│ │joueur    │ │joueur    │ │joueur    │ │
+│ └──────────┘ └──────────┘ └──────────┘ │
+├─────────────────────────────────┤
+│ Equipe 2                        │
+│ ┌──────────┐ ┌──────────┐ ┌──────────┐ │
+│ │ajouter   │ │ajouter   │ │ajouter   │ │
+│ │joueur    │ │joueur    │ │joueur    │ │
+│ └──────────┘ └──────────┘ └──────────┘ │
+└─────────────────────────────────┘
+```
+
+- Chaque équipe affiche des emplacements "ajouter joueur"
+- Clic sur un emplacement → saisie du nom du joueur
+- Plus intuitif que le dropdown original
+
+---
+
 ## Points d'amélioration UX identifiés
 
 1. **Règles inaccessibles** : Le lien "Règles" ne semble pas ouvrir de contenu visible
