@@ -17,7 +17,6 @@ export interface Team {
 
 export type Screen =
   | "home"
-  | "mode"
   | "setup"
   | "playerAnnounce"
   | "play"

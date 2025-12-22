@@ -85,20 +85,19 @@ Créer une version améliorée du jeu "Complicité" de VERBAM (https://app.verba
 
 ## Plan de refonte UX (AVANT → APRÈS)
 
-Le flow complet comporte **8 écrans**. Les étapes 4→7 bouclent tant qu'il reste des manches (12 manches au total).
+Le flow complet comporte **7 écrans** (suppression de l'écran "Sélection du mode"). Les étapes 3→6 bouclent tant qu'il reste des manches (12 manches au total).
 
 | # | Écran | Description | Statut refonte |
 |---|-------|-------------|----------------|
-| 1 | **HOME** | Écran d'accueil avec titre + bouton | ❌ À designer |
-| 2 | **Sélection du mode** | Découverte / À plusieurs | ❌ À designer |
-| 3 | **Ajout joueurs & équipes** | Configuration des équipes | ✅ Maquette prête |
-| 4 | **Annonce du joueur** | "Au tour de [Joueur]" + confirmation | ❌ À designer |
-| 5 | **Manche de jeu** | Carte face cachée → révélation mot | ❌ À designer |
-| 6 | **Sélection Gagnant** | Choix équipe gagnante de la manche | ❌ À designer |
-| 7 | **Affichage Classement** | Scores en cours de partie | ❌ À designer |
-| 8 | **Classement Final** | Résultats après toutes les manches | ❌ À designer |
+| 1 | **HOME** | Écran d'accueil avec titre + bouton | ✅ Implémenté |
+| 2 | **Ajout joueurs & équipes** | Configuration des équipes | ✅ Maquette prête |
+| 3 | **Annonce du joueur** | "Au tour de [Joueur]" + confirmation | ❌ À designer |
+| 4 | **Manche de jeu** | Carte face cachée → révélation mot | ❌ À designer |
+| 5 | **Sélection Gagnant** | Choix équipe gagnante de la manche | ❌ À designer |
+| 6 | **Affichage Classement** | Scores en cours de partie | ❌ À designer |
+| 7 | **Classement Final** | Résultats après toutes les manches | ❌ À designer |
 
-### Maquette écran 3 : Ajout joueurs & équipes
+### Maquette écran 2 : Ajout joueurs & équipes
 
 **Amélioration clé** : Remplacer le système dropdown confus par des emplacements visuels directs.
 

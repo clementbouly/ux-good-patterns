@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { colors } from "../../constants/colors";
 import { Logo } from "../Logo";
-import { VerbamLogo } from "../VerbamLogo";
 
 interface HomeScreenProps {
   onPlay: () => void;
@@ -83,20 +82,7 @@ export function HomeScreen({ onPlay }: HomeScreenProps) {
   const [showRules, setShowRules] = useState(false);
 
   return (
-    <div
-      className="fixed inset-0 flex flex-col items-center justify-center overflow-hidden p-4"
-      style={{ backgroundColor: colors.navy }}
-    >
-      {/* Logo VERBAM en haut */}
-      <a
-        href="https://app.verbam.net"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute top-6 left-0 right-0 flex justify-center"
-      >
-        <VerbamLogo width={120} height={42} />
-      </a>
-
+    <>
       {/* Card jaune principale */}
       <div
         className="flex w-full max-w-md flex-col items-center gap-8 rounded-3xl px-6 py-10"
@@ -165,6 +151,6 @@ export function HomeScreen({ onPlay }: HomeScreenProps) {
 
       {/* Modal règles */}
       {showRules && <RulesModal onClose={() => setShowRules(false)} />}
-    </div>
+    </>
   );
 }

@@ -1,28 +1,30 @@
+import { GameLayout } from "./components/GameLayout";
 import { HomeScreen } from "./components/screens/HomeScreen";
+import { SetupScreen } from "./components/screens/SetupScreen";
 import { useGameStore } from "./store/useGameStore";
 import { colors } from "./constants/colors";
 
 export function ComplicityApp() {
-  const { screen, setScreen } = useGameStore();
+  const { screen, setScreen, startGame } = useGameStore();
 
   const handlePlay = () => {
-    setScreen("mode");
+    setScreen("setup");
+  };
+
+  const handleStartGame = () => {
+    startGame([]); // Start with all categories for now
+  };
+
+  const handleBackToHome = () => {
+    setScreen("home");
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: colors.navy }}>
+    <GameLayout>
       {screen === "home" && <HomeScreen onPlay={handlePlay} />}
 
-      {screen === "mode" && (
-        <div className="flex min-h-screen items-center justify-center">
-          <p style={{ color: colors.lime }}>Mode selection - Coming soon</p>
-        </div>
-      )}
-
       {screen === "setup" && (
-        <div className="flex min-h-screen items-center justify-center">
-          <p style={{ color: colors.lime }}>Setup screen - Coming soon</p>
-        </div>
+        <SetupScreen onStart={handleStartGame} onBack={handleBackToHome} />
       )}
 
       {screen === "playerAnnounce" && (
@@ -54,6 +56,6 @@ export function ComplicityApp() {
           <p style={{ color: colors.lime }}>Final ranking - Coming soon</p>
         </div>
       )}
-    </div>
+    </GameLayout>
   );
 }
