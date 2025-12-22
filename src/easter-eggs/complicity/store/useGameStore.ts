@@ -1,6 +1,8 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { getAllMots, getMotsByCategories } from "../data/mots_complet";
+import { getMotsByCategories, categoriesRecommandees } from "../data/mots_complet";
+import { teamColors } from "../constants/colors";
 
 // Types
 export interface Player {
@@ -13,6 +15,13 @@ export interface Team {
   name: string;
   players: Player[];
   score: number;
+  colorIndex: number; // Index dans teamColors
+}
+
+// Résultat d'une manche
+export interface RoundResult {
+  roundNumber: number;
+  winningTeamIndex: number | null; // null si personne n'a trouvé
 }
 
 export type Screen =
@@ -20,7 +29,6 @@ export type Screen =
   | "setup"
   | "playerAnnounce"
   | "play"
-  | "selectWinner"
   | "ranking"
   | "finalRanking";
 
@@ -36,13 +44,35 @@ interface GameState {
   // Partie en cours
   currentRound: number;
   currentTeamIndex: number;
-  currentPlayerIndex: number;
+  currentGiverIndex: number; // Index du joueur qui donne l'indice dans son équipe
+  roundResults: RoundResult[]; // Historique des manches
 
   // Mots
   availableWords: string[];
   currentWord: string | null;
   usedWords: string[];
 }
+
+// Helper pour obtenir la couleur d'une équipe
+export const getTeamColor = (colorIndex: number): string => {
+  return teamColors[colorIndex % teamColors.length];
+};
+
+// Helper pour obtenir le joueur qui donne l'indice et celui qui devine
+export const getCurrentPlayers = (
+  team: Team,
+  giverIndex: number
+): { giver: Player | null; guesser: Player | null } => {
+  if (team.players.length < 2) {
+    return { giver: null, guesser: null };
+  }
+  const actualGiverIndex = giverIndex % team.players.length;
+  const giver = team.players[actualGiverIndex];
+  // Le guesser est le joueur suivant (ou le premier si on est au dernier)
+  const guesserIndex = (actualGiverIndex + 1) % team.players.length;
+  const guesser = team.players[guesserIndex];
+  return { giver, guesser };
+};
 
 interface GameActions {
   // Navigation
@@ -83,22 +113,24 @@ const shuffleArray = <T>(array: T[]): T[] => {
 const initialState: GameState = {
   screen: "home",
   teams: [
-    { id: generateId(), name: "Équipe 1", players: [], score: 0 },
-    { id: generateId(), name: "Équipe 2", players: [], score: 0 },
+    { id: generateId(), name: "Équipe 1", players: [], score: 0, colorIndex: 0 },
+    { id: generateId(), name: "Équipe 2", players: [], score: 0, colorIndex: 1 },
   ],
   turnDuration: 120,
   totalRounds: 12,
   currentRound: 1,
   currentTeamIndex: 0,
-  currentPlayerIndex: 0,
+  currentGiverIndex: 0,
+  roundResults: [],
   availableWords: [],
   currentWord: null,
   usedWords: [],
 };
 
 export const useGameStore = create<GameState & GameActions>()(
-  immer((set, get) => ({
-    ...initialState,
+  persist(
+    immer((set, get) => ({
+      ...initialState,
 
     // Navigation
     setScreen: (screen) =>
@@ -114,6 +146,7 @@ export const useGameStore = create<GameState & GameActions>()(
           name,
           players: [],
           score: 0,
+          colorIndex: state.teams.length, // Assigner la couleur suivante
         });
       }),
 
@@ -144,16 +177,16 @@ export const useGameStore = create<GameState & GameActions>()(
     // Jeu
     startGame: (categories) =>
       set((state) => {
-        const words =
-          categories.length > 0
-            ? getMotsByCategories(categories)
-            : getAllMots();
+        // Utiliser les catégories recommandées par défaut (exclut les expressions françaises)
+        const categoriesToUse = categories.length > 0 ? categories : categoriesRecommandees;
+        const words = getMotsByCategories(categoriesToUse);
         state.availableWords = shuffleArray(words);
         state.usedWords = [];
         state.currentWord = null;
         state.currentRound = 1;
         state.currentTeamIndex = 0;
-        state.currentPlayerIndex = 0;
+        state.currentGiverIndex = 0;
+        state.roundResults = [];
         // Reset scores
         state.teams.forEach((team) => {
           team.score = 0;
@@ -182,12 +215,18 @@ export const useGameStore = create<GameState & GameActions>()(
       set((state) => {
         if (state.currentWord) {
           state.usedWords.push(state.currentWord);
-          const team = state.teams.find((t) => t.id === winningTeamId);
+          const winningTeamIndex = state.teams.findIndex((t) => t.id === winningTeamId);
+          const team = state.teams[winningTeamIndex];
           if (team) {
             team.score += 1;
           }
+          // Enregistrer le résultat de la manche
+          state.roundResults.push({
+            roundNumber: state.currentRound,
+            winningTeamIndex: winningTeamIndex >= 0 ? winningTeamIndex : null,
+          });
           state.currentWord = null;
-          state.screen = "selectWinner";
+          // Ne pas changer l'écran ici, laisser nextTurn() gérer
         }
       }),
 
@@ -195,8 +234,13 @@ export const useGameStore = create<GameState & GameActions>()(
       set((state) => {
         if (state.currentWord) {
           state.usedWords.push(state.currentWord);
+          // Enregistrer la manche sans gagnant
+          state.roundResults.push({
+            roundNumber: state.currentRound,
+            winningTeamIndex: null,
+          });
           state.currentWord = null;
-          state.screen = "selectWinner";
+          // Ne pas changer l'écran ici, laisser nextTurn() gérer
         }
       }),
 
@@ -204,24 +248,29 @@ export const useGameStore = create<GameState & GameActions>()(
       set((state) => {
         const { teams, currentRound, totalRounds } = state;
 
-        // Calculer le prochain joueur/équipe
-        let nextTeamIndex = state.currentTeamIndex;
-        let nextPlayerIndex = state.currentPlayerIndex;
+        // Logique de rotation :
+        // Manche 1: Équipe 0, joueur 0 donne -> joueur 1 devine
+        // Manche 2: Équipe 1, joueur 0 donne -> joueur 1 devine
+        // Manche 3: Équipe 0, joueur 1 donne -> joueur 0 devine
+        // Manche 4: Équipe 1, joueur 1 donne -> joueur 0 devine
+        // etc.
 
-        // Passer au joueur suivant dans la même équipe ou à l'équipe suivante
-        const currentTeam = teams[nextTeamIndex];
-        if (currentTeam && nextPlayerIndex < currentTeam.players.length - 1) {
-          nextPlayerIndex++;
-        } else {
-          nextPlayerIndex = 0;
-          nextTeamIndex = (nextTeamIndex + 1) % teams.length;
+        // Passer à l'équipe suivante
+        const nextTeamIndex = (state.currentTeamIndex + 1) % teams.length;
+
+        // Si on revient à l'équipe 0, on change le giver
+        let nextGiverIndex = state.currentGiverIndex;
+        if (nextTeamIndex === 0) {
+          // On a fait le tour des équipes, on passe au giver suivant
+          const maxPlayers = Math.max(...teams.map((t) => t.players.length));
+          nextGiverIndex = (state.currentGiverIndex + 1) % maxPlayers;
         }
 
         state.currentTeamIndex = nextTeamIndex;
-        state.currentPlayerIndex = nextPlayerIndex;
+        state.currentGiverIndex = nextGiverIndex;
 
         // Vérifier si la partie est terminée
-        if (currentRound >= totalRounds && state.availableWords.length === 0) {
+        if (currentRound >= totalRounds) {
           state.screen = "finalRanking";
         } else {
           state.currentRound = currentRound + 1;
@@ -244,10 +293,24 @@ export const useGameStore = create<GameState & GameActions>()(
         Object.assign(state, {
           ...initialState,
           teams: [
-            { id: generateId(), name: "Équipe 1", players: [], score: 0 },
-            { id: generateId(), name: "Équipe 2", players: [], score: 0 },
+            { id: generateId(), name: "Équipe 1", players: [], score: 0, colorIndex: 0 },
+            { id: generateId(), name: "Équipe 2", players: [], score: 0, colorIndex: 1 },
           ],
         });
       }),
-  }))
+    })),
+    {
+      name: "complicity-game",
+      // Ne persister que les équipes avec leurs joueurs
+      partialize: (state) => ({
+        teams: state.teams.map((team) => ({
+          id: team.id,
+          name: team.name,
+          players: team.players,
+          score: 0, // Toujours reset le score
+          colorIndex: team.colorIndex,
+        })),
+      }),
+    }
+  )
 );

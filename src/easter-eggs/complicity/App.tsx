@@ -1,11 +1,14 @@
 import { GameLayout } from "./components/GameLayout";
 import { HomeScreen } from "./components/screens/HomeScreen";
 import { SetupScreen } from "./components/screens/SetupScreen";
+import { PlayerAnnounceScreen } from "./components/screens/PlayerAnnounceScreen";
+import { PlayScreen } from "./components/screens/PlayScreen";
 import { useGameStore } from "./store/useGameStore";
 import { colors } from "./constants/colors";
 
 export function ComplicityApp() {
-  const { screen, setScreen, startGame } = useGameStore();
+  const { screen, setScreen, startGame, drawWord, wordFound, wordNotFound, nextTurn } =
+    useGameStore();
 
   const handlePlay = () => {
     setScreen("setup");
@@ -19,6 +22,21 @@ export function ComplicityApp() {
     setScreen("home");
   };
 
+  const handleContinueToPlay = () => {
+    drawWord();
+    setScreen("play");
+  };
+
+  const handleTeamWon = (teamId: string) => {
+    wordFound(teamId);
+    nextTurn();
+  };
+
+  const handleNoOneFound = () => {
+    wordNotFound();
+    nextTurn();
+  };
+
   return (
     <GameLayout>
       {screen === "home" && <HomeScreen onPlay={handlePlay} />}
@@ -28,21 +46,11 @@ export function ComplicityApp() {
       )}
 
       {screen === "playerAnnounce" && (
-        <div className="flex min-h-screen items-center justify-center">
-          <p style={{ color: colors.lime }}>Player announce - Coming soon</p>
-        </div>
+        <PlayerAnnounceScreen onContinue={handleContinueToPlay} />
       )}
 
       {screen === "play" && (
-        <div className="flex min-h-screen items-center justify-center">
-          <p style={{ color: colors.lime }}>Play screen - Coming soon</p>
-        </div>
-      )}
-
-      {screen === "selectWinner" && (
-        <div className="flex min-h-screen items-center justify-center">
-          <p style={{ color: colors.lime }}>Select winner - Coming soon</p>
-        </div>
+        <PlayScreen onTeamWon={handleTeamWon} onNoOneFound={handleNoOneFound} />
       )}
 
       {screen === "ranking" && (
