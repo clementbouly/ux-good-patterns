@@ -29,37 +29,47 @@ function RulesModal({ onClose }: { onClose: () => void }) {
 
         <div className="space-y-4 text-sm" style={{ color: colors.navy }}>
           <section>
-            <h3 className="mb-1 font-bold">🎯 Objectif</h3>
-            <p>Faire deviner un mot à votre complice (coéquipier) avant les autres équipes !</p>
-          </section>
-
-          <section>
-            <h3 className="mb-1 font-bold">👥 Équipes</h3>
-            <p>Formez 2 équipes ou plus de 2-3 joueurs chacune.</p>
+            <h3 className="mb-1 font-bold">👥 Joueurs</h3>
+            <p>
+              Réunissez 4 joueurs minimum pour jouer 2 contre 2.
+              <br />
+              Vous pouvez être plus nombreux mais nous conseillons de ne pas dépasser 6 joueurs.
+            </p>
           </section>
 
           <section>
             <h3 className="mb-1 font-bold">🔄 Déroulement</h3>
             <ol className="ml-4 list-decimal space-y-1">
-              <li>Un joueur de chaque équipe voit le même mot secret</li>
-              <li>Il donne UN seul indice (un mot) à son équipe</li>
-              <li>Son complice doit deviner le mot</li>
-              <li>L'équipe qui trouve en premier marque 1 point</li>
+              <li>Faites au minimum deux groupes de deux personnes</li>
+              <li>Un premier groupe commence</li>
+              <li>Une personne de ce groupe tire secrètement un mot au hasard</li>
+              <li>Cette personne essaie de faire deviner le mot par tous les moyens possibles à son groupe</li>
+              <li>Son groupe doit trouver le mot avant qu'un autre groupe ne le trouve !</li>
             </ol>
           </section>
 
           <section>
-            <h3 className="mb-1 font-bold">⚠️ Interdictions</h3>
-            <ul className="ml-4 list-disc space-y-1">
-              <li>Pas de mots de la même famille</li>
-              <li>Pas de traduction directe</li>
-              <li>Pas de gestes ni de mimiques</li>
-            </ul>
+            <h3 className="mb-1 font-bold">💡 Astuces</h3>
+            <p className="mb-2">
+              Utilisez la complicité de votre groupe pour faire deviner votre mot sans que vos adversaires ne sachent vraiment de quoi vous parlez.
+            </p>
+            <p className="italic" style={{ color: colors.navy, opacity: 0.8 }}>
+              Exemple : "Tu te souviens hier midi je t'ai parlé de quelqu'un et bien c'est le même prénom de la célébrité que je dois te faire deviner."
+            </p>
           </section>
 
+          {/* Vidéo YouTube */}
           <section>
-            <h3 className="mb-1 font-bold">🏆 Victoire</h3>
-            <p>L'équipe avec le plus de points après 12 manches gagne !</p>
+            <h3 className="mb-2 font-bold">🎬 Vidéo explicative</h3>
+            <div className="aspect-video w-full overflow-hidden rounded-xl">
+              <iframe
+                src="https://www.youtube.com/embed/OsvD1yQDDc4?si=WW0yo4gcWP_ipv96"
+                title="Complicité - Règles du jeu"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="h-full w-full"
+              />
+            </div>
           </section>
         </div>
 
