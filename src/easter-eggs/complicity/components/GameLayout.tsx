@@ -9,18 +9,16 @@ interface GameLayoutProps {
 export function GameLayout({ children }: GameLayoutProps) {
   return (
     <div
-      className="fixed inset-0 flex flex-col overflow-hidden"
+      className="fixed inset-0 flex flex-col overflow-y-auto"
       style={{ backgroundColor: colors.navy }}
     >
-      <header className="flex justify-center py-4">
+      <header className="flex shrink-0 justify-center py-4">
         <a href="https://app.verbam.net" target="_blank" rel="noopener noreferrer">
-          <VerbamLogo width={250} height={80} />
+          <VerbamLogo width={100} height={30} />
         </a>
       </header>
 
-      <main className="flex flex-1 flex-col items-center start overflow-hidden p-4">
-        {children}
-      </main>
+      <main className="flex flex-1 flex-col items-center p-4 pt-0 pb-8">{children}</main>
     </div>
   );
 }
