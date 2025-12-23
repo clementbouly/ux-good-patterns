@@ -324,15 +324,19 @@ export const useGameStore = create<GameState & GameActions>()(
         }
       }),
 
-    // Reset
+    // Reset (conserve les équipes et joueurs)
     resetGame: () =>
       set((state) => {
-        Object.assign(state, {
-          ...initialState,
-          teams: [
-            { id: generateId(), name: "Équipe 1", players: [], score: 0, colorIndex: 0 },
-            { id: generateId(), name: "Équipe 2", players: [], score: 0, colorIndex: 1 },
-          ],
+        state.screen = "home";
+        state.currentRound = 1;
+        state.currentTeamIndex = 0;
+        state.currentGiverIndex = 0;
+        state.roundResults = [];
+        state.availableWords = [];
+        state.currentWord = null;
+        state.usedWords = [];
+        state.teams.forEach((team) => {
+          team.score = 0;
         });
       }),
     })),
