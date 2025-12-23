@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { colors } from "../../constants/colors";
 import { Logo } from "../Logo";
-
-interface HomeScreenProps {
-  onPlay: () => void;
-}
+import { useGameStore } from "../../store/useGameStore";
 
 function RulesModal({ onClose }: { onClose: () => void }) {
   return (
@@ -78,7 +75,8 @@ function RulesModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-export function HomeScreen({ onPlay }: HomeScreenProps) {
+export function HomeScreen() {
+  const setScreen = useGameStore((state) => state.setScreen);
   const [showRules, setShowRules] = useState(false);
 
   return (
@@ -127,7 +125,7 @@ export function HomeScreen({ onPlay }: HomeScreenProps) {
         {/* Boutons */}
         <div className="flex w-full flex-col items-center gap-3">
           <button
-            onClick={onPlay}
+            onClick={() => setScreen("setup")}
             className="w-full animate-wiggle rounded-full px-12 py-4 text-lg font-bold active:scale-95"
             style={{ backgroundColor: colors.pink, color: "white" }}
           >

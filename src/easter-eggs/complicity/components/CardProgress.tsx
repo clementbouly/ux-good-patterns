@@ -20,11 +20,10 @@ export function CardProgress({ className }: CardProgressProps) {
             key={index}
             className="relative h-10 w-7 rounded-sm transition-all duration-300"
             style={{
-              backgroundColor: isPlayed
-                ? winningTeamIndex !== null
+              backgroundColor:
+                isPlayed && winningTeamIndex !== null
                   ? getTeamColor(teams[winningTeamIndex]?.colorIndex ?? 0)
-                  : colors.navy // Aucun gagnant
-                : colors.navy, // Face cachée = même bleu que le background
+                  : colors.navy,
               border: `2px solid ${colors.lime}`,
             }}
           >

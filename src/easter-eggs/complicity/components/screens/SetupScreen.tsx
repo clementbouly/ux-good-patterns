@@ -87,30 +87,24 @@ function TeamCard({ team, teamIndex, onAddPlayer, onRemovePlayer, hasError }: Te
   );
 }
 
-interface SetupScreenProps {
-  onStart: () => void;
-  onBack: () => void;
-}
+const ROUND_OPTIONS = [2, 8, 12, 24];
 
-export function SetupScreen({ onStart, onBack }: SetupScreenProps) {
-  const { teams, addPlayerToTeam, removePlayerFromTeam } = useGameStore();
+export function SetupScreen() {
+  const { teams, totalRounds, addPlayerToTeam, removePlayerFromTeam, setTotalRounds, setScreen, startGame } = useGameStore();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [teamsWithError, setTeamsWithError] = useState<string[]>([]);
-  const [editingSlot, setEditingSlot] = useState<{
-    teamId: string;
-    slotIndex: number;
-  } | null>(null);
+  const [editingTeamId, setEditingTeamId] = useState<string | null>(null);
   const [playerName, setPlayerName] = useState("");
 
   const handleAddPlayer = (teamId: string) => {
-    setEditingSlot({ teamId, slotIndex: 0 });
+    setEditingTeamId(teamId);
     setPlayerName("");
   };
 
   const handleConfirmPlayer = () => {
-    if (editingSlot && playerName.trim()) {
-      addPlayerToTeam(editingSlot.teamId, playerName.trim());
-      setEditingSlot(null);
+    if (editingTeamId && playerName.trim()) {
+      addPlayerToTeam(editingTeamId, playerName.trim());
+      setEditingTeamId(null);
       setPlayerName("");
       setErrorMessage(null);
       setTeamsWithError([]);
@@ -132,7 +126,7 @@ export function SetupScreen({ onStart, onBack }: SetupScreenProps) {
       return;
     }
 
-    onStart();
+    startGame([]);
   };
 
   return (
@@ -159,6 +153,29 @@ export function SetupScreen({ onStart, onBack }: SetupScreenProps) {
           ))}
         </div>
 
+        {/* Sélecteur nombre de manches */}
+        <div className="flex w-full flex-col gap-2">
+          <span className="text-sm font-medium" style={{ color: colors.navy }}>
+            Nombre de manches
+          </span>
+          <div className="flex gap-2">
+            {ROUND_OPTIONS.map((option) => (
+              <button
+                key={option}
+                onClick={() => setTotalRounds(option)}
+                className="flex-1 rounded-xl py-2 text-sm font-bold transition-transform active:scale-95"
+                style={{
+                  backgroundColor: totalRounds === option ? colors.navy : "transparent",
+                  color: totalRounds === option ? colors.lime : colors.navy,
+                  border: `2px solid ${colors.navy}`,
+                }}
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Error message */}
         {errorMessage && (
           <p className="text-sm font-medium" style={{ color: colors.pink }}>
@@ -180,7 +197,7 @@ export function SetupScreen({ onStart, onBack }: SetupScreenProps) {
           </button>
 
           <button
-            onClick={onBack}
+            onClick={() => setScreen("home")}
             className="text-sm font-medium transition-opacity active:opacity-70"
             style={{ color: colors.navy }}
           >
@@ -190,10 +207,10 @@ export function SetupScreen({ onStart, onBack }: SetupScreenProps) {
       </div>
 
       {/* Modal d'ajout de joueur */}
-      {editingSlot && (
+      {editingTeamId && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-          onClick={() => setEditingSlot(null)}
+          onClick={() => setEditingTeamId(null)}
         >
           <div
             className="w-full max-w-xs rounded-2xl p-6"
@@ -219,7 +236,7 @@ export function SetupScreen({ onStart, onBack }: SetupScreenProps) {
             />
             <div className="flex gap-2">
               <button
-                onClick={() => setEditingSlot(null)}
+                onClick={() => setEditingTeamId(null)}
                 className="flex-1 rounded-full py-3 font-medium transition-transform active:scale-95"
                 style={{
                   backgroundColor: "transparent",

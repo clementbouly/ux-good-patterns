@@ -29,7 +29,6 @@ export type Screen =
   | "setup"
   | "playerAnnounce"
   | "play"
-  | "ranking"
   | "finalRanking";
 
 interface GameState {
@@ -58,20 +57,19 @@ export const getTeamColor = (colorIndex: number): string => {
   return teamColors[colorIndex % teamColors.length];
 };
 
-// Helper pour obtenir le joueur qui donne l'indice et celui qui devine
+// Helper pour obtenir le joueur qui donne l'indice et ceux qui devinent
 export const getCurrentPlayers = (
   team: Team,
   giverIndex: number
-): { giver: Player | null; guesser: Player | null } => {
+): { giver: Player | null; guessers: Player[] } => {
   if (team.players.length < 2) {
-    return { giver: null, guesser: null };
+    return { giver: null, guessers: [] };
   }
   const actualGiverIndex = giverIndex % team.players.length;
   const giver = team.players[actualGiverIndex];
-  // Le guesser est le joueur suivant (ou le premier si on est au dernier)
-  const guesserIndex = (actualGiverIndex + 1) % team.players.length;
-  const guesser = team.players[guesserIndex];
-  return { giver, guesser };
+  // Tous les autres joueurs devinent
+  const guessers = team.players.filter((_, i) => i !== actualGiverIndex);
+  return { giver, guessers };
 };
 
 interface GameActions {
@@ -83,14 +81,18 @@ interface GameActions {
   removeTeam: (teamId: string) => void;
   addPlayerToTeam: (teamId: string, playerName: string) => void;
   removePlayerFromTeam: (teamId: string, playerId: string) => void;
+  setTotalRounds: (rounds: number) => void;
 
   // Jeu
   startGame: (categories: string[]) => void;
+  startTurn: () => void;
   drawWord: () => void;
   skipWord: () => void;
   wordFound: (winningTeamId: string) => void;
   wordNotFound: () => void;
   nextTurn: () => void;
+  onTeamWon: (teamId: string) => void;
+  onNoOneFound: () => void;
 
   // Scores
   addScore: (teamId: string, points: number) => void;
@@ -99,7 +101,18 @@ interface GameActions {
   resetGame: () => void;
 }
 
-const generateId = () => crypto.randomUUID();
+const generateId = (): string => {
+  // Fallback pour les navigateurs qui ne supportent pas crypto.randomUUID (HTTP, anciens mobiles)
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+  // Fallback avec Math.random
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
 
 const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array];
@@ -110,6 +123,8 @@ const shuffleArray = <T>(array: T[]): T[] => {
   return shuffled;
 };
 
+const TOTAL_ROUNDS = 12;
+
 const initialState: GameState = {
   screen: "home",
   teams: [
@@ -117,7 +132,7 @@ const initialState: GameState = {
     { id: generateId(), name: "Équipe 2", players: [], score: 0, colorIndex: 1 },
   ],
   turnDuration: 120,
-  totalRounds: 12,
+  totalRounds: TOTAL_ROUNDS,
   currentRound: 1,
   currentTeamIndex: 0,
   currentGiverIndex: 0,
@@ -174,6 +189,11 @@ export const useGameStore = create<GameState & GameActions>()(
         }
       }),
 
+    setTotalRounds: (rounds) =>
+      set((state) => {
+        state.totalRounds = rounds;
+      }),
+
     // Jeu
     startGame: (categories) =>
       set((state) => {
@@ -193,6 +213,13 @@ export const useGameStore = create<GameState & GameActions>()(
         });
         state.screen = "playerAnnounce";
       }),
+
+    startTurn: () => {
+      get().drawWord();
+      set((state) => {
+        state.screen = "play";
+      });
+    },
 
     drawWord: () =>
       set((state) => {
@@ -277,6 +304,16 @@ export const useGameStore = create<GameState & GameActions>()(
           state.screen = "playerAnnounce";
         }
       }),
+
+    onTeamWon: (teamId) => {
+      get().wordFound(teamId);
+      get().nextTurn();
+    },
+
+    onNoOneFound: () => {
+      get().wordNotFound();
+      get().nextTurn();
+    },
 
     // Scores
     addScore: (teamId, points) =>

@@ -4,12 +4,7 @@ import { Logo } from "../Logo";
 import { SwipeableCard } from "../SwipeableCard";
 import { useGameStore, getCurrentPlayers, getTeamColor } from "../../store/useGameStore";
 
-interface PlayScreenProps {
-  onTeamWon: (teamId: string) => void;
-  onNoOneFound: () => void;
-}
-
-export function PlayScreen({ onTeamWon, onNoOneFound }: PlayScreenProps) {
+export function PlayScreen() {
   const {
     teams,
     currentTeamIndex,
@@ -18,14 +13,22 @@ export function PlayScreen({ onTeamWon, onNoOneFound }: PlayScreenProps) {
     turnDuration,
     drawWord,
     availableWords,
+    resetGame,
+    onTeamWon,
+    onNoOneFound,
   } = useGameStore();
 
   const [isCardFlipped, setIsCardFlipped] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(turnDuration);
 
   const currentTeam = teams[currentTeamIndex];
-  const { giver, guesser } = getCurrentPlayers(currentTeam, currentGiverIndex);
+  const { giver, guessers } = getCurrentPlayers(currentTeam, currentGiverIndex);
   const teamColor = getTeamColor(currentTeam?.colorIndex ?? 0);
+
+  // Formater les noms des guessers pour le bouton
+  const guessersText = guessers.length === 1
+    ? guessers[0].name
+    : guessers.map(g => g.name).join(" & ");
 
   // Timer countdown - ne démarre qu'après le flip de la carte
   useEffect(() => {
@@ -45,22 +48,13 @@ export function PlayScreen({ onTeamWon, onNoOneFound }: PlayScreenProps) {
     return `${mins}min et ${secs.toString().padStart(2, "0")}sec`;
   };
 
-  const handleFlipCard = () => {
-    if (!isCardFlipped) {
-      setIsCardFlipped(true);
-    }
-  };
-
-  const handleSwipe = () => {
-    // Tirer un nouveau mot
-    drawWord();
-  };
+  const handleFlipCard = () => setIsCardFlipped(true);
 
   // Trouver l'équipe adverse
   const opposingTeamIndex = (currentTeamIndex + 1) % teams.length;
   const opposingTeam = teams[opposingTeamIndex];
 
-  if (!giver || !guesser || !currentWord) {
+  if (!giver || guessers.length === 0 || !currentWord) {
     return null;
   }
 
@@ -107,7 +101,7 @@ export function PlayScreen({ onTeamWon, onNoOneFound }: PlayScreenProps) {
           nextWord={availableWords[availableWords.length - 1]}
           isFlipped={isCardFlipped}
           onFlip={handleFlipCard}
-          onSwipe={handleSwipe}
+          onSwipe={drawWord}
         />
 
         {/* Boutons de sélection du gagnant (après flip) */}
@@ -129,7 +123,7 @@ export function PlayScreen({ onTeamWon, onNoOneFound }: PlayScreenProps) {
                     color: "white",
                   }}
                 >
-                  {guesser.name} a trouvé
+                  {guessersText} {guessers.length > 1 ? "ont" : "a"} trouvé
                 </button>
 
                 {/* Bouton adversaires */}
@@ -162,6 +156,15 @@ export function PlayScreen({ onTeamWon, onNoOneFound }: PlayScreenProps) {
           </div>
         )}
       </div>
+
+      {/* Bouton quitter */}
+      <button
+        onClick={resetGame}
+        className="mt-4 text-sm font-medium opacity-60 transition-opacity hover:opacity-100"
+        style={{ color: colors.lime }}
+      >
+        Quitter la partie
+      </button>
     </>
   );
 }
