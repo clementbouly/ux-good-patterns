@@ -60,12 +60,14 @@ function Confetti() {
 // Composant pour le podium
 function PodiumPlace({
   rank,
+  displayRank,
   playerNames,
   score,
   color,
   isWinner,
 }: {
-  rank: number;
+  rank: number; // Position pour l'ordre d'affichage (1, 2, 3)
+  displayRank: number; // Rang affiché (peut être le même en cas d'égalité)
   playerNames: string[];
   score: number;
   color: string;
@@ -85,9 +87,7 @@ function PodiumPlace({
 
       {/* Noms des joueurs */}
       <div
-        className={`mb-2 flex flex-col items-center rounded-2xl px-3 py-2 text-center ${
-          isWinner ? "animate-pulse" : ""
-        }`}
+        className="mb-2 flex flex-col items-center rounded-2xl px-3 py-2 text-center"
         style={{ backgroundColor: color, color: "white" }}
       >
         {playerNames.map((name, i) => (
@@ -105,10 +105,10 @@ function PodiumPlace({
         {score} pts
       </div>
 
-      {/* Podium */}
+      {/* Podium - hauteur basée sur le rang affiché */}
       <div
         className={`flex w-24 items-end justify-center rounded-t-lg ${
-          heights[rank as 1 | 2 | 3]
+          heights[displayRank as 1 | 2 | 3] || "h-16"
         }`}
         style={{ backgroundColor: color }}
       >
@@ -116,7 +116,7 @@ function PodiumPlace({
           className="mb-2 text-3xl font-bold"
           style={{ color: "white" }}
         >
-          {rank}
+          {displayRank}
         </span>
       </div>
     </div>
@@ -124,13 +124,28 @@ function PodiumPlace({
 }
 
 export function FinalRankingScreen() {
-  const { teams, resetGame } = useGameStore();
+  const { teams, totalRounds, resetGame } = useGameStore();
   const [showConfetti, setShowConfetti] = useState(true);
 
   // Trier les équipes par score décroissant
   const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
   const winner = sortedTeams[0];
+  const topScore = winner?.score ?? 0;
   const isTie = sortedTeams.length > 1 && sortedTeams[0].score === sortedTeams[1].score;
+
+  // Calculer le pourcentage de réussite pour adapter les messages
+  const winRate = totalRounds > 0 ? topScore / totalRounds : 0;
+
+  // Calculer le rang réel de chaque équipe (égalité = même rang)
+  const getRank = (index: number): number => {
+    if (index === 0) return 1;
+    // Si même score que l'équipe précédente, même rang
+    if (sortedTeams[index].score === sortedTeams[index - 1].score) {
+      return getRank(index - 1);
+    }
+    // Sinon, rang = nombre d'équipes avec un meilleur score + 1
+    return sortedTeams.filter((t) => t.score > sortedTeams[index].score).length + 1;
+  };
 
   // Arrêter les confettis après quelques secondes
   useEffect(() => {
@@ -177,16 +192,21 @@ export function FinalRankingScreen() {
         {/* Podium (pour 2+ équipes) */}
         {sortedTeams.length >= 2 && (
           <div className="flex items-end justify-center gap-2 pt-4">
-            {sortedTeams.slice(0, Math.min(3, sortedTeams.length)).map((team, index) => (
-              <PodiumPlace
-                key={team.id}
-                rank={index + 1}
-                playerNames={team.players.map((p) => p.name)}
-                score={team.score}
-                color={getTeamColor(team.colorIndex)}
-                isWinner={index === 0 && !isTie}
-              />
-            ))}
+            {sortedTeams.slice(0, Math.min(3, sortedTeams.length)).map((team, index) => {
+              const displayRank = getRank(index);
+              const isWinner = team.score === topScore;
+              return (
+                <PodiumPlace
+                  key={team.id}
+                  rank={index + 1}
+                  displayRank={displayRank}
+                  playerNames={team.players.map((p) => p.name)}
+                  score={team.score}
+                  color={getTeamColor(team.colorIndex)}
+                  isWinner={isWinner}
+                />
+              );
+            })}
           </div>
         )}
 
@@ -196,11 +216,13 @@ export function FinalRankingScreen() {
           style={{ backgroundColor: colors.navy }}
         >
           <p className="text-sm" style={{ color: colors.lime }}>
-            {winner.score >= 10
+            {isTie
+              ? "🤝 Match nul, revanche obligatoire !"
+              : winRate >= 0.7
               ? "🔥 Performance exceptionnelle !"
-              : winner.score >= 7
+              : winRate >= 0.5
               ? "👏 Bien joué !"
-              : winner.score >= 4
+              : winRate >= 0.3
               ? "💪 C'était serré !"
               : "🎲 La prochaine sera la bonne !"}
           </p>
