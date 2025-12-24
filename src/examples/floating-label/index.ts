@@ -5,10 +5,10 @@ import content from "./README.md";
 export { content };
 
 export const meta = {
-  id: "visible-label",
+  id: "floating-label",
   title: "Floating labels instead of placeholders",
   description:
-    "Avoid confusion about which field is which by using visible labels",
+    "Avoid confusion about which field is which by using floating labels",
   category: "Forms",
   tags: ["accessibility", "forms", "labels", "placeholders"],
   createdAt: "2025-12-22",

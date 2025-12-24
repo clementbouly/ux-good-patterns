@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Eye, EyeOff } from "lucide-react";
+import FloatingInput from "@/components/FloatingInput";
 
 export const GoodExample = () => {
   const [password, setPassword] = useState("");
@@ -12,20 +11,26 @@ export const GoodExample = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.target.value);
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setConfirmPassword(e.target.value);
+
   return (
     <form className="space-y-6">
       {/* Field 1: New Password */}
       <div className="space-y-2">
-        <Label htmlFor="new-password">New Password</Label>
         <div className="relative">
-          <Input
+          <FloatingInput
             id="new-password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter your new password" // Placeholder is a hint, not the label
+            label="New Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="pr-10" // Padding right to prevent text hiding behind icon
+            placeholder="Enter your new password"
+            type={showPassword ? "text" : "password"}
+            required={true}
+            onHandleChange={handlePasswordChange}
           />
+
           <Button
             type="button"
             variant="ghost"
@@ -45,16 +50,17 @@ export const GoodExample = () => {
 
       {/* Field 2: Confirm Password */}
       <div className="space-y-2">
-        <Label htmlFor="confirm-password">Confirm Password</Label>
         <div className="relative">
-          <Input
+          <FloatingInput
             id="confirm-password"
-            type={showConfirm ? "text" : "password"}
-            placeholder="Re-enter your password"
+            label="Confirm Password"
             value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="pr-10"
+            placeholder="Confirm your password"
+            type={showConfirm ? "text" : "password"}
+            required={true}
+            onHandleChange={handleConfirmPasswordChange}
           />
+
           <Button
             type="button"
             variant="ghost"
@@ -71,6 +77,9 @@ export const GoodExample = () => {
           </Button>
         </div>
       </div>
+      <p className="text-xs text-center text-muted-foreground mt-2">
+        Labels remain visible, show/hide buttons let you control visibility.
+      </p>
     </form>
   );
 };

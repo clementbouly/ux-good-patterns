@@ -25,9 +25,8 @@ export const BadExample = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
       </div>
-
-      <p className="text-xs text-muted-foreground mt-2">
-        *Note: Once you start typing, you forget which field is which.
+      <p className="text-xs text-center text-muted-foreground mt-2">
+        Once you start typing, if you get distracted and come back, you forget which field is which.
       </p>
     </form>
   );
