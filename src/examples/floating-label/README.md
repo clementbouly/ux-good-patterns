@@ -1,4 +1,4 @@
-# Disable Submit Button During Loading
+# Floating labels instead of placeholders
 
 ## Description
 

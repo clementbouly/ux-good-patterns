@@ -1,6 +1,6 @@
 import { GoodExample } from "./GoodExample";
 import { BadExample } from "./BadExample";
-import content from "./README.md";
+import content from "./README.md?raw";
 
 export { content };
 
