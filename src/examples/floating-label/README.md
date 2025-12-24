@@ -1,5 +1,3 @@
-# Floating labels instead of placeholders
-
 ## Description
 
 A floating label sits inside the field as a placeholder initially and animates to the top when the user focuses the field or enters text. This method solves the accessibility issue of disappearing placeholders while keeping a minimal and clean design.
