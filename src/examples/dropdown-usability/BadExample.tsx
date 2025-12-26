@@ -18,7 +18,7 @@ export function BadExample() {
           <SelectValue placeholder="Select a country" />
         </SelectTrigger>
 
-        <SelectContent>
+        <SelectContent position="popper" className="max-h-60">
           {COUNTRIES.map((country) => (
             <SelectItem
               key={country}
