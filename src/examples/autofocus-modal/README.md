@@ -21,3 +21,11 @@ When a modal opens with a single input (or a primary field), it should be automa
 - Modals with multiple fields without a clear hierarchy
 - Confirmation modals (focus should be on the confirmation button)
 - Modals with content to read before interaction
+
+## Real-world example
+
+Here's SNCF's search modal — when opened, the input is not focused, requiring an extra click before typing:
+
+<video src="/videos/BadExampleAutoFocusModal.mp4" controls width="100%"></video>
+
+A small detail that adds friction to every search interaction.
