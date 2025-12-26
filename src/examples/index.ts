@@ -12,6 +12,7 @@ import * as pasteOtpCode from "./paste-otp-code";
 import * as modalClosing from "./modal-closing";
 import * as dropdownUsability from "./dropdown-usability";
 import * as displayOptions from "./display-options";
+import * as toastVsInlineFeedback from "./toast-vs-inline-feedback";
 
 export const examples = [
   autofocusModal,
@@ -28,6 +29,7 @@ export const examples = [
   pasteOtpCode,
   dropdownUsability,
   displayOptions,
+  toastVsInlineFeedback,
 ];
 
 export type ExampleMeta = {
