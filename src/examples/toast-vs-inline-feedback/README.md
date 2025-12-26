@@ -32,6 +32,14 @@ Toast notifications force users to shift their attention away from their current
 - System notifications unrelated to current task
 - Information users won't mind missing
 
+## Real-world example
+
+Here's how LinkedIn handles the "Copy to clipboard" action — the toast appears in the bottom-left corner, far from where the user clicked:
+
+<video src="/videos/badExampleToast.mp4" controls width="100%"></video>
+
+This pattern is common in many applications, which is why it's valuable to question established conventions.
+
 ## References
 
 - [Jakob Nielsen - Toast notifications are a burnt GUI widget](https://jakobnielsenphd.substack.com/p/ux-roundup-20240325)
