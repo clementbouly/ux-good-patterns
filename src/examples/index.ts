@@ -13,6 +13,7 @@ import * as modalClosing from "./modal-closing";
 import * as dropdownUsability from "./dropdown-usability";
 import * as displayOptions from "./display-options";
 import * as toastVsInlineFeedback from "./toast-vs-inline-feedback";
+import * as floatingActionButton from "./floating-action-button";
 
 export const examples = [
   autofocusModal,
@@ -26,6 +27,7 @@ export const examples = [
   formValidationFeedback,
   inputAutoFormat,
   scrollToTop,
+  floatingActionButton,
   pasteOtpCode,
   dropdownUsability,
   displayOptions,

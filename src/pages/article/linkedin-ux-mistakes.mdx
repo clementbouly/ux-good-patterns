@@ -1,0 +1,283 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "5 UX Mistakes Even LinkedIn Makes"
+description: "A deep dive into friction points on one of the world's largest platforms, and what they teach us about UX best practices"
+---
+
+import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+import { VideoEmbed } from "@/components/articles/VideoEmbed";
+import { Sources, SourceRef } from "@/components/articles/Sources";
+
+# 5 UX Mistakes Even LinkedIn Makes
+
+LinkedIn is a product used by over 900 million people. It's built by talented designers and engineers with significant resources. And yet, it still has UX friction points that violate well-established principles.
+
+This isn't a hit piece. LinkedIn has, overall, a solid user experience. But examining where even major platforms fall short teaches us something important: **these mistakes are easy to make, which means they're easy to overlook in our own products**.
+
+Let's break down five specific issues, the UX principles they violate, and how to solve them.
+
+---
+
+## 1. The Disappearing "Create Post" Button
+
+### The Problem
+
+On LinkedIn's desktop interface, the "Create a post" input is positioned at the top of the feed. The moment you scroll down to read content, it disappears. To create a post, you must manually scroll back to the top of the feed.
+
+<VideoEmbed
+  src="/videos/scroll-to-top.mp4"
+  caption="The 'Create a post' button disappears as soon as you scroll"
+/>
+
+Compare this to X (Twitter), which keeps the compose button permanently visible in the left sidebar, regardless of scroll position.
+
+### Why It's a Problem
+
+This violates a core UX principle: **primary actions should always be accessible**. The ability to create content is arguably LinkedIn's most important user action—it drives engagement, content creation, and platform value.
+
+When users scroll through their feed and get inspired to post something, they face an immediate barrier:
+
+1. **Increased cognitive load**: They must remember to scroll back up
+2. **Interrupted flow**: The inspiration-to-action path is broken
+3. **Lost opportunities**: Some users simply won't bother
+
+This relates to **Fitts's Law**: the time to reach a target increases with distance. A button 800 pixels away (at the top of a scrolled page) takes significantly more effort than one that's always visible.
+
+### The Solutions
+
+There are two complementary approaches to keep primary actions accessible:
+
+#### Solution 1: Scroll to Top Button
+
+Provide a quick way to return to the top of the page, where the "Create Post" action lives. This reduces the effort needed to access the primary action after scrolling.
+
+<ExampleEmbed id="scroll-to-top" client:load />
+
+#### Solution 2: Persistent Action Button
+
+Keep the primary action always visible, regardless of scroll position:
+
+- A sticky header with the compose action
+- A floating action button (FAB) that stays visible during scroll
+- A sidebar placement (like X/Twitter uses)
+
+<ExampleEmbed id="floating-action-button" client:load />
+
+This approach is more direct—users don't need to scroll at all—but requires more UI real estate.
+
+---
+
+## 2. Disabled Copy-Paste on Mobile
+
+### The Problem
+
+On LinkedIn's mobile app, you cannot select or copy text from posts. Long-pressing on text does nothing—no selection handles, no copy option.
+
+### Why It's a Problem
+
+This violates **user control and freedom**, one of Jakob Nielsen's 10 usability heuristics. Users should feel in control of the interface and their data.
+
+The likely motivation is content protection—preventing users from easily copying creators' posts. But this approach is problematic for several reasons:
+
+1. **It punishes legitimate users**: People who want to save a quote, share a phrase, or reference information are blocked
+2. **It's easily circumvented**: A screenshot plus any OCR tool extracts text in seconds
+3. **It creates frustration**: Users expect text selection to work; when it doesn't, it feels broken
+4. **Other platforms allow it**: X/Twitter enables text selection, and creators still thrive
+
+The security-through-obscurity approach rarely works and almost always degrades user experience. If someone wants to copy content badly enough, they will. The only people truly affected are casual users with legitimate needs.
+
+### The Solution
+
+Allow text selection. If content protection is a concern, consider:
+
+- Watermarking for images
+- Rate limiting for bulk operations
+- Legal protections (terms of service)
+
+But fundamentally: **don't sacrifice usability for security theater**.
+
+---
+
+## 3. Spinner Instead of Skeleton Loading
+
+### The Problem
+
+When LinkedIn loads content, it displays a simple spinner (rotating circle). You see nothing except that loading indicator until content appears.
+
+<VideoEmbed
+  src="/videos/spinner-loading.mp4"
+  caption="LinkedIn's spinner provides no information about what's loading"
+/>
+
+### Why It's a Problem
+
+Spinners create **perceived uncertainty**. The user knows *something* is loading, but not *what*. This violates the principle of **progressive disclosure** and negatively impacts **perceived performance**.
+
+Research on skeleton screens shows significant benefits <SourceRef id={1} client:load />:
+
+- Skeleton screens are perceived as faster than spinners
+- They reduce anxiety by showing the structure of upcoming content
+- They feel more responsive because *something* appears immediately
+
+A spinner is essentially saying: "Wait. I'm not going to tell you what's coming or how long it will take." A skeleton says: "Here's what's coming, and it's almost ready."
+
+### The Solution
+
+Replace spinners with skeleton loading for content-heavy pages. Skeletons should:
+
+1. Match the approximate structure of the real content
+2. Use subtle animation (shimmer/pulse) to indicate activity
+3. Load from top to bottom, mimicking reading patterns
+
+<ExampleEmbed id="skeleton-loading" client:load />
+
+The example above demonstrates how skeleton loading provides immediate visual feedback and sets user expectations for the content structure.
+
+---
+
+## 4. Language Selector Without Search (45 Languages, 0 Search)
+
+### The Problem
+
+LinkedIn's settings page includes a language selector with approximately 45 options. To change your language, you must scroll through an alphabetically-sorted dropdown list. There is no search functionality.
+
+<VideoEmbed
+  src="/videos/language-selector.mp4"
+  caption="Scrolling through 45 languages to find the right one"
+/>
+
+### Why It's a Problem
+
+This is a violation of **efficiency of use**. The interaction cost is disproportionately high for a simple task.
+
+Consider the user journey:
+
+1. Open the dropdown
+2. Remember where your language falls alphabetically
+3. Scroll... and scroll... and scroll
+4. Overshoot, scroll back up
+5. Finally find and select
+
+For a user switching to French: ~15 scroll actions. For a user with keyboard-searchable dropdown: 2 keystrokes ("Fr").
+
+This is especially frustrating because **the solution is well-established**. Searchable dropdowns have been a standard pattern for years. Libraries exist in every major framework. There's no technical barrier.
+
+The usability issue becomes worse for:
+- Languages with non-Latin names (users might not know alphabetical position)
+- Users on mobile (smaller scroll area, less precise)
+- Users who switch languages frequently
+
+### The Solution
+
+Add a search/filter input to any dropdown with more than ~10 options. The pattern is simple:
+
+1. Text input at the top of the dropdown
+2. Filter options as user types
+3. Keyboard navigation support
+
+<ExampleEmbed id="dropdown-usability" client:load />
+
+The example above shows how a searchable dropdown transforms a 15-second task into a 2-second one.
+
+---
+
+## 5. Toast Notification for "Link Copied"
+
+### The Problem
+
+When you copy a link to a LinkedIn post, the confirmation appears as a toast notification at the bottom of the screen. The problem: your attention is still on the button you just clicked, not 800 pixels below.
+
+<VideoEmbed
+  src="/videos/toast-feedback.mp4"
+  caption="The 'Link copied' toast appears far from the user's focus point"
+/>
+
+### Why It's a Problem
+
+This violates the principle of **proximity in feedback**. Confirmation should appear where the user is already looking.
+
+Nielsen Norman Group research highlights this issue <SourceRef id={2} client:load />: in one study, a participant spent 5 minutes waiting for content to load because she hadn't noticed an error message at the bottom of the screen that quickly faded away.
+
+When you click a button, your visual attention is on that button. A toast at the bottom of the screen requires:
+
+1. A peripheral vision catch (which many users miss)
+2. An eye movement to read the message
+3. Processing of the message content
+
+For a simple confirmation like "Link copied," this is excessive overhead. Users often miss the toast entirely and click again, unsure if the action succeeded.
+
+**Fitts's Law** applies here too: feedback distance matters. The closer the feedback is to the action, the faster it's processed.
+
+### The Solution
+
+Use inline feedback or micro-interactions directly on the trigger element:
+
+- Change the button text temporarily ("Copied!")
+- Show a checkmark animation on the button
+- Brief color change to indicate success
+
+The feedback happens exactly where the user is looking, requiring zero additional eye movement.
+
+<ExampleEmbed id="toast-vs-inline-feedback" client:load />
+
+The example above compares toast feedback versus inline feedback. Notice how the inline version provides immediate confirmation without requiring you to look elsewhere.
+
+---
+
+## Key Takeaways
+
+These five issues share common themes:
+
+| Issue | Violated Principle | Solution Pattern |
+|-------|-------------------|------------------|
+| Disappearing post button | Primary action accessibility | Sticky/floating actions |
+| Disabled copy-paste | User control and freedom | Trust users, don't restrict basic functionality |
+| Spinner loading | Progressive disclosure, perceived performance | Skeleton loading |
+| No dropdown search | Efficiency of use | Searchable/filterable long lists |
+| Distant toast feedback | Proximity of feedback | Inline micro-interactions |
+
+### What This Teaches Us
+
+1. **Even large teams miss obvious issues**: Budget and team size don't guarantee perfect UX
+2. **Small frictions compound**: Each issue adds seconds; together, they create frustration
+3. **Established patterns exist for a reason**: Most of these solutions are documented best practices
+4. **Test with real users**: Many of these issues would surface in basic usability testing
+
+The goal isn't to criticize LinkedIn—it's to recognize that **these patterns are easy to implement wrong**. If a platform with LinkedIn's resources makes these mistakes, so can any of us.
+
+Use this as a checklist for your own products. The fixes are often straightforward; the hard part is noticing the problems in the first place.
+
+---
+
+## Explore More Patterns
+
+Want to see these patterns in action? Check out the interactive examples:
+
+- [Scroll to Top](/example/scroll-to-top/) — Keeping primary actions accessible
+- [Skeleton Loading](/example/skeleton-loading/) — Better perceived performance
+- [Dropdown Usability](/example/dropdown-usability/) — Searchable dropdowns for long lists
+- [Toast vs Inline Feedback](/example/toast-vs-inline-feedback/) — Where to show confirmation messages
+
+Each example lets you experience the difference between good and bad implementations firsthand.
+
+<Sources
+  client:load
+  sources={[
+    {
+      id: 1,
+      authors: "Mejtoft, T., Långström, E., & Söderström, U.",
+      year: 2018,
+      title: "The effect of skeleton screens: Users' perception of speed and ease of navigation",
+      publication: "ECCE'18: Proceedings of the 36th European Conference on Cognitive Ergonomics",
+      url: "https://dl.acm.org/doi/10.1145/3232078.3232103"
+    },
+    {
+      id: 2,
+      authors: "Nielsen Norman Group",
+      year: 2024,
+      title: "Indicators, Validations, and Notifications: Pick the Correct Communication Option",
+      publication: "Nielsen Norman Group",
+      url: "https://www.nngroup.com/articles/indicators-validations-notifications/"
+    }
+  ]}
+/>

@@ -8,6 +8,14 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "linkedin-ux-mistakes",
+    title: "5 UX Mistakes Even LinkedIn Makes",
+    description:
+      "A deep dive into friction points on one of the world's largest platforms, and what they teach us about UX best practices",
+    tags: ["Case Study", "Feedback", "Loading", "Navigation"],
+    createdAt: "2025-12-27",
+  },
+  {
     slug: "otp-ux-guide",
     title: "The Complete Guide to OTP UX",
     description:
