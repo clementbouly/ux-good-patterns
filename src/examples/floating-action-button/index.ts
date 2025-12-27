@@ -11,7 +11,7 @@ export const meta = {
     "Keep primary actions accessible with a persistent floating button",
   category: "Navigation",
   tags: ["fab", "button", "navigation", "accessibility", "mobile", "ux"],
-  createdAt: "2024-12-27",
+  createdAt: "2025-12-27",
 };
 
 export const BadExamples = [
