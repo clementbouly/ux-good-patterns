@@ -32,6 +32,14 @@ Studies show that skeleton screens can reduce perceived wait time by up to 10-20
 - Full-page initial loads (prefer a branded splash screen)
 - Background data refreshes where content is already visible
 
+## Real-world example
+
+Here's LinkedIn loading content with a simple spinner — you see nothing except a rotating circle until content appears:
+
+<video src="/videos/spinner-loading.mp4" controls width="100%"></video>
+
+A skeleton screen would show the structure of upcoming content, reducing perceived wait time.
+
 ## Implementation tips
 
 1. **Match the layout**: Skeleton shapes should closely match the actual content dimensions

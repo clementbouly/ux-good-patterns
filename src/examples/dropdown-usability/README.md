@@ -30,6 +30,14 @@ Use a **searchable combobox** when:
 - Options have similar prefixes (states, cities)
 - Data-driven or growing lists
 
+## Real-world example
+
+Here's LinkedIn's language selector with approximately 45 options — to find your language, you must scroll through the entire alphabetically-sorted list:
+
+<video src="/videos/language-selector.mp4" controls width="100%"></video>
+
+A searchable dropdown would transform a 15-second task into a 2-second one.
+
 ## Implementation tips
 
 1. **Preserve the selected value display**: Show the full selected value, not just what the user typed

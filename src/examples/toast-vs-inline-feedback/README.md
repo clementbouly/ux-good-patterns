@@ -36,7 +36,7 @@ Toast notifications force users to shift their attention away from their current
 
 Here's how LinkedIn handles the "Copy to clipboard" action — the toast appears in the bottom-left corner, far from where the user clicked:
 
-<video src="/videos/badExampleToast.mp4" controls width="100%"></video>
+<video src="/videos/toast-feedback.mp4" controls width="100%"></video>
 
 This pattern is common in many applications, which is why it's valuable to question established conventions.
 

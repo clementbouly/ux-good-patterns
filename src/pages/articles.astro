@@ -3,7 +3,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import { ArrowRight } from "lucide-react";
 import { ShareButton } from "@/components/ShareButton";
 import { articles } from "@/articles";
-import { isNew, formatDate } from "@/lib/dateUtils";
+import { isArticleNew, formatDate } from "@/lib/dateUtils";
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") || "";
 
@@ -29,7 +29,7 @@ const sortedArticles = [...articles].sort((a, b) =>
               <span class="text-xs text-muted-foreground">{formatDate(article.createdAt)}</span>
               <div class="flex items-center gap-2 mb-1">
                 <h2 class="text-xl font-semibold group-hover:underline">{article.title}</h2>
-                {isNew(article.createdAt) && (
+                {isArticleNew(article.createdAt) && (
                   <span class="inline-flex items-center rounded-full bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
                     New
                   </span>

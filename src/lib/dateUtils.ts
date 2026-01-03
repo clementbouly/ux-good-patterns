@@ -1,14 +1,26 @@
-const NEW_THRESHOLD_DAYS = 3;
+const EXAMPLE_NEW_THRESHOLD_DAYS = 14; // 2 weeks
+const ARTICLE_NEW_THRESHOLD_DAYS = 28; // 4 weeks
 
-/**
- * Check if a date string is considered "new" (within the last 3 days)
- */
-export function isNew(dateString: string): boolean {
+function isWithinDays(dateString: string, days: number): boolean {
   const date = new Date(dateString);
   const now = new Date();
   const diffTime = now.getTime() - date.getTime();
   const diffDays = diffTime / (1000 * 60 * 60 * 24);
-  return diffDays <= NEW_THRESHOLD_DAYS;
+  return diffDays <= days;
+}
+
+/**
+ * Check if an example is considered "new" (within the last 2 weeks)
+ */
+export function isNew(dateString: string): boolean {
+  return isWithinDays(dateString, EXAMPLE_NEW_THRESHOLD_DAYS);
+}
+
+/**
+ * Check if an article is considered "new" (within the last 4 weeks)
+ */
+export function isArticleNew(dateString: string): boolean {
+  return isWithinDays(dateString, ARTICLE_NEW_THRESHOLD_DAYS);
 }
 
 /**

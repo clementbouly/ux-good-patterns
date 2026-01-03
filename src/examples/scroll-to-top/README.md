@@ -32,6 +32,14 @@ This follows the principle of providing shortcuts for experienced users while no
 - Wizard/stepper flows where linear progression is intentional
 - Modal dialogs or small scrollable containers (debatable - depends on content length)
 
+## Real-world example
+
+Here's LinkedIn's desktop feed — the "Create a post" input disappears as soon as you scroll down, forcing users to manually scroll back up to post:
+
+<video src="/videos/scroll-to-top.mp4" controls width="100%"></video>
+
+A scroll-to-top button would provide a quick way back to the primary action.
+
 ## Implementation tips
 
 1. **Appear after threshold**: Show the button only after scrolling 300-500px down
