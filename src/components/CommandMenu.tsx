@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FileText, Search, BookOpen } from "lucide-react";
 import {
   CommandDialog,
@@ -18,6 +18,11 @@ type CommandMenuProps = {
 export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
   const [open, setOpen] = useState(false);
   const [modifierKey, setModifierKey] = useState("Ctrl");
+  const listRef = useRef<HTMLDivElement>(null);
+
+  const handleSearchChange = () => {
+    listRef.current?.scrollTo(0, 0);
+  };
 
   useEffect(() => {
     setModifierKey(/Mac|iPhone|iPad/.test(navigator.userAgent) ? "⌘" : "Ctrl");
@@ -72,8 +77,8 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
         title="Search examples and articles"
         description="Search for UX patterns and examples"
       >
-        <CommandInput placeholder="Search examples, articles..." />
-        <CommandList>
+        <CommandInput placeholder="Search examples, articles..." onValueChange={handleSearchChange} />
+        <CommandList ref={listRef}>
           <CommandEmpty>No examples found.</CommandEmpty>
           <CommandGroup heading="Examples">
             {examples.map((example) => (
