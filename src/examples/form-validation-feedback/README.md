@@ -1,8 +1,8 @@
-# Form Validation with Error Feedback
+# Avoid Disabled Submit Buttons
 
 ## Description
 
-Keep submit buttons enabled and display clear, inline error messages when the user attempts to submit an incomplete or invalid form. Avoid disabling buttons based on form validity.
+Keep submit buttons enabled and display clear error messages when the user attempts to submit an incomplete or invalid form.
 
 ## Why it matters
 
@@ -16,24 +16,17 @@ Keep submit buttons enabled and display clear, inline error messages when the us
 When you disable a submit button until a form is valid:
 
 - Users don't know **why** the button is disabled
-- They may not realize which field is incomplete
+- They may not realize which field is incomplete or invalid
 - It can feel like the interface is broken
 - There's no opportunity to provide helpful guidance
 
 ## Better approach
 
 1. Keep the submit button always enabled
-2. Validate on submit (and optionally on change after first submission)
+2. Validate on submit
 3. Display clear, inline error messages next to invalid fields
 4. Use visual cues (red borders, icons) to draw attention
 5. Include ARIA attributes for accessibility (`aria-invalid`, `aria-describedby`)
-
-## When to apply
-
-- Contact forms
-- Login/signup forms
-- Any form where users need guidance on validation rules
-- Forms with multiple required fields
 
 ## When disabled buttons are acceptable
 

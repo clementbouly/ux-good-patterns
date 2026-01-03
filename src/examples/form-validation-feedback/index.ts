@@ -6,16 +6,16 @@ export { content };
 
 export const meta = {
   id: "form-validation-feedback",
-  title: "Form validation with error feedback",
+  title: "Avoid disabled submit buttons",
   description:
-    "Keep submit buttons enabled and show clear error messages on submit instead of disabling buttons on incomplete forms.",
+    "A disabled button doesn't tell users what's wrong. Keep it enabled and show clear error messages on submit.",
   category: "Forms",
-  tags: ["form", "validation", "error", "button", "accessibility", "feedback"],
+  tags: ["form", "button", "accessibility", "disabled"],
   createdAt: "2025-12-08",
 };
 
-export const BadExamples = [{ component: BadExample, label: "Disabled button until valid" }];
+export const BadExamples = [{ component: BadExample, label: "Disabled button" }];
 
 export const GoodExamples = [
-  { component: GoodExample, label: "Enabled button with validation feedback" },
+  { component: GoodExample, label: "Enabled button with feedback" },
 ];

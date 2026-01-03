@@ -68,30 +68,59 @@ export function GoodExample() {
 
 export function GoodExampleCards() {
   const [selected, setSelected] = useState("basic");
+  const [selectedInline, setSelectedInline] = useState("basic");
 
   return (
-    <div className="grid gap-3">
-      <Label>Subscription plan</Label>
+    <div className="grid gap-6">
+      {/* Version en ligne compacte */}
+      <div className="grid gap-3">
+        <Label>Subscription plan</Label>
 
-      <div className="grid gap-2">
-        {PLANS.map((plan) => (
-          <button
-            key={plan.id}
-            type="button"
-            onClick={() => setSelected(plan.id)}
-            className={cn(
-              "cursor-pointer rounded-lg border p-4 text-left transition-colors hover:bg-accent/50",
-              selected === plan.id
-                ? "border-primary bg-accent/30 ring-1 ring-primary"
-                : "border-input"
-            )}
-          >
-            <div className="grid gap-0.5">
-              <span className="font-medium">{plan.name}</span>
-              <span className="text-sm text-muted-foreground">{plan.description}</span>
-            </div>
-          </button>
-        ))}
+        <div className="flex flex-wrap gap-2">
+          {PLANS.map((plan) => (
+            <button
+              key={plan.id}
+              type="button"
+              onClick={() => setSelectedInline(plan.id)}
+              className={cn(
+                "flex-1 cursor-pointer rounded-lg border px-4 py-3 text-center transition-colors hover:bg-accent/50",
+                selectedInline === plan.id
+                  ? "border-primary bg-accent/30 ring-1 ring-primary"
+                  : "border-input"
+              )}
+            >
+              <span className="text-sm font-medium md:text-base">{plan.name}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <hr className="border-border" />
+
+      {/* Version en colonnes avec description */}
+      <div className="grid gap-3">
+        <Label>Subscription plan</Label>
+
+        <div className="grid gap-2">
+          {PLANS.map((plan) => (
+            <button
+              key={plan.id}
+              type="button"
+              onClick={() => setSelected(plan.id)}
+              className={cn(
+                "cursor-pointer rounded-lg border p-4 text-left transition-colors hover:bg-accent/50",
+                selected === plan.id
+                  ? "border-primary bg-accent/30 ring-1 ring-primary"
+                  : "border-input"
+              )}
+            >
+              <div className="grid gap-0.5">
+                <span className="font-medium">{plan.name}</span>
+                <span className="text-sm text-muted-foreground">{plan.description}</span>
+              </div>
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
