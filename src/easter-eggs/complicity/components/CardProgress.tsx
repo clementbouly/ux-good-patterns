@@ -9,7 +9,7 @@ export function CardProgress({ className }: CardProgressProps) {
   const { totalRounds, roundResults, teams } = useGameStore();
 
   return (
-    <div className={`flex justify-center gap-0.5 ${className ?? ""}`}>
+    <div className={`flex w-full justify-center gap-0.5 ${className ?? ""}`}>
       {Array.from({ length: totalRounds }).map((_, index) => {
         const result = roundResults[index];
         const isPlayed = result !== undefined;
@@ -18,8 +18,9 @@ export function CardProgress({ className }: CardProgressProps) {
         return (
           <div
             key={index}
-            className="relative h-10 w-7 rounded-sm transition-all duration-300"
+            className="relative aspect-[7/10] min-w-0 flex-1 rounded-sm transition-all duration-300"
             style={{
+              maxWidth: "28px",
               backgroundColor:
                 isPlayed && winningTeamIndex !== null
                   ? getTeamColor(teams[winningTeamIndex]?.colorIndex ?? 0)

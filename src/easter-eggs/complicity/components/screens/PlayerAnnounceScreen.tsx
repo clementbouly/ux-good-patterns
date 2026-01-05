@@ -37,9 +37,9 @@ export function PlayerAnnounceScreen() {
         {/* Barre de progression en cartes */}
         <CardProgress />
 
-        {/* Cercle avec le joueur */}
+        {/* Rectangle avec le joueur */}
         <div
-          className="flex h-36 w-36 flex-col items-center justify-center rounded-full px-3"
+          className="flex w-full flex-col items-center justify-center rounded-2xl px-6 py-6"
           style={{
             border: `4px solid ${teamColor}`,
             backgroundColor: "white",
