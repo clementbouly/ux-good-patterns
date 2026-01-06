@@ -61,7 +61,7 @@ function generateAiContext(): void {
   // Header
   lines.push("# UX Best Practices for AI-Assisted Development");
   lines.push("");
-  lines.push("> Auto-generated from https://ux-good-patterns.netlify.app");
+  lines.push("> Auto-generated from https://uxgoodpatterns.com");
   lines.push("");
   lines.push("## Instructions for AI");
   lines.push("");

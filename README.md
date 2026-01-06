@@ -1,6 +1,6 @@
 # UX Good Patterns
 
-**[Live Demo](https://ux-good-patterns.netlify.app/)**
+**[Live Demo](https://uxgoodpatterns.com/)**
 
 An open source collection of UX patterns with comparative examples. Each pattern shows a "good" and "bad" example to illustrate user experience best practices.
 

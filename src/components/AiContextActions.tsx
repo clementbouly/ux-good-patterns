@@ -1,7 +1,7 @@
 import { Check, Copy, Download, Link } from "lucide-react";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 
-const FILE_URL = "https://ux-good-patterns.netlify.app/ux-rules.md";
+const FILE_URL = "https://uxgoodpatterns.com/ux-rules.md";
 
 export function AiContextActions() {
   const { copied: copiedLink, copy: copyLink } = useCopyToClipboard();
