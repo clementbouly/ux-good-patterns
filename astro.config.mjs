@@ -5,7 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 
 export default defineConfig({
-  site: "https://ux-good-patterns.netlify.app",
+  site: "https://uxgoodpatterns.com",
   output: "static",
   integrations: [react(), sitemap(), mdx()],
   vite: {

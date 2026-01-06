@@ -1,6 +1,6 @@
 # UX Best Practices for AI-Assisted Development
 
-> Auto-generated from https://ux-good-patterns.netlify.app
+> Auto-generated from https://uxgoodpatterns.com
 
 ## Instructions for AI
 

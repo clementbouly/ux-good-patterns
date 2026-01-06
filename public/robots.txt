@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ux-good-patterns.netlify.app/sitemap-index.xml
+Sitemap: https://uxgoodpatterns.com/sitemap-index.xml
