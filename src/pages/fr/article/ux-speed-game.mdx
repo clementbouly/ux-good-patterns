@@ -1,0 +1,61 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "Le defi de vitesse UX"
+description: "Experimentez par vous-meme comment les petites frictions UX s'accumulent pour creer des ralentissements majeurs"
+---
+
+import { UxSpeedGame } from "@/components/articles/ux-speed-game";
+
+# Le defi de vitesse UX
+
+**Pouvez-vous sentir la difference ?** Completez la meme tache dans les deux versions et voyez comment les micro-frictions impactent votre vitesse.
+
+<UxSpeedGame client:load>
+
+---
+
+## Pourquoi c'est important
+
+Chaque clic supplementaire, chaque raccourci manquant, chaque interaction non optimisee s'accumule. Isolement, chaque friction semble mineure. Combinees, elles creent une experience mesurablament plus lente — et plus frustrante.
+
+### L'effet compose
+
+Si chaque friction ajoute seulement **0,5 seconde** :
+
+| Frictions | Temps ajoute | Impact quotidien (100 utilisations) |
+| --------- | ------------ | ----------------------------------- |
+| 1         | 0,5s         | 50 secondes                         |
+| 3         | 1,5s         | 2,5 minutes                         |
+| 5         | 2,5s         | **4+ minutes**                      |
+
+Maintenant multipliez cela par l'ensemble de votre base d'utilisateurs.
+
+### Le cout psychologique
+
+Au-dela du temps brut, une mauvaise UX cree :
+
+- **Charge cognitive** — Les utilisateurs doivent reflechir a _comment_ utiliser l'interface au lieu de _ce qu'ils_ veulent faire
+- **Frustration** — Les petits desagrements s'accumulent en perception negative de la marque
+- **Erreurs** — Plus d'etapes = plus d'opportunites d'erreurs
+
+---
+
+## Points cles a retenir
+
+1. **Auto-focus sur les champs** quand une modale s'ouvre — les utilisateurs s'attendent a pouvoir taper immediatement
+2. **Supporter plusieurs methodes de fermeture** — bouton X, clic a l'exterieur, touche Echap
+3. **Fournir des boutons de copie** — ne forcez pas les utilisateurs a selectionner le texte manuellement
+4. **Auto-soumettre quand possible** — si vous avez toutes les donnees, pourquoi attendre un clic ?
+
+---
+
+## En savoir plus
+
+Explorez les patterns individuels demontres dans ce defi :
+
+- [Auto-focus dans les modales](/fr/example/autofocus-modal)
+- [Feedback de copie](/fr/example/copy-feedback)
+- [Auto-soumission de code](/fr/example/auto-submit-code)
+- [Champ de code de verification](/fr/example/verification-code-input)
+
+</UxSpeedGame>

@@ -1,0 +1,117 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "Le guide complet de l'UX OTP"
+description: "Bonnes pratiques pour les champs de code de verification, de la conception des emails a l'implementation des formulaires"
+---
+
+import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+import { EmailComparison } from "@/components/articles/EmailComparison";
+import { UltimateOtpDemo } from "@/components/articles/UltimateOtpDemo";
+
+# Le guide complet de l'UX OTP
+
+Les mots de passe a usage unique (OTP) sont partout : verification de compte, authentification a deux facteurs, reinitialisation de mot de passe. Pourtant, l'UX qui les entoure est souvent negligee. Ce guide couvre **4 domaines cles** pour rendre votre flux OTP fluide.
+
+---
+
+## 1. Conception de l'email : Rendre le code facilement reperable
+
+Avant meme que les utilisateurs interagissent avec votre formulaire, ils doivent trouver le code dans leur boite de reception. C'est la que beaucoup de services echouent.
+
+<EmailComparison />
+
+### Pourquoi c'est important
+
+- Les utilisateurs parcourent les emails en **2-3 secondes** a la recherche du code
+- Un code enfoui dans le texte les oblige a lire l'email entier
+- Une hierarchie visuelle claire = copier-coller plus rapide = moins de frustration
+
+### Bonnes pratiques
+
+1. **Centrer le code** avec un espace genereux autour
+2. **Utiliser une grande police monospace** pour les chiffres
+3. **Ajouter un contraste visuel** (boite de fond, couleur differente)
+4. **Afficher clairement le delai d'expiration**
+5. **Garder l'email court** — les utilisateurs ne lisent pas le contenu marketing quand ils ont besoin d'un code
+
+---
+
+## 2. Support du coller : La fonctionnalite decisive
+
+Les utilisateurs ont presque toujours le code dans leur presse-papiers (depuis l'email, le SMS ou le gestionnaire de mots de passe). S'ils ne peuvent pas le coller, la frustration arrive immediatement.
+
+<ExampleEmbed id="verification-code-input" client:load />
+
+### Le probleme des implementations naives
+
+Beaucoup d'implementations a "champs separes" cassent le coller :
+
+- Chaque champ n'accepte qu'un seul caractere
+- Coller remplit seulement le premier champ et ignore le reste
+- Les utilisateurs sont obliges de taper chiffre par chiffre
+
+### La solution
+
+Gerer correctement l'evenement `paste` :
+
+1. Intercepter `Ctrl+V` / `Cmd+V` sur n'importe quel champ
+2. Extraire les chiffres du contenu colle
+3. Les distribuer automatiquement dans tous les champs
+
+Les bibliotheques OTP modernes (comme `input-otp`) gerent cela nativement. Si vous construisez des champs personnalises, **le support du coller est non-negociable**.
+
+---
+
+## 3. Auto-soumission : Supprimer le clic supplementaire
+
+Une fois tous les chiffres saisis, pourquoi obliger les utilisateurs a cliquer sur "Verifier" ?
+
+<ExampleEmbed id="auto-submit-code" client:load />
+
+### Pourquoi l'auto-soumission gagne
+
+- **Economise une interaction** (pas de clic sur le bouton necessaire)
+- **Semble plus rapide** meme si le temps reel est le meme
+- **Reduit la charge cognitive** — les utilisateurs n'ont pas a decider quand soumettre
+
+### Notes d'implementation
+
+- Declencher la validation quand `value.length === maxLength`
+- Afficher immediatement un etat de chargement
+- Gerer les erreurs avec elegance (vider le champ, afficher un message)
+
+---
+
+## 4. Bouton coller : L'accelerateur cache
+
+Sur mobile, coller necessite plusieurs etapes : appui long → menu contextuel → toucher "Coller". Un bouton coller visible reduit cela a un seul toucher.
+
+<ExampleEmbed id="paste-otp-code" client:load />
+
+### La question de la permission du navigateur
+
+Oui, l'API Clipboard declenche une demande de permission. Mais :
+
+1. **C'est une seule fois** — les utilisateurs ne la verront plus apres avoir accepte
+2. **C'est contextuel** — la demande apparait juste apres avoir clique sur "Coller"
+3. **C'est quand meme plus rapide** que de taper 6 chiffres manuellement
+
+### Quand l'utiliser
+
+- **Desktop** : Fortement recommande (codes email, gestionnaires de mots de passe)
+- **Mobile** : Solution de repli optionnelle — `autocomplete="one-time-code"` gere la plupart des cas
+
+---
+
+## Le flux OTP ultime
+
+Combinez tous les patterns pour la meilleure experience :
+
+1. **Email** : Code affiche en evidence, facile a copier
+2. **Champ** : Support complet du coller (Ctrl+V remplit tous les champs)
+3. **Comportement** : Auto-soumission une fois complete
+4. **Repli** : Bouton coller visible pour les utilisateurs avances
+
+<UltimateOtpDemo client:load />
+
+L'objectif est simple : **minimiser le temps entre la reception du code et la verification**.

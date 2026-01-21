@@ -1,0 +1,285 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "5 erreurs UX que meme LinkedIn commet"
+description: "Une analyse approfondie des points de friction sur l'une des plus grandes plateformes au monde, et ce qu'ils nous apprennent sur les bonnes pratiques UX"
+---
+
+import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+import { VideoEmbed } from "@/components/articles/VideoEmbed";
+import { Sources, SourceRef } from "@/components/articles/Sources";
+
+# 5 erreurs UX que meme LinkedIn commet
+
+LinkedIn est un produit utilise par plus de 900 millions de personnes. Il est concu par des designers et ingenieurs talentueux disposant de ressources importantes. Et pourtant, il presente encore des points de friction UX qui violent des principes bien etablis.
+
+Ceci n'est pas une critique gratuite. LinkedIn offre, dans l'ensemble, une bonne experience utilisateur. Mais examiner ou meme les grandes plateformes echouent nous enseigne quelque chose d'important : **ces erreurs sont faciles a commettre, ce qui signifie qu'elles sont faciles a negliger dans nos propres produits**.
+
+Analysons cinq problemes specifiques, les principes UX qu'ils violent, et comment les resoudre.
+
+---
+
+## 1. Le bouton "Creer un post" qui disparait
+
+### Le probleme
+
+Sur l'interface desktop de LinkedIn, le champ "Creer un post" est positionne en haut du fil d'actualite. Des que vous faites defiler pour lire le contenu, il disparait. Pour creer un post, vous devez remonter manuellement en haut du fil.
+
+<VideoEmbed
+  src="/videos/scroll-to-top.mp4"
+  caption="Le bouton 'Creer un post' disparait des que vous faites defiler"
+/>
+
+Comparez cela a X (Twitter), qui garde le bouton de composition en permanence visible dans la barre laterale gauche, quelle que soit la position de defilement.
+
+### Pourquoi c'est un probleme
+
+Cela viole un principe UX fondamental : **les actions principales doivent toujours etre accessibles**. La possibilite de creer du contenu est sans doute l'action utilisateur la plus importante de LinkedIn — elle genere de l'engagement, de la creation de contenu et de la valeur pour la plateforme.
+
+Quand les utilisateurs parcourent leur fil et sont inspires pour publier quelque chose, ils font face a une barriere immediate :
+
+1. **Charge cognitive accrue** : Ils doivent se souvenir de remonter
+2. **Flux interrompu** : Le chemin de l'inspiration a l'action est brise
+3. **Opportunites perdues** : Certains utilisateurs ne prendront tout simplement pas la peine
+
+Cela est lie a la **loi de Fitts** : le temps pour atteindre une cible augmente avec la distance. Un bouton a 800 pixels (en haut d'une page scrollee) demande beaucoup plus d'effort qu'un bouton toujours visible.
+
+### Les solutions
+
+Il existe deux approches complementaires pour garder les actions principales accessibles :
+
+#### Solution 1 : Bouton de retour en haut
+
+Fournir un moyen rapide de revenir en haut de la page, ou se trouve l'action "Creer un post". Cela reduit l'effort necessaire pour acceder a l'action principale apres avoir fait defiler.
+
+<ExampleEmbed id="scroll-to-top" client:load />
+
+#### Solution 2 : Bouton d'action persistant
+
+Garder l'action principale toujours visible, quelle que soit la position de defilement :
+
+- Un header fixe avec l'action de composition
+- Un bouton d'action flottant (FAB) qui reste visible pendant le defilement
+- Un placement dans la barre laterale (comme X/Twitter l'utilise)
+
+<ExampleEmbed id="floating-action-button" client:load />
+
+Cette approche est plus directe — les utilisateurs n'ont pas besoin de faire defiler du tout — mais necessite plus d'espace d'interface.
+
+---
+
+## 2. Copier-coller desactive sur mobile
+
+### Le probleme
+
+Sur l'application mobile de LinkedIn, vous ne pouvez pas selectionner ou copier le texte des posts. Un appui long sur le texte ne fait rien — pas de poignees de selection, pas d'option de copie.
+
+### Pourquoi c'est un probleme
+
+Cela viole le **controle et la liberte de l'utilisateur**, l'une des 10 heuristiques d'utilisabilite de Jakob Nielsen. Les utilisateurs doivent se sentir en controle de l'interface et de leurs donnees.
+
+La motivation probable est la protection du contenu — empecher les utilisateurs de copier facilement les posts des createurs. Mais cette approche est problematique pour plusieurs raisons :
+
+1. **Elle punit les utilisateurs legitimes** : Les personnes qui veulent sauvegarder une citation, partager une phrase ou referencer une information sont bloquees
+2. **Elle est facilement contournee** : Une capture d'ecran plus n'importe quel outil OCR extrait le texte en quelques secondes
+3. **Elle cree de la frustration** : Les utilisateurs s'attendent a ce que la selection de texte fonctionne ; quand ce n'est pas le cas, cela semble casse
+4. **D'autres plateformes l'autorisent** : X/Twitter permet la selection de texte, et les createurs prosperent quand meme
+
+L'approche de securite par l'obscurite fonctionne rarement et degrade presque toujours l'experience utilisateur. Si quelqu'un veut vraiment copier du contenu, il le fera. Les seules personnes vraiment affectees sont les utilisateurs occasionnels avec des besoins legitimes.
+
+### La solution
+
+Autoriser la selection de texte. Si la protection du contenu est une preoccupation, envisagez :
+
+- Le filigrane pour les images
+- La limitation de debit pour les operations en masse
+- Les protections legales (conditions d'utilisation)
+
+Mais fondamentalement : **ne sacrifiez pas l'utilisabilite pour un theatre de securite**.
+
+---
+
+## 3. Spinner au lieu du chargement squelette
+
+### Le probleme
+
+Quand LinkedIn charge du contenu, il affiche un simple spinner (cercle rotatif). Vous ne voyez rien d'autre que cet indicateur de chargement jusqu'a ce que le contenu apparaisse.
+
+<VideoEmbed
+  src="/videos/spinner-loading.mp4"
+  caption="Le spinner de LinkedIn ne fournit aucune information sur ce qui est en cours de chargement"
+/>
+
+### Pourquoi c'est un probleme
+
+Les spinners creent une **incertitude percue**. L'utilisateur sait que _quelque chose_ charge, mais pas _quoi_. Cela viole le principe de **divulgation progressive** et impacte negativement la **performance percue**.
+
+La recherche sur les ecrans squelettes montre des benefices significatifs <SourceRef id={1} client:load /> :
+
+- Les ecrans squelettes sont percus comme plus rapides que les spinners
+- Ils reduisent l'anxiete en montrant la structure du contenu a venir
+- Ils semblent plus reactifs car _quelque chose_ apparait immediatement
+
+Un spinner dit essentiellement : "Attendez. Je ne vais pas vous dire ce qui arrive ni combien de temps ca prendra." Un squelette dit : "Voici ce qui arrive, et c'est presque pret."
+
+### La solution
+
+Remplacer les spinners par un chargement squelette pour les pages riches en contenu. Les squelettes doivent :
+
+1. Correspondre a la structure approximative du contenu reel
+2. Utiliser une animation subtile (miroitement/pulsation) pour indiquer l'activite
+3. Charger de haut en bas, imitant les patterns de lecture
+
+<ExampleEmbed id="skeleton-loading" client:load />
+
+L'exemple ci-dessus demontre comment le chargement squelette fournit un feedback visuel immediat et definit les attentes de l'utilisateur pour la structure du contenu.
+
+---
+
+## 4. Selecteur de langue sans recherche (45 langues, 0 recherche)
+
+### Le probleme
+
+La page de parametres de LinkedIn inclut un selecteur de langue avec environ 45 options. Pour changer de langue, vous devez faire defiler une liste deroulante triee alphabetiquement. Il n'y a pas de fonction de recherche.
+
+<VideoEmbed
+  src="/videos/language-selector.mp4"
+  caption="Faire defiler 45 langues pour trouver la bonne"
+/>
+
+### Pourquoi c'est un probleme
+
+C'est une violation de l'**efficacite d'utilisation**. Le cout d'interaction est disproportionnellement eleve pour une tache simple.
+
+Considerez le parcours utilisateur :
+
+1. Ouvrir le menu deroulant
+2. Se souvenir ou se trouve votre langue alphabetiquement
+3. Faire defiler... et defiler... et defiler
+4. Depasser, remonter
+5. Enfin trouver et selectionner
+
+Pour un utilisateur qui passe au francais : ~15 actions de defilement. Pour un utilisateur avec un menu deroulant searchable au clavier : 2 frappes ("Fr").
+
+C'est particulierement frustrant car **la solution est bien etablie**. Les menus deroulants avec recherche sont un pattern standard depuis des annees. Des bibliotheques existent dans tous les frameworks majeurs. Il n'y a pas de barriere technique.
+
+Le probleme d'utilisabilite s'aggrave pour :
+
+- Les langues avec des noms non-latins (les utilisateurs peuvent ne pas connaitre la position alphabetique)
+- Les utilisateurs sur mobile (zone de defilement plus petite, moins precise)
+- Les utilisateurs qui changent frequemment de langue
+
+### La solution
+
+Ajouter un champ de recherche/filtre a tout menu deroulant avec plus de ~10 options. Le pattern est simple :
+
+1. Champ de texte en haut du menu deroulant
+2. Filtrer les options au fur et a mesure que l'utilisateur tape
+3. Support de la navigation au clavier
+
+<ExampleEmbed id="dropdown-usability" client:load />
+
+L'exemple ci-dessus montre comment un menu deroulant avec recherche transforme une tache de 15 secondes en une tache de 2 secondes.
+
+---
+
+## 5. Notification toast pour "Lien copie"
+
+### Le probleme
+
+Quand vous copiez un lien vers un post LinkedIn, la confirmation apparait sous forme de notification toast en bas de l'ecran. Le probleme : votre attention est toujours sur le bouton que vous venez de cliquer, pas 800 pixels plus bas.
+
+<VideoEmbed
+  src="/videos/toast-feedback.mp4"
+  caption="Le toast 'Lien copie' apparait loin du point de focus de l'utilisateur"
+/>
+
+### Pourquoi c'est un probleme
+
+Cela viole le principe de **proximite du feedback**. La confirmation devrait apparaitre la ou l'utilisateur regarde deja.
+
+La recherche du Nielsen Norman Group souligne ce probleme <SourceRef id={2} client:load /> : dans une etude, une participante a passe 5 minutes a attendre que le contenu charge parce qu'elle n'avait pas remarque un message d'erreur en bas de l'ecran qui a rapidement disparu.
+
+Quand vous cliquez sur un bouton, votre attention visuelle est sur ce bouton. Un toast en bas de l'ecran necessite :
+
+1. Une detection en vision peripherique (que beaucoup d'utilisateurs manquent)
+2. Un mouvement des yeux pour lire le message
+3. Le traitement du contenu du message
+
+Pour une simple confirmation comme "Lien copie", c'est un surcout excessif. Les utilisateurs manquent souvent le toast completement et cliquent a nouveau, incertains si l'action a reussi.
+
+La **loi de Fitts** s'applique ici aussi : la distance du feedback compte. Plus le feedback est proche de l'action, plus vite il est traite.
+
+### La solution
+
+Utiliser un feedback inline ou des micro-interactions directement sur l'element declencheur :
+
+- Changer temporairement le texte du bouton ("Copie !")
+- Afficher une animation de coche sur le bouton
+- Bref changement de couleur pour indiquer le succes
+
+Le feedback se produit exactement la ou l'utilisateur regarde, ne necessitant aucun mouvement oculaire supplementaire.
+
+<ExampleEmbed id="toast-vs-inline-feedback" client:load />
+
+L'exemple ci-dessus compare le feedback toast au feedback inline. Remarquez comment la version inline fournit une confirmation immediate sans vous obliger a regarder ailleurs.
+
+---
+
+## Points cles a retenir
+
+Ces cinq problemes partagent des themes communs :
+
+| Probleme                                | Principe viole                              | Pattern de solution                                                              |
+| --------------------------------------- | ------------------------------------------- | -------------------------------------------------------------------------------- |
+| Bouton de post qui disparait            | Accessibilite de l'action principale        | Actions fixes/flottantes                                                         |
+| Copier-coller desactive                 | Controle et liberte de l'utilisateur        | Faire confiance aux utilisateurs, ne pas restreindre les fonctionnalites de base |
+| Chargement spinner                      | Divulgation progressive, performance percue | Chargement squelette                                                             |
+| Pas de recherche dans le menu deroulant | Efficacite d'utilisation                    | Listes longues searchables/filtrables                                            |
+| Feedback toast distant                  | Proximite du feedback                       | Micro-interactions inline                                                        |
+
+### Ce que cela nous enseigne
+
+1. **Meme les grandes equipes manquent des problemes evidents** : Le budget et la taille de l'equipe ne garantissent pas une UX parfaite
+2. **Les petites frictions s'accumulent** : Chaque probleme ajoute des secondes ; ensemble, ils creent de la frustration
+3. **Les patterns etablis existent pour une raison** : La plupart de ces solutions sont des bonnes pratiques documentees
+4. **Testez avec de vrais utilisateurs** : Beaucoup de ces problemes emergeraient lors de tests d'utilisabilite basiques
+
+L'objectif n'est pas de critiquer LinkedIn — c'est de reconnaitre que **ces patterns sont faciles a mal implementer**. Si une plateforme avec les ressources de LinkedIn fait ces erreurs, nous le pouvons aussi.
+
+Utilisez cela comme une checklist pour vos propres produits. Les corrections sont souvent simples ; le plus difficile est de remarquer les problemes en premier lieu.
+
+---
+
+## Explorer d'autres patterns
+
+Vous voulez voir ces patterns en action ? Consultez les exemples interactifs :
+
+- [Retour en haut](/fr/example/scroll-to-top/) — Garder les actions principales accessibles
+- [Bouton d'action flottant](/fr/example/floating-action-button/) — Acces permanent aux actions principales
+- [Chargement squelette](/fr/example/skeleton-loading/) — Meilleure performance percue
+- [Utilisabilite des menus deroulants](/fr/example/dropdown-usability/) — Menus deroulants avec recherche pour les longues listes
+- [Toast vs feedback inline](/fr/example/toast-vs-inline-feedback/) — Ou afficher les messages de confirmation
+
+Chaque exemple vous permet d'experimenter la difference entre les bonnes et mauvaises implementations par vous-meme.
+
+<Sources
+  client:load
+  sources={[
+    {
+      id: 1,
+      authors: "Mejtoft, T., Langstrom, E., & Soderstrom, U.",
+      year: 2018,
+      title: "The effect of skeleton screens: Users' perception of speed and ease of navigation",
+      publication: "ECCE'18: Proceedings of the 36th European Conference on Cognitive Ergonomics",
+      url: "https://dl.acm.org/doi/10.1145/3232078.3232086",
+    },
+    {
+      id: 2,
+      authors: "Nielsen Norman Group",
+      year: 2024,
+      title: "Indicators, Validations, and Notifications: Pick the Correct Communication Option",
+      publication: "Nielsen Norman Group",
+      url: "https://www.nngroup.com/articles/indicators-validations-notifications/",
+    },
+  ]}
+/>
