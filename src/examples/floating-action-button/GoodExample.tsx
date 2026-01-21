@@ -3,9 +3,10 @@ import { PenSquare, Heart, MessageCircle, Share2 } from "lucide-react";
 const FAKE_POSTS = Array.from({ length: 8 }, (_, i) => ({
   id: i + 1,
   author: `User ${i + 1}`,
-  content: "Just shared something interesting! This is a sample post that shows how a social feed might look. What do you think about this topic?",
-  likes: Math.floor(Math.random() * 100) + 10,
-  comments: Math.floor(Math.random() * 20) + 1,
+  content:
+    "Just shared something interesting! This is a sample post that shows how a social feed might look. What do you think about this topic?",
+  likes: 42 + i * 7,
+  comments: 5 + i * 2,
 }));
 
 export function GoodExample() {
@@ -19,10 +20,7 @@ export function GoodExample() {
 
           {/* Feed */}
           {FAKE_POSTS.map((post) => (
-            <article
-              key={post.id}
-              className="rounded-lg border p-4 space-y-3"
-            >
+            <article key={post.id} className="rounded-lg border p-4 space-y-3">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs font-medium">
                   {post.author.charAt(0)}
