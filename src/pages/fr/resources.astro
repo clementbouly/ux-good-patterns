@@ -1,0 +1,55 @@
+---
+import PageLayout from "@/layouts/PageLayout.astro";
+import { ExternalLink } from "lucide-react";
+import { resources } from "@/resources";
+
+const categories = [...new Set(resources.map((r) => r.category))];
+---
+
+<PageLayout title="Resources | The Good, The Bad and The UX" description="Curated collection of UX resources, principles, and case studies">
+  <div class="mx-auto max-w-4xl">
+    <h1 class="text-3xl font-bold mb-2">Resources</h1>
+    <p class="text-muted-foreground mb-8">Curated collection of UX resources to level up your skills</p>
+
+    {categories.map((category) => (
+      <section class="mb-10">
+        <h2 class="text-lg font-semibold text-muted-foreground mb-4">{category}</h2>
+        <div class="grid gap-4">
+          {resources
+            .filter((r) => r.category === category)
+            .map((resource) => (
+              <a
+                href={resource.url}
+                target="_blank"
+                rel="noopener"
+                class="group rounded-lg border bg-card p-5 transition-colors hover:bg-muted/50"
+              >
+                <div class="flex items-start gap-4">
+                  <img
+                    src={`https://www.google.com/s2/favicons?domain=${new URL(resource.url).hostname}&sz=32`}
+                    alt=""
+                    class="h-8 w-8 rounded mt-0.5"
+                    loading="lazy"
+                  />
+                  <div class="flex-1">
+                    <h3 class="text-lg font-semibold group-hover:underline flex items-center gap-2">
+                      {resource.title}
+                      <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                    </h3>
+                    <p class="mt-1 text-muted-foreground text-sm">{resource.description}</p>
+                    <p class="mt-2 text-xs text-muted-foreground/70">{new URL(resource.url).hostname}</p>
+                  </div>
+                </div>
+              </a>
+            ))}
+        </div>
+      </section>
+    ))}
+
+    {resources.length === 0 && (
+      <div class="rounded-lg border border-dashed p-8 text-center text-muted-foreground">
+        No resources yet. Check back soon!
+      </div>
+    )}
+  </div>
+</PageLayout>

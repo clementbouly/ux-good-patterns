@@ -2,10 +2,22 @@
 import ThemeToggle from "@/components/ThemeToggle";
 import CommandMenu from "@/components/CommandMenu";
 import { MobileNav } from "@/components/MobileNav";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { getNavLinks } from "@/utils/navigation";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLangFromLocale, type Lang } from "@/i18n";
+
+// Use Astro's native currentLocale
+const lang = getLangFromLocale(Astro.currentLocale) as Lang;
+const otherLang = lang === "en" ? "fr" : "en";
+
+// Use Astro's native getRelativeLocaleUrl for the language switch
+const currentPathWithoutLocale = Astro.url.pathname.replace(/^\/(fr|en)/, "") || "/";
+const switchLangUrl = getRelativeLocaleUrl(otherLang, currentPathWithoutLocale);
 
 const navLinks = getNavLinks(Astro.url.pathname);
-const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
+const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "" || Astro.url.pathname === "/fr" || Astro.url.pathname === "/fr/";
+const homeHref = getRelativeLocaleUrl(lang, "/");
 ---
 
 <!-- Mobile sticky nav -->
@@ -14,6 +26,7 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
 >
   <MobileNav client:load navLinks={navLinks} />
   <div class="flex items-center gap-2">
+    <LanguageSwitcher client:load currentLang={lang} switchUrl={switchLangUrl} />
     <CommandMenu client:load variant="icon" />
     <ThemeToggle client:load />
   </div>
@@ -30,7 +43,7 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
             The Good, The Bad and The U<a href="/demo-complicity" class="hover:text-white/80">X</a>
           </h1>
         ) : (
-          <a href="/" class="hover:opacity-80">
+          <a href={homeHref} class="hover:opacity-80">
             <p class="text-3xl font-bold md:text-5xl">
               The Good, The Bad and The U<span class="contents"><a href="/demo-complicity" class="hover:text-white/80" onclick="event.stopPropagation()">X</a></span>
             </p>
@@ -60,6 +73,7 @@ const isHome = Astro.url.pathname === "/" || Astro.url.pathname === "";
     </div>
     <!-- Desktop controls -->
     <div class="hidden items-center gap-3 md:flex">
+      <LanguageSwitcher client:load currentLang={lang} switchUrl={switchLangUrl} />
       <a
         href="https://github.com/clementbouly/ux-good-patterns"
         target="_blank"

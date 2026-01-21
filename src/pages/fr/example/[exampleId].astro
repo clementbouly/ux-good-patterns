@@ -1,0 +1,49 @@
+---
+import { marked } from "marked";
+import PageLayout from "@/layouts/PageLayout.astro";
+import { ExamplePageContent } from "@/components/ExamplePageContent";
+import { RelatedExamples } from "@/components/RelatedExamples";
+import { examples } from "@/examples";
+import { formatDate } from "@/lib/dateUtils";
+
+export function getStaticPaths() {
+  return examples.map((example) => ({
+    params: { exampleId: example.meta.id },
+  }));
+}
+
+const { exampleId } = Astro.params;
+const example = examples.find((e) => e.meta.id === exampleId);
+
+if (!example) {
+  return Astro.redirect("/fr/404");
+}
+
+const htmlContent = example.content ? marked.parse(example.content) : null;
+---
+
+<PageLayout
+  title={`${example.meta.title} | The Good, The Bad and The UX`}
+  description={example.meta.description}
+>
+  <ExamplePageContent client:load exampleId={example.meta.id} />
+
+  {
+    htmlContent && (
+      <div class="mt-8 rounded-lg border bg-card p-6">
+        <div
+          class="prose prose-neutral max-w-none dark:prose-invert"
+          set:html={htmlContent}
+        />
+        <p class="mt-6 text-xs text-muted-foreground">Published on {formatDate(example.meta.createdAt)}</p>
+      </div>
+    )
+  }
+
+  <RelatedExamples
+    client:load
+    currentExampleId={example.meta.id}
+    currentCategory={example.meta.category}
+    currentTags={example.meta.tags}
+  />
+</PageLayout>
