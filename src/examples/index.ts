@@ -54,3 +54,29 @@ export type Example = {
   BadExamples: ExampleVariant[];
   content?: string;
 };
+
+// Re-export translation helper
+export { getExampleTranslation } from "@/i18n/examples";
+
+import { getExampleTranslation } from "@/i18n/examples";
+import type { Lang } from "@/i18n/ui";
+
+/**
+ * Get examples with translated metadata for a specific language
+ */
+export function getLocalizedExamples(lang: Lang): Example[] {
+  return examples.map((example) => {
+    const translation = getExampleTranslation(example.meta.id, lang);
+    if (!translation) return example;
+
+    return {
+      ...example,
+      meta: {
+        ...example.meta,
+        title: translation.title,
+        description: translation.description,
+        category: translation.category,
+      },
+    };
+  });
+}

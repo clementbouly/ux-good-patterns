@@ -1,34 +1,49 @@
-import { examples } from "@/examples";
+import { useMemo } from "react";
+import { getLocalizedExamples } from "@/examples";
 import { ExampleCard } from "./ExampleCard";
 import { Button } from "@/components/ui/button";
 import { useSearchParam } from "@/hooks/useSearchParam";
 import { isNew, sortByDate } from "@/lib/dateUtils";
-import { useI18n } from "@/hooks/useI18n";
+import { useTranslations, type Lang } from "@/i18n";
 
-const NEW_CATEGORY = "New";
-const categories = [NEW_CATEGORY, ...new Set(examples.map((e) => e.meta.category))];
+const NEW_CATEGORY_KEY = "New";
 
-// Sort all examples by date (newest first)
-const sortedExamples = sortByDate(examples);
+type ExampleGridProps = {
+  lang: Lang;
+};
 
-// Count examples per category
-const categoryCounts = categories.reduce(
-  (acc, category) => {
-    acc[category] =
-      category === NEW_CATEGORY
-        ? sortedExamples.filter((e) => isNew(e.meta.createdAt)).length
-        : sortedExamples.filter((e) => e.meta.category === category).length;
-    return acc;
-  },
-  {} as Record<string, number>
-);
-
-export function ExampleGrid() {
-  const { t } = useI18n();
+export function ExampleGrid({ lang }: ExampleGridProps) {
+  const t = useTranslations(lang);
   const [selectedCategory, setSelectedCategory] = useSearchParam("category");
 
+  // Get localized examples
+  const localizedExamples = useMemo(() => getLocalizedExamples(lang), [lang]);
+
+  // Sort all examples by date (newest first)
+  const sortedExamples = useMemo(() => sortByDate(localizedExamples), [localizedExamples]);
+
+  // Get unique categories from localized examples
+  const categories = useMemo(() => {
+    const cats = new Set(sortedExamples.map((e) => e.meta.category));
+    return [NEW_CATEGORY_KEY, ...Array.from(cats)];
+  }, [sortedExamples]);
+
+  // Count examples per category
+  const categoryCounts = useMemo(() => {
+    return categories.reduce(
+      (acc, category) => {
+        acc[category] =
+          category === NEW_CATEGORY_KEY
+            ? sortedExamples.filter((e) => isNew(e.meta.createdAt)).length
+            : sortedExamples.filter((e) => e.meta.category === category).length;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+  }, [categories, sortedExamples]);
+
   const filteredExamples =
-    selectedCategory === NEW_CATEGORY
+    selectedCategory === NEW_CATEGORY_KEY
       ? sortedExamples.filter((e) => isNew(e.meta.createdAt))
       : selectedCategory
         ? sortedExamples.filter((e) => e.meta.category === selectedCategory)
@@ -36,7 +51,7 @@ export function ExampleGrid() {
 
   // Translate the "New" category label
   const getCategoryLabel = (category: string) => {
-    if (category === NEW_CATEGORY) return t("common.new");
+    if (category === NEW_CATEGORY_KEY) return t("common.new");
     return category;
   };
 
@@ -63,7 +78,7 @@ export function ExampleGrid() {
               className="gap-1.5"
             >
               {getCategoryLabel(category)}
-              {category === NEW_CATEGORY && categoryCounts[category] > 0 ? (
+              {category === NEW_CATEGORY_KEY && categoryCounts[category] > 0 ? (
                 <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-xs font-semibold text-white">
                   {categoryCounts[category]}
                 </span>
@@ -76,7 +91,7 @@ export function ExampleGrid() {
 
       <div className="grid gap-6">
         {filteredExamples.map((example) => (
-          <ExampleCard key={example.meta.id} example={example} />
+          <ExampleCard key={example.meta.id} example={example} lang={lang} />
         ))}
       </div>
     </>

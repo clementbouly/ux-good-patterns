@@ -3,8 +3,10 @@ import PageLayout from "@/layouts/PageLayout.astro";
 import { ExternalLink } from "lucide-react";
 import { resources } from "@/resources";
 import { useTranslations } from "@/i18n";
+import { getResourceTranslation, getTranslatedCategory } from "@/i18n/resources";
 
-const t = useTranslations("fr");
+const lang = "fr";
+const t = useTranslations(lang);
 const categories = [...new Set(resources.map((r) => r.category))];
 ---
 
@@ -15,35 +17,41 @@ const categories = [...new Set(resources.map((r) => r.category))];
 
     {categories.map((category) => (
       <section class="mb-10">
-        <h2 class="text-lg font-semibold text-muted-foreground mb-4">{category}</h2>
+        <h2 class="text-lg font-semibold text-muted-foreground mb-4">{getTranslatedCategory(category, lang)}</h2>
         <div class="grid gap-4">
           {resources
             .filter((r) => r.category === category)
-            .map((resource) => (
-              <a
-                href={resource.url}
-                target="_blank"
-                rel="noopener"
-                class="group rounded-lg border bg-card p-5 transition-colors hover:bg-muted/50"
-              >
-                <div class="flex items-start gap-4">
-                  <img
-                    src={`https://www.google.com/s2/favicons?domain=${new URL(resource.url).hostname}&sz=32`}
-                    alt=""
-                    class="h-8 w-8 rounded mt-0.5"
-                    loading="lazy"
-                  />
-                  <div class="flex-1">
-                    <h3 class="text-lg font-semibold group-hover:underline flex items-center gap-2">
-                      {resource.title}
-                      <ExternalLink className="h-4 w-4 text-muted-foreground" />
-                    </h3>
-                    <p class="mt-1 text-muted-foreground text-sm">{resource.description}</p>
-                    <p class="mt-2 text-xs text-muted-foreground/70">{new URL(resource.url).hostname}</p>
+            .map((resource) => {
+              const translation = getResourceTranslation(resource.url, lang);
+              const title = translation?.title || resource.title;
+              const description = translation?.description || resource.description;
+              
+              return (
+                <a
+                  href={resource.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="group rounded-lg border bg-card p-5 transition-colors hover:bg-muted/50"
+                >
+                  <div class="flex items-start gap-4">
+                    <img
+                      src={`https://www.google.com/s2/favicons?domain=${new URL(resource.url).hostname}&sz=32`}
+                      alt=""
+                      class="h-8 w-8 rounded mt-0.5"
+                      loading="lazy"
+                    />
+                    <div class="flex-1">
+                      <h3 class="text-lg font-semibold group-hover:underline flex items-center gap-2">
+                        {title}
+                        <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                      </h3>
+                      <p class="mt-1 text-muted-foreground text-sm">{description}</p>
+                      <p class="mt-2 text-xs text-muted-foreground/70">{new URL(resource.url).hostname}</p>
+                    </div>
                   </div>
-                </div>
-              </a>
-            ))}
+                </a>
+              );
+            })}
         </div>
       </section>
     ))}

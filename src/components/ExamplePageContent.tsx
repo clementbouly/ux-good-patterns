@@ -1,5 +1,6 @@
+import { useMemo } from "react";
 import { ArrowLeft } from "lucide-react";
-import { examples } from "@/examples";
+import { getLocalizedExamples } from "@/examples";
 import { ExampleCard } from "@/components/ExampleCard";
 import { Button } from "@/components/ui/button";
 import { useSearchParam } from "@/hooks/useSearchParam";
@@ -11,8 +12,11 @@ type ExamplePageContentProps = {
 
 export function ExamplePageContent({ exampleId }: ExamplePageContentProps) {
   const { t, lang } = useI18n();
-  const example = examples.find((e) => e.meta.id === exampleId);
   const [category] = useSearchParam("category");
+
+  // Get localized examples and find the current one
+  const localizedExamples = useMemo(() => getLocalizedExamples(lang), [lang]);
+  const example = localizedExamples.find((e) => e.meta.id === exampleId);
 
   if (!example) {
     return <div>{t("example.notFound")}</div>;

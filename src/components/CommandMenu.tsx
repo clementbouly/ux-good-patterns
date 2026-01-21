@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { FileText, Search, BookOpen } from "lucide-react";
 import {
   CommandDialog,
@@ -8,7 +8,7 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { examples, type Example } from "@/examples";
+import { getLocalizedExamples, type Example } from "@/examples";
 import { articles, type Article } from "@/articles";
 import { useI18n } from "@/hooks/useI18n";
 
@@ -23,6 +23,9 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
   const listRef = useRef<HTMLDivElement>(null);
 
   const langPrefix = lang === "fr" ? "/fr" : "";
+
+  // Get localized examples
+  const localizedExamples = useMemo(() => getLocalizedExamples(lang), [lang]);
 
   const handleSearchChange = () => {
     listRef.current?.scrollTo(0, 0);
@@ -85,7 +88,7 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
         <CommandList ref={listRef}>
           <CommandEmpty>{t("search.noResults")}</CommandEmpty>
           <CommandGroup heading={t("search.groupExamples")}>
-            {examples.map((example) => (
+            {localizedExamples.map((example) => (
               <CommandItem
                 key={example.meta.id}
                 value={`${example.meta.title} ${example.meta.description} ${example.meta.tags.join(" ")}`}

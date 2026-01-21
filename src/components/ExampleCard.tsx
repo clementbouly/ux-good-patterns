@@ -4,7 +4,7 @@ import { type Example, type ExampleVariant } from "@/examples";
 import { ShareButton } from "./ShareButton";
 import { useSearchParam } from "@/hooks/useSearchParam";
 import { isNew } from "@/lib/dateUtils";
-import { useI18n } from "@/hooks/useI18n";
+import { useTranslations, type Lang, defaultLang } from "@/i18n";
 
 function VariantSelector({
   variants,
@@ -63,10 +63,16 @@ type ExampleCardProps = {
   example: Example;
   titleAs?: "h1" | "h2";
   linkTitle?: boolean;
+  lang?: Lang;
 };
 
-export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: ExampleCardProps) {
-  const { t, lang } = useI18n();
+export function ExampleCard({
+  example,
+  titleAs = "h2",
+  linkTitle = true,
+  lang = defaultLang,
+}: ExampleCardProps) {
+  const t = useTranslations(lang);
   const [badIndex, setBadIndex] = useState(0);
   const [goodIndex, setGoodIndex] = useState(0);
   const [category] = useSearchParam("category");

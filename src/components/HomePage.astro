@@ -1,5 +1,8 @@
 ---
 import { ExampleGrid } from "./ExampleGrid";
+import { getLangFromLocale, type Lang } from "@/i18n";
+
+const lang = getLangFromLocale(Astro.currentLocale) as Lang;
 ---
 
-<ExampleGrid client:load />
+<ExampleGrid client:load lang={lang} />
