@@ -4,17 +4,20 @@ import { type Example, type ExampleVariant } from "@/examples";
 import { ShareButton } from "./ShareButton";
 import { useSearchParam } from "@/hooks/useSearchParam";
 import { isNew } from "@/lib/dateUtils";
+import { useI18n } from "@/hooks/useI18n";
 
 function VariantSelector({
   variants,
   currentIndex,
   onSelect,
   color,
+  multipleGoodLabel,
 }: {
   variants: ExampleVariant[];
   currentIndex: number;
   onSelect: (index: number) => void;
   color: "red" | "green";
+  multipleGoodLabel: string;
 }) {
   if (variants.length <= 1) return null;
 
@@ -34,7 +37,7 @@ function VariantSelector({
           </span>
           <div className="pointer-events-none absolute bottom-full left-1/2 mb-2 -translate-x-1/2 opacity-0 transition-opacity duration-300 group-hover/dot:opacity-100">
             <div className="whitespace-nowrap rounded bg-foreground px-2 py-1 text-xs text-background">
-              Multiple good examples!
+              {multipleGoodLabel}
             </div>
             <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-foreground"></div>
           </div>
@@ -62,11 +65,8 @@ type ExampleCardProps = {
   linkTitle?: boolean;
 };
 
-export function ExampleCard({
-  example,
-  titleAs = "h2",
-  linkTitle = true,
-}: ExampleCardProps) {
+export function ExampleCard({ example, titleAs = "h2", linkTitle = true }: ExampleCardProps) {
+  const { t, lang } = useI18n();
   const [badIndex, setBadIndex] = useState(0);
   const [goodIndex, setGoodIndex] = useState(0);
   const [category] = useSearchParam("category");
@@ -77,7 +77,8 @@ export function ExampleCard({
   const TitleTag = titleAs;
   const titleClassName = titleAs === "h1" ? "text-2xl font-semibold" : "text-xl font-semibold";
 
-  const exampleUrl = `/example/${example.meta.id}${category ? `?category=${category}` : ""}`;
+  const langPrefix = lang === "fr" ? "/fr" : "";
+  const exampleUrl = `${langPrefix}/example/${example.meta.id}${category ? `?category=${category}` : ""}`;
 
   const title = linkTitle ? (
     <a href={exampleUrl} className="block hover:underline">
@@ -90,8 +91,8 @@ export function ExampleCard({
   // Build share URL after hydration to avoid SSR mismatch
   const [shareUrl, setShareUrl] = useState(`/example/${example.meta.id}`);
   useEffect(() => {
-    setShareUrl(`${window.location.origin}/example/${example.meta.id}`);
-  }, [example.meta.id]);
+    setShareUrl(`${window.location.origin}${langPrefix}/example/${example.meta.id}`);
+  }, [example.meta.id, langPrefix]);
 
   return (
     <div className="group relative rounded-lg border bg-card p-6">
@@ -102,7 +103,7 @@ export function ExampleCard({
           <span className="text-xs font-medium text-muted-foreground">{example.meta.category}</span>
           {isNew(example.meta.createdAt) && (
             <span className="inline-flex items-center rounded-full bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
-              New
+              {t("common.new")}
             </span>
           )}
         </div>
@@ -127,13 +128,14 @@ export function ExampleCard({
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-100 dark:bg-red-950">
                 <X className="h-3 w-3 text-red-600 dark:text-red-400" />
               </span>
-              <h3 className="font-medium text-red-600 dark:text-red-400">Bad example</h3>
+              <h3 className="font-medium text-red-600 dark:text-red-400">{t("example.bad")}</h3>
             </div>
             <VariantSelector
               variants={example.BadExamples}
               currentIndex={badIndex}
               onSelect={setBadIndex}
               color="red"
+              multipleGoodLabel={t("example.multipleGood")}
             />
           </div>
           <div className="flex-1 rounded-md border border-red-200 bg-red-50/50 p-4 dark:border-red-900 dark:bg-red-950/50">
@@ -147,13 +149,16 @@ export function ExampleCard({
               <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 dark:bg-green-950">
                 <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
               </span>
-              <h3 className="font-medium text-green-600 dark:text-green-400">Good example</h3>
+              <h3 className="font-medium text-green-600 dark:text-green-400">
+                {t("example.good")}
+              </h3>
             </div>
             <VariantSelector
               variants={example.GoodExamples}
               currentIndex={goodIndex}
               onSelect={setGoodIndex}
               color="green"
+              multipleGoodLabel={t("example.multipleGood")}
             />
           </div>
           <div className="flex-1 rounded-md border border-green-200 bg-green-50/50 p-4 dark:border-green-900 dark:bg-green-950/50">
@@ -168,7 +173,7 @@ export function ExampleCard({
             href={exampleUrl}
             className="inline-flex w-full items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted md:w-auto"
           >
-            Learn more
+            {t("common.learnMore")}
             <ArrowRight className="h-4 w-4" />
           </a>
         </div>

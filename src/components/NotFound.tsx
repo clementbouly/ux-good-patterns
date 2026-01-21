@@ -3,38 +3,37 @@ import { Home, SearchX } from "lucide-react";
 import { useRandomGif } from "@/hooks/useRandomGif";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useI18n } from "@/hooks/useI18n";
 
 type NotFoundProps = {
-  title?: string;
   backTo?: string;
-  backLabel?: string;
 };
 
-const funMessages = [
-  "This cat looked everywhere. The page is gone.",
-  "Even this cat can't find what you're looking for.",
-  "404: This cat is as confused as you are.",
-  "The page ran away. This cat is judging you.",
-  "Lost? This cat knows the feeling.",
-  "This cat pushed your page off the table.",
-];
+export function NotFound({ backTo }: NotFoundProps) {
+  const { t, lang } = useI18n();
+  const [displayMessage, setDisplayMessage] = useState("");
 
-export function NotFound({
-  title = "Page not found",
-  backTo = "/",
-  backLabel = "Back to home",
-}: NotFoundProps) {
-  const [displayMessage, setDisplayMessage] = useState(funMessages[0]);
+  const funMessages = [
+    t("notFound.message1"),
+    t("notFound.message2"),
+    t("notFound.message3"),
+    t("notFound.message4"),
+    t("notFound.message5"),
+    t("notFound.message6"),
+  ];
 
   useEffect(() => {
     setDisplayMessage(funMessages[Math.floor(Math.random() * funMessages.length)]);
   }, []);
+
   const { gif, isLoading } = useRandomGif();
+
+  const homeHref = backTo || (lang === "fr" ? "/fr/" : "/");
 
   return (
     <div className="flex flex-col items-center justify-center py-3 text-center">
       <h1 className="text-4xl font-bold tracking-tight">404</h1>
-      <h2 className="mt-2 text-xl font-semibold">{title}</h2>
+      <h2 className="mt-2 text-xl font-semibold">{t("notFound.title")}</h2>
 
       <div className="my-6 overflow-hidden rounded-lg">
         {isLoading ? (
@@ -51,9 +50,9 @@ export function NotFound({
       <p className="max-w-md text-muted-foreground">{displayMessage}</p>
 
       <Button asChild className="mt-6">
-        <a href={backTo}>
+        <a href={homeHref}>
           <Home className="mr-2 h-4 w-4" />
-          {backLabel}
+          {t("common.backToHome")}
         </a>
       </Button>
     </div>

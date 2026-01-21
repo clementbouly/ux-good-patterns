@@ -47,7 +47,7 @@ export const ui = {
     "example.viewExample": "View example",
 
     // Search / Command Menu
-    "search.placeholder": "Search examples, articles...",
+    "search.placeholder": "Search...",
     "search.ariaLabel": "Search",
     "search.dialogTitle": "Search examples and articles",
     "search.dialogDescription": "Search for UX patterns and examples",
@@ -129,7 +129,7 @@ export const ui = {
     "example.viewExample": "Voir l'exemple",
 
     // Search / Command Menu
-    "search.placeholder": "Rechercher exemples, articles...",
+    "search.placeholder": "Rechercher...",
     "search.ariaLabel": "Rechercher",
     "search.dialogTitle": "Rechercher exemples et articles",
     "search.dialogDescription": "Rechercher des patterns et exemples UX",

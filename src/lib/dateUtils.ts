@@ -35,9 +35,10 @@ export function sortByDate<T extends { meta: { createdAt: string } }>(items: T[]
 /**
  * Format a date string to a readable format (e.g., "Dec 17, 2025")
  */
-export function formatDate(dateString: string): string {
+export function formatDate(dateString: string, locale: string = "en"): string {
   const date = new Date(dateString);
-  return date.toLocaleDateString("en-US", {
+  const localeCode = locale === "fr" ? "fr-FR" : "en-US";
+  return date.toLocaleDateString(localeCode, {
     month: "short",
     day: "numeric",
     year: "numeric",

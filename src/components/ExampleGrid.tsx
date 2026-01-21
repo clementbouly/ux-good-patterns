@@ -3,6 +3,7 @@ import { ExampleCard } from "./ExampleCard";
 import { Button } from "@/components/ui/button";
 import { useSearchParam } from "@/hooks/useSearchParam";
 import { isNew, sortByDate } from "@/lib/dateUtils";
+import { useI18n } from "@/hooks/useI18n";
 
 const NEW_CATEGORY = "New";
 const categories = [NEW_CATEGORY, ...new Set(examples.map((e) => e.meta.category))];
@@ -23,6 +24,7 @@ const categoryCounts = categories.reduce(
 );
 
 export function ExampleGrid() {
+  const { t } = useI18n();
   const [selectedCategory, setSelectedCategory] = useSearchParam("category");
 
   const filteredExamples =
@@ -31,6 +33,12 @@ export function ExampleGrid() {
       : selectedCategory
         ? sortedExamples.filter((e) => e.meta.category === selectedCategory)
         : sortedExamples;
+
+  // Translate the "New" category label
+  const getCategoryLabel = (category: string) => {
+    if (category === NEW_CATEGORY) return t("common.new");
+    return category;
+  };
 
   return (
     <>
@@ -41,10 +49,8 @@ export function ExampleGrid() {
           onClick={() => setSelectedCategory(undefined)}
           className="gap-1.5"
         >
-          All
-          <span className="text-xs text-muted-foreground">
-            {sortedExamples.length}
-          </span>
+          {t("common.all")}
+          <span className="text-xs text-muted-foreground">{sortedExamples.length}</span>
         </Button>
         {categories
           .filter((category) => categoryCounts[category] > 0)
@@ -56,15 +62,13 @@ export function ExampleGrid() {
               onClick={() => setSelectedCategory(category)}
               className="gap-1.5"
             >
-              {category}
+              {getCategoryLabel(category)}
               {category === NEW_CATEGORY && categoryCounts[category] > 0 ? (
                 <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-red-500 px-1.5 text-xs font-semibold text-white">
                   {categoryCounts[category]}
                 </span>
               ) : (
-                <span className="text-xs text-muted-foreground">
-                  {categoryCounts[category]}
-                </span>
+                <span className="text-xs text-muted-foreground">{categoryCounts[category]}</span>
               )}
             </Button>
           ))}

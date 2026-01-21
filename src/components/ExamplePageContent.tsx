@@ -3,21 +3,24 @@ import { examples } from "@/examples";
 import { ExampleCard } from "@/components/ExampleCard";
 import { Button } from "@/components/ui/button";
 import { useSearchParam } from "@/hooks/useSearchParam";
+import { useI18n } from "@/hooks/useI18n";
 
 type ExamplePageContentProps = {
   exampleId: string;
 };
 
 export function ExamplePageContent({ exampleId }: ExamplePageContentProps) {
+  const { t, lang } = useI18n();
   const example = examples.find((e) => e.meta.id === exampleId);
   const [category] = useSearchParam("category");
 
   if (!example) {
-    return <div>Example not found</div>;
+    return <div>{t("example.notFound")}</div>;
   }
 
-  const backUrl = category ? `/?category=${category}` : "/";
-  const backLabel = category ? `Back to ${category}` : "Back to all examples";
+  const langPrefix = lang === "fr" ? "/fr" : "";
+  const backUrl = category ? `${langPrefix}/?category=${category}` : `${langPrefix}/`;
+  const backLabel = category ? t("example.backToCategory", { category }) : t("example.backToAll");
 
   return (
     <>

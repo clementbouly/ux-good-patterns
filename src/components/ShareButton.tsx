@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, Share2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/hooks/useI18n";
 
 type ShareButtonProps = {
   url: string;
@@ -9,6 +10,7 @@ type ShareButtonProps = {
 };
 
 export function ShareButton({ url, className }: ShareButtonProps) {
+  const { t } = useI18n();
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopy = async (e: React.MouseEvent) => {
@@ -49,7 +51,7 @@ export function ShareButton({ url, className }: ShareButtonProps) {
             className="flex items-center gap-1.5"
           >
             <Check className="h-3 w-3" />
-            Url Copied!
+            {t("common.copied")}
           </motion.span>
         ) : (
           <motion.span
@@ -61,7 +63,7 @@ export function ShareButton({ url, className }: ShareButtonProps) {
             className="flex items-center gap-1.5"
           >
             <Share2 className="h-3 w-3" />
-            Share
+            {t("common.share")}
           </motion.span>
         )}
       </AnimatePresence>

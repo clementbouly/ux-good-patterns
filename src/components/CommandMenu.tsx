@@ -10,15 +10,19 @@ import {
 } from "@/components/ui/command";
 import { examples, type Example } from "@/examples";
 import { articles, type Article } from "@/articles";
+import { useI18n } from "@/hooks/useI18n";
 
 type CommandMenuProps = {
   variant?: "full" | "icon";
 };
 
 export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
+  const { t, lang } = useI18n();
   const [open, setOpen] = useState(false);
   const [modifierKey, setModifierKey] = useState("Ctrl");
   const listRef = useRef<HTMLDivElement>(null);
+
+  const langPrefix = lang === "fr" ? "/fr" : "";
 
   const handleSearchChange = () => {
     listRef.current?.scrollTo(0, 0);
@@ -40,12 +44,12 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
 
   const handleSelectExample = (example: Example) => {
     setOpen(false);
-    window.location.href = `/example/${example.meta.id}`;
+    window.location.href = `${langPrefix}/example/${example.meta.id}`;
   };
 
   const handleSelectArticle = (article: Article) => {
     setOpen(false);
-    window.location.href = `/article/${article.slug}`;
+    window.location.href = `${langPrefix}/article/${article.slug}`;
   };
 
   return (
@@ -54,7 +58,7 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
         <button
           onClick={() => setOpen(true)}
           className="inline-flex h-9 w-9 items-center justify-center rounded-md text-white/70 transition-colors hover:bg-white/10 hover:text-white"
-          aria-label="Search"
+          aria-label={t("search.ariaLabel")}
         >
           <Search className="h-5 w-5" />
         </button>
@@ -64,7 +68,7 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
           className="inline-flex w-64 items-center gap-2 rounded-md border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
         >
           <Search className="h-4 w-4" />
-          <span className="flex-1 text-left text-white/50">Search...</span>
+          <span className="flex-1 text-left text-white/50">{t("search.placeholder")}</span>
           <kbd className="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border border-white/20 bg-white/10 px-1.5 font-mono text-[10px] font-medium sm:flex">
             <span className="text-xs">{modifierKey}</span> + K
           </kbd>
@@ -74,13 +78,13 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
       <CommandDialog
         open={open}
         onOpenChange={setOpen}
-        title="Search examples and articles"
-        description="Search for UX patterns and examples"
+        title={t("search.dialogTitle")}
+        description={t("search.dialogDescription")}
       >
-        <CommandInput placeholder="Search examples, articles..." onValueChange={handleSearchChange} />
+        <CommandInput placeholder={t("search.placeholder")} onValueChange={handleSearchChange} />
         <CommandList ref={listRef}>
-          <CommandEmpty>No examples found.</CommandEmpty>
-          <CommandGroup heading="Examples">
+          <CommandEmpty>{t("search.noResults")}</CommandEmpty>
+          <CommandGroup heading={t("search.groupExamples")}>
             {examples.map((example) => (
               <CommandItem
                 key={example.meta.id}
@@ -98,7 +102,7 @@ export default function CommandMenu({ variant = "full" }: CommandMenuProps) {
               </CommandItem>
             ))}
           </CommandGroup>
-          <CommandGroup heading="Articles">
+          <CommandGroup heading={t("search.groupArticles")}>
             {articles.map((article) => (
               <CommandItem
                 key={article.slug}
