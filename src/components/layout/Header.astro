@@ -28,7 +28,7 @@ const homeHref = getRelativeLocaleUrl(lang, "/");
   <MobileNav client:load navLinks={navLinks} />
   <div class="flex items-center gap-2">
     <LanguageSwitcher client:load currentLang={lang} switchUrl={switchLangUrl} />
-    <CommandMenu client:load variant="icon" />
+    <CommandMenu client:load variant="icon" withDialog={false} />
     <ThemeToggle client:load />
   </div>
 </div>
