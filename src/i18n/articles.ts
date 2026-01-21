@@ -35,7 +35,7 @@ const articlesTranslations: Record<Lang, ArticleTranslations> = {
       title: "5 erreurs UX que même LinkedIn commet",
       description:
         "Une analyse des points de friction sur l'une des plus grandes plateformes au monde, et ce qu'ils nous apprennent sur les bonnes pratiques UX",
-      tags: ["Étude de cas", "Retours", "Chargement", "Navigation"],
+      tags: ["Étude de cas", "Feedback", "Chargement", "Navigation"],
     },
     "otp-ux-guide": {
       title: "Le guide complet de l'UX des codes OTP",

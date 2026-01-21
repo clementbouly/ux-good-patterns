@@ -117,7 +117,7 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       title: "État de chargement du bouton",
       description:
         "Afficher un état de chargement sur les boutons de soumission pour éviter les doubles clics",
-      category: "Retours",
+      category: "Feedback",
     },
     "verification-code-input": {
       title: "Champ de code de vérification",
@@ -128,13 +128,13 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       title: "Feedback de copie",
       description:
         "Fournir un retour visuel clair quand du contenu est copié dans le presse-papier",
-      category: "Retours",
+      category: "Feedback",
     },
     "skeleton-loading": {
       title: "Skeleton loading vs Spinner",
       description:
         "Afficher la structure du contenu avec des placeholders animés au lieu d'un spinner générique",
-      category: "Retours",
+      category: "Feedback",
     },
     "auto-submit-code": {
       title: "Soumission auto du code",
@@ -146,7 +146,7 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       title: "Messages de chargement progressifs",
       description:
         "Afficher des messages de progression contextuels pendant les longues opérations",
-      category: "Retours",
+      category: "Feedback",
     },
     "form-validation-feedback": {
       title: "Feedback de validation de formulaire",
@@ -184,13 +184,13 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       title: "Options d'affichage",
       description:
         "Utiliser des toggles visuels clairs pour les options d'affichage au lieu de checkboxes",
-      category: "Saisie",
+      category: "Input",
     },
     "toast-vs-inline-feedback": {
       title: "Toast vs Feedback inline",
       description:
         "Utiliser un feedback inline pour les actions contextuelles plutôt que des toasts déconnectés",
-      category: "Retours",
+      category: "Feedback",
     },
   },
 };
