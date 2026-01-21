@@ -1,8 +1,9 @@
 import { GoodExample } from "./GoodExample";
 import { BadExample } from "./BadExample";
 import content from "./README.md?raw";
+import contentFr from "./README.fr.md?raw";
 
-export { content };
+export { content, contentFr };
 
 export const meta = {
   id: "progressive-loading-messages",

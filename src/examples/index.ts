@@ -53,6 +53,7 @@ export type Example = {
   GoodExamples: ExampleVariant[];
   BadExamples: ExampleVariant[];
   content?: string;
+  contentFr?: string;
 };
 
 // Re-export translation helper
@@ -77,6 +78,8 @@ export function getLocalizedExamples(lang: Lang): Example[] {
         description: translation.description,
         category: translation.category,
       },
+      // Use French content if available and language is French
+      content: lang === "fr" && example.contentFr ? example.contentFr : example.content,
     };
   });
 }

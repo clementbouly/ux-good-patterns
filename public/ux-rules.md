@@ -89,6 +89,14 @@ When a modal opens with a single input (or a primary field), it should be automa
 - Confirmation modals (focus should be on the confirmation button)
 - Modals with content to read before interaction
 
+## Real-world example
+
+Here's SNCF's search modal — when opened, the input is not focused, requiring an extra click before typing:
+
+<video src="/videos/BadExampleAutoFocusModal.mp4" controls width="100%"></video>
+
+A small detail that adds friction to every search interaction.
+
 
 ---
 
@@ -190,6 +198,14 @@ Use a **searchable combobox** when:
 - Options have similar prefixes (states, cities)
 - Data-driven or growing lists
 
+## Real-world example
+
+Here's LinkedIn's language selector with approximately 45 options — to find your language, you must scroll through the entire alphabetically-sorted list:
+
+<video src="/videos/language-selector.mp4" controls width="100%"></video>
+
+A searchable dropdown would transform a 15-second task into a 2-second one.
+
 ## Implementation tips
 
 1. **Preserve the selected value display**: Show the full selected value, not just what the user typed
@@ -200,11 +216,78 @@ Use a **searchable combobox** when:
 
 ---
 
-# Form Validation with Error Feedback
+# Floating Action Button (FAB)
+
+## Real-world example: LinkedIn
+
+LinkedIn's desktop interface places the "Create a post" input at the top of the feed. When users scroll down to read content, this primary action disappears completely. To create a post, users must scroll all the way back to the top.
+
+<video src="/videos/scroll-to-top.mp4" autoplay loop muted playsinline style="width: 100%; border-radius: 8px; margin: 1rem 0;"></video>
+
+Compare this to X (Twitter), which keeps the compose button permanently visible in the left sidebar—a much better implementation of persistent primary actions.
 
 ## Description
 
-Keep submit buttons enabled and display clear, inline error messages when the user attempts to submit an incomplete or invalid form. Avoid disabling buttons based on form validity.
+A floating action button is a persistent, circular button that hovers above the UI, typically in the bottom-right corner. It provides instant access to the primary action of a screen, regardless of scroll position.
+
+## Why it matters
+
+- **Always accessible**: The primary action is never hidden, no matter how far users scroll
+- **Reduced cognitive load**: Users don't need to remember where the action is or scroll back to find it
+- **Faster task completion**: One tap away from the most important action at any time
+- **Mobile-first**: Perfectly positioned for thumb reach on mobile devices
+- **Visual hierarchy**: Clearly signals the most important action on the screen
+
+## The psychology behind it
+
+When a primary action disappears during scrolling, users experience a broken flow between intention and action. The moment inspiration strikes ("I want to post something!"), any friction—even scrolling back up—can cause that impulse to fade.
+
+A FAB follows Fitts's Law: the time to reach a target is a function of distance and size. By keeping the button close and visible, you minimize the effort required to act on user intent.
+
+## When to apply
+
+- Social media feeds (create post, compose tweet)
+- Email clients (compose new message)
+- Note-taking apps (create new note)
+- Task managers (add new task)
+- Any screen with a single, dominant action that should always be accessible
+- Content-heavy pages where the primary action would otherwise scroll out of view
+
+## When not to apply
+
+- Pages with multiple equally-important actions (FAB should represent ONE primary action)
+- Desktop interfaces with persistent sidebars (sidebar placement may be better)
+- Screens where the primary action requires context from the top of the page
+- Forms or wizards where linear flow is important
+- Pages with minimal scrolling where the action naturally stays visible
+
+## Implementation tips
+
+1. **One FAB per screen**: Multiple FABs dilute their importance and confuse users
+2. **Bottom-right placement**: Convention for right-handed users; consider bottom-left for RTL languages
+3. **Consistent positioning**: Keep the FAB in the same spot across your app
+4. **Clear iconography**: Use universally understood icons (+ for create, pencil for compose)
+5. **Appropriate elevation**: Use shadow to make it "float" above content
+6. **Don't obstruct content**: Ensure it doesn't cover critical information or other interactive elements
+7. **Consider extended FAB**: For complex actions, an extended FAB with text can improve clarity
+8. **Responsive behavior**: On larger screens, consider transitioning to a sidebar or header placement
+9. **Animation on scroll**: Optional subtle animation (hide on scroll down, show on scroll up) can reduce visual noise
+
+## Accessibility considerations
+
+- Ensure sufficient color contrast (WCAG AA minimum)
+- Provide an accessible label (`aria-label`) describing the action
+- Make sure it's keyboard focusable and activatable
+- Consider users who may find floating elements distracting
+
+
+---
+
+# Avoid Disabled Submit Buttons
+
+## Description
+
+Keep submit buttons enabled and display clear error messages when the user attempts to submit an incomplete or invalid form.
 
 ## Why it matters
 
@@ -218,24 +301,17 @@ Keep submit buttons enabled and display clear, inline error messages when the us
 When you disable a submit button until a form is valid:
 
 - Users don't know **why** the button is disabled
-- They may not realize which field is incomplete
+- They may not realize which field is incomplete or invalid
 - It can feel like the interface is broken
 - There's no opportunity to provide helpful guidance
 
 ## Better approach
 
 1. Keep the submit button always enabled
-2. Validate on submit (and optionally on change after first submission)
+2. Validate on submit
 3. Display clear, inline error messages next to invalid fields
 4. Use visual cues (red borders, icons) to draw attention
 5. Include ARIA attributes for accessibility (`aria-invalid`, `aria-describedby`)
-
-## When to apply
-
-- Contact forms
-- Login/signup forms
-- Any form where users need guidance on validation rules
-- Forms with multiple required fields
 
 ## When disabled buttons are acceptable
 
@@ -508,6 +584,14 @@ This follows the principle of providing shortcuts for experienced users while no
 - Wizard/stepper flows where linear progression is intentional
 - Modal dialogs or small scrollable containers (debatable - depends on content length)
 
+## Real-world example
+
+Here's LinkedIn's desktop feed — the "Create a post" input disappears as soon as you scroll down, forcing users to manually scroll back up to post:
+
+<video src="/videos/scroll-to-top.mp4" controls width="100%"></video>
+
+A scroll-to-top button would provide a quick way back to the primary action.
+
 ## Implementation tips
 
 1. **Appear after threshold**: Show the button only after scrolling 300-500px down
@@ -554,6 +638,14 @@ Studies show that skeleton screens can reduce perceived wait time by up to 10-20
 - Unpredictable content structure
 - Full-page initial loads (prefer a branded splash screen)
 - Background data refreshes where content is already visible
+
+## Real-world example
+
+Here's LinkedIn loading content with a simple spinner — you see nothing except a rotating circle until content appears:
+
+<video src="/videos/spinner-loading.mp4" controls width="100%"></video>
+
+A skeleton screen would show the structure of upcoming content, reducing perceived wait time.
 
 ## Implementation tips
 
@@ -626,6 +718,14 @@ Toast notifications force users to shift their attention away from their current
 - Background processes completing (file upload finished)
 - System notifications unrelated to current task
 - Information users won't mind missing
+
+## Real-world example
+
+Here's how LinkedIn handles the "Copy to clipboard" action — the toast appears in the bottom-left corner, far from where the user clicked:
+
+<video src="/videos/toast-feedback.mp4" controls width="100%"></video>
+
+This pattern is common in many applications, which is why it's valuable to question established conventions.
 
 ## References
 

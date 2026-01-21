@@ -1,8 +1,9 @@
 import { GoodExample } from "./GoodExample";
 import { BadExample } from "./BadExample";
 import content from "./README.md?raw";
+import contentFr from "./README.fr.md?raw";
 
-export { content };
+export { content, contentFr };
 
 export const meta = {
   id: "modal-closing",
@@ -14,10 +15,6 @@ export const meta = {
   createdAt: "2025-12-16",
 };
 
-export const BadExamples = [
-  { component: BadExample, label: "Only X button works" },
-];
+export const BadExamples = [{ component: BadExample, label: "Only X button works" }];
 
-export const GoodExamples = [
-  { component: GoodExample, label: "X + click outside + Escape" },
-];
+export const GoodExamples = [{ component: GoodExample, label: "X + click outside + Escape" }];

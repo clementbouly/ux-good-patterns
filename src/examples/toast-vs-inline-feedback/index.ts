@@ -1,14 +1,14 @@
 import { GoodExample } from "./GoodExample";
 import { BadExample } from "./BadExample";
 import content from "./README.md?raw";
+import contentFr from "./README.fr.md?raw";
 
-export { content };
+export { content, contentFr };
 
 export const meta = {
   id: "toast-vs-inline-feedback",
   title: "Toast vs Inline feedback",
-  description:
-    "Show feedback where the user is looking, not in a distant corner",
+  description: "Show feedback where the user is looking, not in a distant corner",
   category: "Feedback",
   tags: ["toast", "feedback", "copy", "clipboard", "accessibility"],
   createdAt: "2025-12-26",

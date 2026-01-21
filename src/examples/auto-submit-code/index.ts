@@ -1,8 +1,9 @@
 import { GoodExample } from "./GoodExample";
 import { BadExample } from "./BadExample";
 import content from "./README.md?raw";
+import contentFr from "./README.fr.md?raw";
 
-export { content };
+export { content, contentFr };
 
 export const meta = {
   id: "auto-submit-code",
@@ -14,10 +15,6 @@ export const meta = {
   createdAt: "2025-12-07",
 };
 
-export const BadExamples = [
-  { component: BadExample, label: "Manual submit" },
-];
+export const BadExamples = [{ component: BadExample, label: "Manual submit" }];
 
-export const GoodExamples = [
-  { component: GoodExample, label: "Auto-submit" },
-];
+export const GoodExamples = [{ component: GoodExample, label: "Auto-submit" }];

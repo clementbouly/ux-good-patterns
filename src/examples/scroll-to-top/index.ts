@@ -1,23 +1,19 @@
 import { GoodExample } from "./GoodExample";
 import { BadExample } from "./BadExample";
 import content from "./README.md?raw";
+import contentFr from "./README.fr.md?raw";
 
-export { content };
+export { content, contentFr };
 
 export const meta = {
   id: "scroll-to-top",
   title: "Scroll to Top Button",
-  description:
-    "Provide a quick way to return to the top on long scrollable content",
+  description: "Provide a quick way to return to the top on long scrollable content",
   category: "Navigation",
   tags: ["scroll", "navigation", "button", "accessibility", "ux"],
   createdAt: "2025-12-13",
 };
 
-export const BadExamples = [
-  { component: BadExample, label: "No button" },
-];
+export const BadExamples = [{ component: BadExample, label: "No button" }];
 
-export const GoodExamples = [
-  { component: GoodExample, label: "With scroll button" },
-];
+export const GoodExamples = [{ component: GoodExample, label: "With scroll button" }];

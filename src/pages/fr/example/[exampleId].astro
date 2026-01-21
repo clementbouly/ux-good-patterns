@@ -3,7 +3,7 @@ import { marked } from "marked";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { ExamplePageContent } from "@/components/ExamplePageContent";
 import { RelatedExamples } from "@/components/RelatedExamples";
-import { examples } from "@/examples";
+import { examples, getLocalizedExamples } from "@/examples";
 import { formatDate } from "@/lib/dateUtils";
 
 export function getStaticPaths() {
@@ -13,7 +13,8 @@ export function getStaticPaths() {
 }
 
 const { exampleId } = Astro.params;
-const example = examples.find((e) => e.meta.id === exampleId);
+const localizedExamples = getLocalizedExamples("fr");
+const example = localizedExamples.find((e) => e.meta.id === exampleId);
 
 if (!example) {
   return Astro.redirect("/fr/404");

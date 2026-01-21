@@ -1,8 +1,9 @@
 import { GoodExample } from "./GoodExample";
 import { BadExample } from "./BadExample";
 import content from "./README.md?raw";
+import contentFr from "./README.fr.md?raw";
 
-export { content };
+export { content, contentFr };
 
 export const meta = {
   id: "form-validation-feedback",
@@ -16,6 +17,4 @@ export const meta = {
 
 export const BadExamples = [{ component: BadExample, label: "Disabled button" }];
 
-export const GoodExamples = [
-  { component: GoodExample, label: "Enabled button with feedback" },
-];
+export const GoodExamples = [{ component: GoodExample, label: "Enabled button with feedback" }];
