@@ -4,6 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import { ShareButton } from "@/components/ShareButton";
 import { articles } from "@/articles";
 import { formatDate } from "@/lib/dateUtils";
+import { getLangFromLocale, useTranslations, type Lang } from "@/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props {
   frontmatter: {
@@ -15,20 +17,27 @@ interface Props {
 const { frontmatter } = Astro.props;
 const currentUrl = new URL(Astro.url.pathname, Astro.site).toString();
 
-// Get article slug from URL path
-const slug = Astro.url.pathname.replace(/^\/article\//, "").replace(/\/$/, "");
+// Get language
+const lang = getLangFromLocale(Astro.currentLocale) as Lang;
+const t = useTranslations(lang);
+
+// Get article slug from URL path (handle both /article/ and /fr/article/)
+const slug = Astro.url.pathname.replace(/^\/(fr\/)?article\//, "").replace(/\/$/, "");
 const article = articles.find((a) => a.slug === slug);
+
+// Get localized articles URL
+const articlesUrl = getRelativeLocaleUrl(lang, "/articles");
 ---
 
 <PageLayout title={`${frontmatter.title} | The Good, The Bad and The UX`} description={frontmatter.description}>
   <div class="mx-auto max-w-5xl">
     <div class="mb-6 flex items-center justify-between">
       <a
-        href="/articles"
+        href={articlesUrl}
         class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
-        Back to articles
+        {t("articles.backToArticles")}
       </a>
       <ShareButton client:load url={currentUrl} />
     </div>

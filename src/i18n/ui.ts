@@ -73,6 +73,7 @@ export const ui = {
     "articles.description": "In-depth guides combining multiple UX patterns",
     "articles.readArticle": "Read article",
     "articles.empty": "No articles yet. Check back soon!",
+    "articles.backToArticles": "Back to articles",
 
     // Resources page
     "resources.title": "Resources",
@@ -155,6 +156,7 @@ export const ui = {
     "articles.description": "Guides approfondis combinant plusieurs patterns UX",
     "articles.readArticle": "Lire l'article",
     "articles.empty": "Pas encore d'articles. Revenez bientôt !",
+    "articles.backToArticles": "Retour aux articles",
 
     // Resources page
     "resources.title": "Ressources",
