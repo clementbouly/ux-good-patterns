@@ -2,14 +2,17 @@
 import PageLayout from "@/layouts/PageLayout.astro";
 import { ExternalLink } from "lucide-react";
 import { resources } from "@/resources";
+import { getLangFromLocale, useTranslations, type Lang } from "@/i18n";
 
+const lang = getLangFromLocale(Astro.currentLocale) as Lang;
+const t = useTranslations(lang);
 const categories = [...new Set(resources.map((r) => r.category))];
 ---
 
-<PageLayout title="Resources | The Good, The Bad and The UX" description="Curated collection of UX resources, principles, and case studies">
+<PageLayout title={`${t("resources.title")} | The Good, The Bad and The UX`} description={t("resources.description")}>
   <div class="mx-auto max-w-4xl">
-    <h1 class="text-3xl font-bold mb-2">Resources</h1>
-    <p class="text-muted-foreground mb-8">Curated collection of UX resources to level up your skills</p>
+    <h1 class="text-3xl font-bold mb-2">{t("resources.title")}</h1>
+    <p class="text-muted-foreground mb-8">{t("resources.description")}</p>
 
     {categories.map((category) => (
       <section class="mb-10">
@@ -48,7 +51,7 @@ const categories = [...new Set(resources.map((r) => r.category))];
 
     {resources.length === 0 && (
       <div class="rounded-lg border border-dashed p-8 text-center text-muted-foreground">
-        No resources yet. Check back soon!
+        {t("resources.empty")}
       </div>
     )}
   </div>

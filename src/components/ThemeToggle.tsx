@@ -1,19 +1,19 @@
 import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useI18n } from "@/hooks/useI18n";
 
 type Theme = "light" | "dark";
 
 export default function ThemeToggle() {
+  const { t } = useI18n();
   // Start with "light" for SSR, then sync with DOM
   const [theme, setTheme] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     // Read theme from DOM after mount
-    const currentTheme = document.documentElement.classList.contains("dark")
-      ? "dark"
-      : "light";
+    const currentTheme = document.documentElement.classList.contains("dark") ? "dark" : "light";
     setTheme(currentTheme);
     setMounted(true);
   }, []);
@@ -35,7 +35,7 @@ export default function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={toggleTheme}
-      aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+      aria-label={theme === "light" ? t("theme.switchToDark") : t("theme.switchToLight")}
       className="text-white hover:bg-white/10 hover:text-white"
     >
       <Icon className="h-5 w-5" />

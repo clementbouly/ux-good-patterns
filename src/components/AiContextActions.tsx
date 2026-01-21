@@ -1,11 +1,13 @@
 import { Check, Copy, Download, Link } from "lucide-react";
 import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
+import { useI18n } from "@/hooks/useI18n";
 
 const FILE_URL = "https://uxgoodpatterns.com/ux-rules.md";
 
 export function AiContextActions() {
   const { copied: copiedLink, copy: copyLink } = useCopyToClipboard();
   const { copied: copiedContent, copy: copyToClipboard } = useCopyToClipboard();
+  const { t } = useI18n();
 
   const handleCopyLink = () => copyLink(FILE_URL);
 
@@ -35,12 +37,12 @@ export function AiContextActions() {
         {copiedLink ? (
           <>
             <Check className="h-4 w-4 text-green-500" />
-            <span>Copied!</span>
+            <span>{t("common.copied")}</span>
           </>
         ) : (
           <>
             <Link className="h-4 w-4" />
-            <span>Copy Link</span>
+            <span>{t("ai.copyLink")}</span>
           </>
         )}
       </button>
@@ -52,12 +54,12 @@ export function AiContextActions() {
         {copiedContent ? (
           <>
             <Check className="h-4 w-4 text-green-500" />
-            <span>Copied!</span>
+            <span>{t("common.copied")}</span>
           </>
         ) : (
           <>
             <Copy className="h-4 w-4" />
-            <span>Copy Content</span>
+            <span>{t("ai.copyContent")}</span>
           </>
         )}
       </button>
@@ -67,7 +69,7 @@ export function AiContextActions() {
         className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border bg-card px-4 py-3 font-medium transition-colors hover:bg-muted/50"
       >
         <Download className="h-4 w-4" />
-        <span>Download</span>
+        <span>{t("ai.download")}</span>
       </button>
     </div>
   );

@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
-import { examples, type Example } from "@/examples";
+import { examples, getLocalizedExamples, type Example } from "@/examples";
 import { useSearchParam } from "@/hooks/useSearchParam";
+import { useI18n } from "@/hooks/useI18n";
 
 type RelatedExamplesProps = {
   currentExampleId: string;
@@ -8,8 +9,14 @@ type RelatedExamplesProps = {
   currentTags: string[];
 };
 
-function getRelatedExamples(currentId: string, currentCategory: string, currentTags: string[], count = 3): Example[] {
-  const otherExamples = examples.filter((e) => e.meta.id !== currentId);
+function getRelatedExamplesFiltered(
+  currentId: string,
+  currentCategory: string,
+  currentTags: string[],
+  localizedExamples: Example[],
+  count = 3
+): Example[] {
+  const otherExamples = localizedExamples.filter((e) => e.meta.id !== currentId);
 
   // Score examples by relevance: shared tags + same category bonus
   const scored = otherExamples.map((example) => {
@@ -32,17 +39,25 @@ export function RelatedExamples({
   currentCategory,
   currentTags,
 }: RelatedExamplesProps) {
-  const related = getRelatedExamples(currentExampleId, currentCategory, currentTags);
+  const { t, lang } = useI18n();
+  const localizedExamples = getLocalizedExamples(lang);
+  const related = getRelatedExamplesFiltered(
+    currentExampleId,
+    currentCategory,
+    currentTags,
+    localizedExamples
+  );
   const [searchCategory] = useSearchParam("category");
 
   if (related.length === 0) return null;
 
+  const langPrefix = lang === "fr" ? "/fr" : "";
   const buildUrl = (exampleId: string) =>
-    `/example/${exampleId}${searchCategory ? `?category=${searchCategory}` : ""}`;
+    `${langPrefix}/example/${exampleId}${searchCategory ? `?category=${searchCategory}` : ""}`;
 
   return (
     <section className="mt-12">
-      <h2 className="mb-4 text-lg font-semibold">Explore more examples</h2>
+      <h2 className="mb-4 text-lg font-semibold">{t("example.exploreMore")}</h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {related.map((example) => (
           <a
@@ -68,7 +83,7 @@ export function RelatedExamples({
               ))}
             </div>
             <div className="mt-3 flex items-center gap-1 text-sm font-medium text-muted-foreground group-hover:text-foreground">
-              View example
+              {t("example.viewExample")}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </div>
           </a>

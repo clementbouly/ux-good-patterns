@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { languages, type Lang } from "@/i18n";
+import { useI18n } from "@/hooks/useI18n";
 
 interface LanguageSwitcherProps {
   currentLang: Lang;
@@ -16,6 +17,7 @@ export function LanguageSwitcher({ currentLang, switchUrl }: LanguageSwitcherPro
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const otherLang = currentLang === "en" ? "fr" : "en";
+  const { t } = useI18n();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -33,7 +35,7 @@ export function LanguageSwitcher({ currentLang, switchUrl }: LanguageSwitcherPro
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-1 rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-        aria-label={`Current language: ${languages[currentLang]}. Click to change.`}
+        aria-label={t("lang.currentLanguage").replace("{lang}", languages[currentLang])}
         aria-expanded={isOpen}
       >
         <span className="text-base">{langFlags[currentLang]}</span>
