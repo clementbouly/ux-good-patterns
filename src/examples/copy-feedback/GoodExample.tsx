@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 const PROMO_CODE = "SAVE20OFF";
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -16,7 +18,7 @@ export function GoodExample() {
   return (
     <div className="space-y-4">
       <div className="rounded-md border p-4 text-center">
-        <p className="text-xs text-muted-foreground mb-2">Your promo code:</p>
+        <p className="text-xs text-muted-foreground mb-2">{td("copy.promoCode")}</p>
         <p className="font-mono text-xl font-bold tracking-wider">{PROMO_CODE}</p>
       </div>
 
@@ -28,12 +30,12 @@ export function GoodExample() {
         {copied ? (
           <>
             <Check className="mr-2 h-4 w-4" />
-            Copied!
+            {td("common.copied")}
           </>
         ) : (
           <>
             <Copy className="mr-2 h-4 w-4" />
-            Copy code
+            {td("copy.copyCode")}
           </>
         )}
       </Button>

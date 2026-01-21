@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { CopyButton } from "@/components/ui/shadcn-io/copy-button";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 const CARD_MAX_DIGITS = 16;
 const IBAN_MAX_CHARS = 34;
@@ -60,6 +61,7 @@ function isValidPhone(value: string): boolean {
 }
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
   const [cardNumber, setCardNumber] = useState("");
   const [iban, setIban] = useState("");
   const [phone, setPhone] = useState("");
@@ -87,58 +89,58 @@ export function GoodExample() {
     <div className="space-y-4">
       <div className="grid gap-2">
         <div className="flex items-center gap-2">
-          <Label htmlFor="card-good">Credit Card Number</Label>
+          <Label htmlFor="card-good">{td("input.creditCard")}</Label>
           <CopyButton content={TEST_CARD} variant="ghost" size="sm" />
         </div>
         <Input
           id="card-good"
           type="text"
           inputMode="numeric"
-          placeholder="4242 4242 4242 4242"
+          placeholder={td("input.creditCardPlaceholder")}
           value={cardNumber}
           onChange={handleCardChange}
           autoComplete="cc-number"
         />
         {cardRaw.length === CARD_MAX_DIGITS && !isValidCard(cardNumber) && (
-          <p className="text-xs text-destructive">Invalid card number format</p>
+          <p className="text-xs text-destructive">{td("input.creditCardInvalid")}</p>
         )}
       </div>
 
       <div className="grid gap-2">
         <div className="flex items-center gap-2">
-          <Label htmlFor="iban-good">IBAN</Label>
+          <Label htmlFor="iban-good">{td("input.iban")}</Label>
           <CopyButton content={TEST_IBAN} variant="ghost" size="sm" />
         </div>
         <Input
           id="iban-good"
           type="text"
           inputMode="text"
-          placeholder="FR76 3000 6000 0112 3456 7890 189"
+          placeholder={td("input.ibanPlaceholder")}
           value={iban}
           onChange={handleIbanChange}
           autoComplete="off"
         />
         {ibanRaw.length >= 15 && !isValidIban(iban) && (
-          <p className="text-xs text-destructive">Invalid IBAN format</p>
+          <p className="text-xs text-destructive">{td("input.ibanInvalid")}</p>
         )}
       </div>
 
       <div className="grid gap-2">
         <div className="flex items-center gap-2">
-          <Label htmlFor="phone-good">Phone Number</Label>
+          <Label htmlFor="phone-good">{td("input.phone")}</Label>
           <CopyButton content={TEST_PHONE} variant="ghost" size="sm" />
         </div>
         <Input
           id="phone-good"
           type="tel"
           inputMode="tel"
-          placeholder="(202) 555-1234"
+          placeholder={td("input.phonePlaceholder")}
           value={phone}
           onChange={handlePhoneChange}
           autoComplete="tel"
         />
         {phoneRaw.length === PHONE_MAX_DIGITS && !isValidPhone(phone) && (
-          <p className="text-xs text-destructive">Invalid phone number format</p>
+          <p className="text-xs text-destructive">{td("input.phoneInvalid")}</p>
         )}
       </div>
     </div>

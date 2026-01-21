@@ -2,20 +2,22 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { motion, AnimatePresence } from "motion/react";
-
-const LOADING_MESSAGES = [
-  "Collecting your data...",
-  "Analyzing metrics...",
-  "Crunching numbers...",
-  "Generating insights...",
-  "Formatting report...",
-  "Almost there...",
-];
+import { useDemoI18n } from "@/hooks/useI18n";
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [messageIndex, setMessageIndex] = useState(0);
+
+  const LOADING_MESSAGES = [
+    td("progress.collecting"),
+    td("progress.analyzing"),
+    td("progress.crunching"),
+    td("progress.generating"),
+    td("progress.formatting"),
+    td("progress.almostThere"),
+  ];
 
   useEffect(() => {
     if (!isLoading) {
@@ -28,7 +30,7 @@ export function GoodExample() {
     }, 1500);
 
     return () => clearInterval(interval);
-  }, [isLoading]);
+  }, [isLoading, LOADING_MESSAGES.length]);
 
   const handleGenerate = () => {
     setIsLoading(true);
@@ -37,7 +39,7 @@ export function GoodExample() {
 
     // Simulate long API call (AI generation, report, etc.)
     setTimeout(() => {
-      setResult("Your report has been generated successfully!");
+      setResult(td("progress.reportGenerated"));
       setIsLoading(false);
     }, 6000);
   };
@@ -45,13 +47,13 @@ export function GoodExample() {
   return (
     <div className="space-y-4">
       <div className="text-center space-y-2">
-        <h3 className="text-sm font-medium">Generate Monthly Report</h3>
-        <p className="text-xs text-muted-foreground">This may take a few seconds</p>
+        <h3 className="text-sm font-medium">{td("progress.generateMonthly")}</h3>
+        <p className="text-xs text-muted-foreground">{td("progress.mayTakeFewSeconds")}</p>
       </div>
 
       <div className="flex flex-col items-center gap-4">
         <Button onClick={handleGenerate} disabled={isLoading}>
-          Generate Report
+          {td("progress.generateReport")}
         </Button>
 
         {isLoading && (

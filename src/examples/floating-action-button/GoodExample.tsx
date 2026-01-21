@@ -1,21 +1,23 @@
 import { PenSquare, Heart, MessageCircle, Share2 } from "lucide-react";
-
-const FAKE_POSTS = Array.from({ length: 8 }, (_, i) => ({
-  id: i + 1,
-  author: `User ${i + 1}`,
-  content:
-    "Just shared something interesting! This is a sample post that shows how a social feed might look. What do you think about this topic?",
-  likes: 42 + i * 7,
-  comments: 5 + i * 2,
-}));
+import { useDemoI18n } from "@/hooks/useI18n";
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
+
+  const FAKE_POSTS = Array.from({ length: 8 }, (_, i) => ({
+    id: i + 1,
+    author: `${td("fab.user")} ${i + 1}`,
+    content: td("fab.samplePost"),
+    likes: 42 + i * 7,
+    comments: 5 + i * 2,
+  }));
+
   return (
     <div className="relative">
       <div className="h-[400px] overflow-y-auto rounded-lg border bg-background">
         <div className="p-4 space-y-4">
           <p className="text-xs text-muted-foreground text-center">
-            Scroll down — the create button stays accessible
+            {td("fab.scrollDownAccessible")}
           </p>
 
           {/* Feed */}
@@ -48,14 +50,12 @@ export function GoodExample() {
         {/* Floating Action Button - always visible */}
         <button
           className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105 flex items-center justify-center"
-          aria-label="Create post"
+          aria-label={td("fab.createPost")}
         >
           <PenSquare className="w-5 h-5" />
         </button>
       </div>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
-        FAB stays visible regardless of scroll position
-      </p>
+      <p className="mt-3 text-center text-xs text-muted-foreground">{td("fab.fabVisible")}</p>
     </div>
   );
 }

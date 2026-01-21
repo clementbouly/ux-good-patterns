@@ -1,24 +1,7 @@
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-
-const PLANS = [
-  {
-    id: "basic",
-    name: "Basic",
-    description: "1000 emails",
-  },
-  {
-    id: "standard",
-    name: "Standard",
-    description: "5000 emails",
-  },
-  {
-    id: "professional",
-    name: "Professional",
-    description: "10 000 emails",
-  },
-];
+import { useDemoI18n } from "@/hooks/useI18n";
 
 function RadioCircle({ checked }: { checked: boolean }) {
   return (
@@ -34,11 +17,30 @@ function RadioCircle({ checked }: { checked: boolean }) {
 }
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
   const [selected, setSelected] = useState("basic");
+
+  const PLANS = [
+    {
+      id: "basic",
+      name: td("display.basic"),
+      description: td("display.emails1000"),
+    },
+    {
+      id: "standard",
+      name: td("display.standard"),
+      description: td("display.emails5000"),
+    },
+    {
+      id: "professional",
+      name: td("display.professional"),
+      description: td("display.emails10000"),
+    },
+  ];
 
   return (
     <div className="grid gap-3">
-      <Label>Subscription plan</Label>
+      <Label>{td("display.subscriptionPlan")}</Label>
 
       <div className="grid gap-1">
         {PLANS.map((plan) => (
@@ -67,14 +69,33 @@ export function GoodExample() {
 }
 
 export function GoodExampleCards() {
+  const { td } = useDemoI18n();
   const [selected, setSelected] = useState("basic");
   const [selectedInline, setSelectedInline] = useState("basic");
+
+  const PLANS = [
+    {
+      id: "basic",
+      name: td("display.basic"),
+      description: td("display.emails1000"),
+    },
+    {
+      id: "standard",
+      name: td("display.standard"),
+      description: td("display.emails5000"),
+    },
+    {
+      id: "professional",
+      name: td("display.professional"),
+      description: td("display.emails10000"),
+    },
+  ];
 
   return (
     <div className="grid gap-6">
       {/* Version en ligne compacte */}
       <div className="grid gap-3">
-        <Label>Subscription plan</Label>
+        <Label>{td("display.subscriptionPlan")}</Label>
 
         <div className="flex flex-wrap gap-2">
           {PLANS.map((plan) => (
@@ -99,7 +120,7 @@ export function GoodExampleCards() {
 
       {/* Version en colonnes avec description */}
       <div className="grid gap-3">
-        <Label>Subscription plan</Label>
+        <Label>{td("display.subscriptionPlan")}</Label>
 
         <div className="grid gap-2">
           {PLANS.map((plan) => (

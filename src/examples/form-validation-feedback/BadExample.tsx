@@ -4,8 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckCircle2 } from "lucide-react";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 export function BadExample() {
+  const { td } = useDemoI18n();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
@@ -31,10 +33,10 @@ export function BadExample() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
           <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="text-lg font-semibold">Message sent!</h3>
-        <p className="text-sm text-muted-foreground">We'll get back to you soon.</p>
+        <h3 className="text-lg font-semibold">{td("form.messageSent")}</h3>
+        <p className="text-sm text-muted-foreground">{td("form.wellGetBack")}</p>
         <Button variant="outline" onClick={handleReset} className="w-full">
-          Send another message
+          {td("form.sendAnother")}
         </Button>
       </div>
     );
@@ -43,34 +45,32 @@ export function BadExample() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid gap-2">
-        <Label htmlFor="email-bad">Email</Label>
+        <Label htmlFor="email-bad">{td("common.email")}</Label>
         <Input
           id="email-bad"
           type="email"
-          placeholder="your@email.com"
+          placeholder={td("form.emailPlaceholder")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="message-bad">Message (min 10 characters)</Label>
+        <Label htmlFor="message-bad">{td("form.messageLabel")}</Label>
         <Textarea
           id="message-bad"
-          placeholder="Your message..."
+          placeholder={td("form.messagePlaceholder")}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
       </div>
 
       <Button type="submit" disabled={!isFormValid} className="w-full">
-        Send message
+        {td("form.sendMessage")}
       </Button>
 
       {!isFormValid && (
-        <p className="text-center text-xs text-muted-foreground">
-          Please fill all fields correctly to enable the button
-        </p>
+        <p className="text-center text-xs text-muted-foreground">{td("form.fillAllFields")}</p>
       )}
     </form>
   );

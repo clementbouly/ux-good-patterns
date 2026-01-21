@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 type FieldErrors = {
   email?: string;
@@ -11,6 +12,7 @@ type FieldErrors = {
 };
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -21,15 +23,15 @@ export function GoodExample() {
     const newErrors: FieldErrors = {};
 
     if (!email) {
-      newErrors.email = "Email is required";
+      newErrors.email = td("form.emailRequired");
     } else if (!email.includes("@")) {
-      newErrors.email = "Please enter a valid email";
+      newErrors.email = td("form.emailInvalid");
     }
 
     if (!message) {
-      newErrors.message = "Message is required";
+      newErrors.message = td("form.messageRequired");
     } else if (message.length < 10) {
-      newErrors.message = `Message must be at least 10 characters (${message.length}/10)`;
+      newErrors.message = `${td("form.messageMinLength")} (${message.length}/10)`;
     }
 
     setErrors(newErrors);
@@ -59,10 +61,10 @@ export function GoodExample() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/30">
           <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="text-lg font-semibold">Message sent!</h3>
-        <p className="text-sm text-muted-foreground">We'll get back to you soon.</p>
+        <h3 className="text-lg font-semibold">{td("form.messageSent")}</h3>
+        <p className="text-sm text-muted-foreground">{td("form.wellGetBack")}</p>
         <Button variant="outline" onClick={handleReset} className="w-full">
-          Send another message
+          {td("form.sendAnother")}
         </Button>
       </div>
     );
@@ -71,11 +73,11 @@ export function GoodExample() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
       <div className="grid gap-2">
-        <Label htmlFor="email-good">Email</Label>
+        <Label htmlFor="email-good">{td("common.email")}</Label>
         <Input
           id="email-good"
           type="email"
-          placeholder="your@email.com"
+          placeholder={td("form.emailPlaceholder")}
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
@@ -97,10 +99,10 @@ export function GoodExample() {
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="message-good">Message (min 10 characters)</Label>
+        <Label htmlFor="message-good">{td("form.messageLabel")}</Label>
         <Textarea
           id="message-good"
-          placeholder="Your message..."
+          placeholder={td("form.messagePlaceholder")}
           value={message}
           onChange={(e) => {
             setMessage(e.target.value);
@@ -122,7 +124,7 @@ export function GoodExample() {
       </div>
 
       <Button type="submit" className="w-full">
-        Send message
+        {td("form.sendMessage")}
       </Button>
     </form>
   );

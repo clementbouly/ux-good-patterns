@@ -3,8 +3,10 @@ import { Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitCount, setSubmitCount] = useState(0);
@@ -33,12 +35,12 @@ export function GoodExample() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
           <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="text-lg font-semibold">Payment successful!</h3>
+        <h3 className="text-lg font-semibold">{td("submit.paymentSuccessful")}</h3>
         <p className="text-sm text-muted-foreground">
-          Total payments: <span className="font-mono font-bold">{submitCount}</span>
+          {td("submit.totalPayments")} <span className="font-mono font-bold">{submitCount}</span>
         </p>
         <Button variant="outline" onClick={handleNewPayment} className="w-full">
-          New payment
+          {td("submit.newPayment")}
         </Button>
       </div>
     );
@@ -47,12 +49,12 @@ export function GoodExample() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid gap-2">
-        <Label htmlFor="email-good">Email</Label>
+        <Label htmlFor="email-good">{td("common.email")}</Label>
         <Input id="email-good" type="email" defaultValue="john@example.com" disabled={isLoading} />
       </div>
 
       <div className="grid gap-2">
-        <Label htmlFor="amount-good">Amount (€)</Label>
+        <Label htmlFor="amount-good">{td("submit.amount")}</Label>
         <Input id="amount-good" type="number" defaultValue={99} disabled={isLoading} />
       </div>
 
@@ -60,10 +62,10 @@ export function GoodExample() {
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Processing payment...
+            {td("submit.processing")}
           </>
         ) : (
-          "Pay now"
+          td("submit.payNow")
         )}
       </Button>
     </form>

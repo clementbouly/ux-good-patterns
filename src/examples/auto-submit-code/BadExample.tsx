@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { Check } from "lucide-react";
 import { CopyableCode } from "@/components/CopyableCode";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 const VALID_CODE = "123456";
 
 export function BadExample() {
+  const { td } = useDemoI18n();
   const [value, setValue] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [error, setError] = useState(false);
@@ -37,9 +35,9 @@ export function BadExample() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
           <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
-        <p className="font-medium">Code verified!</p>
+        <p className="font-medium">{td("autoSubmit.codeVerified")}</p>
         <Button variant="outline" size="sm" onClick={handleReset}>
-          Try again
+          {td("common.tryAgain")}
         </Button>
       </div>
     );
@@ -50,9 +48,7 @@ export function BadExample() {
       <CopyableCode code={VALID_CODE} />
 
       <div className="space-y-2">
-        <p className="text-sm text-center text-muted-foreground">
-          Enter verification code
-        </p>
+        <p className="text-sm text-center text-muted-foreground">{td("autoSubmit.enterCode")}</p>
         <div className="flex justify-center">
           <InputOTP
             maxLength={6}
@@ -79,22 +75,14 @@ export function BadExample() {
           </InputOTP>
         </div>
         {error && (
-          <p className="text-sm text-center text-red-500">
-            Invalid code. Try again.
-          </p>
+          <p className="text-sm text-center text-red-500">{td("autoSubmit.invalidCode")}</p>
         )}
       </div>
 
-      <Button
-        onClick={handleVerify}
-        disabled={value.length < 6}
-        className="w-full"
-      >
-        Verify
+      <Button onClick={handleVerify} disabled={value.length < 6} className="w-full">
+        {td("common.verify")}
       </Button>
-      <p className="text-xs text-center text-muted-foreground">
-        Press Enter or click Verify
-      </p>
+      <p className="text-xs text-center text-muted-foreground">{td("autoSubmit.pressEnter")}</p>
     </div>
   );
 }

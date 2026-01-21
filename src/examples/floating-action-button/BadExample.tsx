@@ -1,15 +1,17 @@
 import { PenSquare, Heart, MessageCircle, Share2 } from "lucide-react";
-
-const FAKE_POSTS = Array.from({ length: 8 }, (_, i) => ({
-  id: i + 1,
-  author: `User ${i + 1}`,
-  content:
-    "Just shared something interesting! This is a sample post that shows how a social feed might look. What do you think about this topic?",
-  likes: 42 + i * 7,
-  comments: 5 + i * 2,
-}));
+import { useDemoI18n } from "@/hooks/useI18n";
 
 export function BadExample() {
+  const { td } = useDemoI18n();
+
+  const FAKE_POSTS = Array.from({ length: 8 }, (_, i) => ({
+    id: i + 1,
+    author: `${td("fab.user")} ${i + 1}`,
+    content: td("fab.samplePost"),
+    likes: 42 + i * 7,
+    comments: 5 + i * 2,
+  }));
+
   return (
     <div className="relative">
       <div className="h-[400px] overflow-y-auto rounded-lg border bg-background">
@@ -17,12 +19,10 @@ export function BadExample() {
           {/* Create Post button at top - will scroll away */}
           <button className="w-full flex items-center gap-2 p-3 rounded-lg border border-dashed border-muted-foreground/50 text-muted-foreground hover:bg-muted/50 transition-colors">
             <PenSquare className="w-5 h-5" />
-            <span>Create a post...</span>
+            <span>{td("fab.createPostPlaceholder")}</span>
           </button>
 
-          <p className="text-xs text-muted-foreground text-center">
-            Scroll down, then try to create a post
-          </p>
+          <p className="text-xs text-muted-foreground text-center">{td("fab.scrollDownTry")}</p>
 
           {/* Feed */}
           {FAKE_POSTS.map((post) => (
@@ -51,9 +51,7 @@ export function BadExample() {
           ))}
         </div>
       </div>
-      <p className="mt-3 text-center text-xs text-muted-foreground">
-        The "Create Post" button disappears when scrolling
-      </p>
+      <p className="mt-3 text-center text-xs text-muted-foreground">{td("fab.buttonDisappears")}</p>
     </div>
   );
 }

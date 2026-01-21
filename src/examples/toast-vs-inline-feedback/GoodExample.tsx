@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Bookmark, Link, ThumbsDown, Flag, Check } from "lucide-react";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -33,7 +35,7 @@ export function GoodExample() {
   return (
     <div className="space-y-2">
       <p className="text-sm text-muted-foreground flex items-center justify-end gap-1 pr-1 mr-5">
-        Click the ••• menu and select "Copy link" ?
+        {td("toast.clickMenu")}
         <span className="inline-block animate-bounce">👇</span>
       </p>
 
@@ -44,12 +46,17 @@ export function GoodExample() {
           <div className="flex-1">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-semibold text-sm">Alex Johnson</p>
-                <p className="text-xs text-muted-foreground">2h ago</p>
+                <p className="font-semibold text-sm">{td("toast.alexJohnson")}</p>
+                <p className="text-xs text-muted-foreground">{td("toast.timeAgo")}</p>
               </div>
               <Popover open={isOpen} onOpenChange={setIsOpen}>
                 <PopoverTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-8 w-8" aria-label="More options">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                    aria-label={td("common.moreOptions")}
+                  >
                     <MoreHorizontal className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
@@ -59,7 +66,7 @@ export function GoodExample() {
                     onClick={() => setIsOpen(false)}
                   >
                     <Bookmark className="h-4 w-4" />
-                    Save
+                    {td("common.save")}
                   </button>
                   <button
                     className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent transition-colors"
@@ -76,7 +83,7 @@ export function GoodExample() {
                           className="flex items-center gap-2 text-green-600 dark:text-green-400"
                         >
                           <Check className="h-4 w-4" />
-                          Copied!
+                          {td("common.copied")}
                         </motion.span>
                       ) : (
                         <motion.span
@@ -88,7 +95,7 @@ export function GoodExample() {
                           className="flex items-center gap-2"
                         >
                           <Link className="h-4 w-4" />
-                          Copy link
+                          {td("toast.copyLink")}
                         </motion.span>
                       )}
                     </AnimatePresence>
@@ -98,22 +105,19 @@ export function GoodExample() {
                     onClick={() => setIsOpen(false)}
                   >
                     <ThumbsDown className="h-4 w-4" />
-                    Not interested
+                    {td("toast.notInterested")}
                   </button>
                   <button
                     className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm text-destructive hover:bg-accent"
                     onClick={() => setIsOpen(false)}
                   >
                     <Flag className="h-4 w-4" />
-                    Report
+                    {td("toast.report")}
                   </button>
                 </PopoverContent>
               </Popover>
             </div>
-            <p className="mt-2 text-sm">
-              Just shared something interesting that I think you&apos;ll all enjoy! Check it out and
-              let me know what you think.
-            </p>
+            <p className="mt-2 text-sm">{td("toast.samplePost")}</p>
           </div>
         </div>
       </div>

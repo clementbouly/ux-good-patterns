@@ -4,17 +4,18 @@ import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn, getInitials } from "@/lib/utils";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 type User = {
   id: number;
-  name: string;
-  role: string;
+  nameKey: string;
+  roleKey: string;
 };
 
 const FAKE_USERS: User[] = [
-  { id: 1, name: "Alice Martin", role: "Product Designer" },
-  { id: 2, name: "Bob Johnson", role: "Frontend Developer" },
-  { id: 3, name: "Clara Davis", role: "UX Researcher" },
+  { id: 1, nameKey: "skeleton.aliceMartin", roleKey: "skeleton.productDesigner" },
+  { id: 2, nameKey: "skeleton.bobJohnson", roleKey: "skeleton.frontendDeveloper" },
+  { id: 3, nameKey: "skeleton.claraDavis", roleKey: "skeleton.uxResearcher" },
 ];
 
 function UserCardSkeleton() {
@@ -29,7 +30,10 @@ function UserCardSkeleton() {
   );
 }
 
-function UserCard({ user }: { user: User }) {
+function UserCard({ user, td }: { user: User; td: (key: string) => string }) {
+  const name = td(user.nameKey);
+  const role = td(user.roleKey);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -38,17 +42,18 @@ function UserCard({ user }: { user: User }) {
       className="flex items-center gap-3 rounded-lg border p-3"
     >
       <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-medium">
-        {getInitials(user.name)}
+        {getInitials(name)}
       </div>
       <div>
-        <p className="font-medium text-sm">{user.name}</p>
-        <p className="text-xs text-muted-foreground">{user.role}</p>
+        <p className="font-medium text-sm">{name}</p>
+        <p className="text-xs text-muted-foreground">{role}</p>
       </div>
     </motion.div>
   );
 }
 
 export function GoodExample() {
+  const { td } = useDemoI18n();
   const [users, setUsers] = useState<User[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -70,10 +75,10 @@ export function GoodExample() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium">Team Members</h3>
+        <h3 className="text-sm font-medium">{td("skeleton.teamMembers")}</h3>
         <Button variant="secondary" size="sm" onClick={loadUsers} disabled={isLoading}>
           <RefreshCw className={cn("size-3.5", isLoading && "animate-spin")} />
-          Reload to test
+          {td("skeleton.reloadToTest")}
         </Button>
       </div>
 
@@ -99,7 +104,7 @@ export function GoodExample() {
               className="space-y-3"
             >
               {users?.map((user) => (
-                <UserCard key={user.id} user={user} />
+                <UserCard key={user.id} user={user} td={td} />
               ))}
             </motion.div>
           )}

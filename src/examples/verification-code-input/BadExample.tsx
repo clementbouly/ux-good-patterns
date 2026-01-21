@@ -3,10 +3,12 @@ import { Check } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 const CODE_TO_COPY = "847291";
 
 export function BadExample() {
+  const { td } = useDemoI18n();
   const [values, setValues] = useState(["", "", "", "", "", ""]);
   const [copied, setCopied] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -56,9 +58,9 @@ export function BadExample() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
           <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
-        <h3 className="text-lg font-semibold">Code verified!</h3>
+        <h3 className="text-lg font-semibold">{td("autoSubmit.codeVerified")}</h3>
         <Button variant="outline" onClick={handleReset} className="w-full">
-          Try again
+          {td("common.tryAgain")}
         </Button>
       </div>
     );
@@ -67,11 +69,11 @@ export function BadExample() {
   return (
     <div className="space-y-4">
       <div className="rounded-md bg-muted p-3 text-center">
-        <p className="text-xs text-muted-foreground mb-1">Your code:</p>
+        <p className="text-xs text-muted-foreground mb-1">{td("verification.yourCode")}</p>
         <button
           onClick={copyCode}
           className="font-mono text-lg font-bold tracking-widest hover:text-primary transition-colors cursor-pointer"
-          title="Click to copy"
+          title={td("verification.clickToCopy")}
         >
           {CODE_TO_COPY}
         </button>
@@ -81,12 +83,12 @@ export function BadExample() {
             copied ? "text-green-600 dark:text-green-400 font-medium" : "text-muted-foreground"
           )}
         >
-          {copied ? "Copied!" : "Click to copy"}
+          {copied ? td("common.copied") : td("verification.clickToCopy")}
         </p>
       </div>
 
       <div className="space-y-2">
-        <p className="text-sm text-center text-muted-foreground">Enter verification code</p>
+        <p className="text-sm text-center text-muted-foreground">{td("autoSubmit.enterCode")}</p>
         <div className="flex justify-center gap-2">
           {values.map((value, index) => (
             <Input
@@ -107,7 +109,7 @@ export function BadExample() {
       </div>
 
       <Button onClick={handleVerify} disabled={values.some((v) => !v)} className="w-full">
-        Verify
+        {td("common.verify")}
       </Button>
     </div>
   );

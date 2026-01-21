@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { Check, Loader2 } from "lucide-react";
 import { CopyableCode } from "@/components/CopyableCode";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 const VALID_CODE = "847293";
 
 export function BadExample() {
+  const { td } = useDemoI18n();
   const [value, setValue] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
@@ -53,9 +51,9 @@ export function BadExample() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
           <Check className="h-6 w-6 text-green-600 dark:text-green-400" />
         </div>
-        <p className="font-medium">Code verified!</p>
+        <p className="font-medium">{td("autoSubmit.codeVerified")}</p>
         <Button variant="outline" size="sm" onClick={handleReset}>
-          Try again
+          {td("common.tryAgain")}
         </Button>
       </div>
     );
@@ -66,9 +64,7 @@ export function BadExample() {
       <CopyableCode code={VALID_CODE} />
 
       <div className="space-y-2">
-        <p className="text-sm text-center text-muted-foreground">
-          Enter verification code
-        </p>
+        <p className="text-sm text-center text-muted-foreground">{td("autoSubmit.enterCode")}</p>
         <div className="flex justify-center">
           <InputOTP
             maxLength={6}
@@ -90,19 +86,15 @@ export function BadExample() {
         {isVerifying && (
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
-            Verifying...
+            {td("common.verifying")}
           </div>
         )}
         {error && (
-          <p className="text-sm text-center text-red-500">
-            Invalid code. Try again.
-          </p>
+          <p className="text-sm text-center text-red-500">{td("autoSubmit.invalidCode")}</p>
         )}
       </div>
 
-      <p className="text-xs text-center text-muted-foreground">
-        Type the code manually or use Ctrl+V to paste
-      </p>
+      <p className="text-xs text-center text-muted-foreground">{td("paste.typeManually")}</p>
     </div>
   );
 }

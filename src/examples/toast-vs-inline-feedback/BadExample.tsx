@@ -4,8 +4,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Bookmark, Link, ThumbsDown, Flag, Check, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useDemoI18n } from "@/hooks/useI18n";
 
 export function BadExample() {
+  const { td } = useDemoI18n();
   const [isOpen, setIsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
@@ -25,7 +27,7 @@ export function BadExample() {
   return (
     <div className="space-y-2">
       <p className="text-sm text-muted-foreground flex items-center justify-end gap-1 pr-1 mr-5">
-        Click the ••• menu and select "Copy link" ?
+        {td("toast.clickMenu")}
         <span className="inline-block animate-bounce">👇</span>
       </p>
 
@@ -36,12 +38,17 @@ export function BadExample() {
           <div className="flex-1">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-semibold text-sm">Alex Johnson</p>
-                <p className="text-xs text-muted-foreground">2h ago</p>
+                <p className="font-semibold text-sm">{td("toast.alexJohnson")}</p>
+                <p className="text-xs text-muted-foreground">{td("toast.timeAgo")}</p>
               </div>
               <Popover open={isOpen} onOpenChange={setIsOpen}>
                 <PopoverTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-8 w-8" aria-label="More options">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8"
+                    aria-label={td("common.moreOptions")}
+                  >
                     <MoreHorizontal className="h-4 w-4" />
                   </Button>
                 </PopoverTrigger>
@@ -51,36 +58,33 @@ export function BadExample() {
                     onClick={() => setIsOpen(false)}
                   >
                     <Bookmark className="h-4 w-4" />
-                    Save
+                    {td("common.save")}
                   </button>
                   <button
                     className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent"
                     onClick={handleCopyLink}
                   >
                     <Link className="h-4 w-4" />
-                    Copy link
+                    {td("toast.copyLink")}
                   </button>
                   <button
                     className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm hover:bg-accent"
                     onClick={() => setIsOpen(false)}
                   >
                     <ThumbsDown className="h-4 w-4" />
-                    Not interested
+                    {td("toast.notInterested")}
                   </button>
                   <button
                     className="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm text-destructive hover:bg-accent"
                     onClick={() => setIsOpen(false)}
                   >
                     <Flag className="h-4 w-4" />
-                    Report
+                    {td("toast.report")}
                   </button>
                 </PopoverContent>
               </Popover>
             </div>
-            <p className="mt-2 text-sm">
-              Just shared something interesting that I think you&apos;ll all enjoy! Check it out and
-              let me know what you think.
-            </p>
+            <p className="mt-2 text-sm">{td("toast.samplePost")}</p>
           </div>
         </div>
       </div>
@@ -99,11 +103,11 @@ export function BadExample() {
             )}
           >
             <Check className="h-4 w-4 text-green-400 dark:text-green-600" />
-            <span className="text-sm font-medium">Link copied!</span>
+            <span className="text-sm font-medium">{td("toast.linkCopied")}</span>
             <button
               onClick={() => setShowToast(false)}
               className="ml-2 rounded p-0.5 hover:bg-white/10 dark:hover:bg-black/10"
-              aria-label="Dismiss"
+              aria-label={td("toast.dismiss")}
             >
               <X className="h-3.5 w-3.5" />
             </button>
