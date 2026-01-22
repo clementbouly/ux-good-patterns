@@ -4,11 +4,15 @@ import "@/index.css";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  lang?: "en" | "fr";
 }
 
 const {
-  title = "The Good, The Bad and The UX",
-  description = "A collection of UX patterns with comparative examples",
+  title = "The Good, The Bad and The UX – Learn UX Patterns by Example",
+  description = "Discover good and bad UX patterns through interactive side-by-side comparisons. Learn what makes interfaces intuitive or frustrating with real examples.",
+  image = "/og-image.png",
+  lang = "en",
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -17,7 +21,7 @@ const favicon = isDev ? "/logo-dev.png" : "/logo.png";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <!-- Google Tag Manager -->
     <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -41,11 +45,18 @@ const favicon = isDev ? "/logo-dev.png" : "/logo.png";
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="The Good, The Bad and The UX" />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={lang === "fr" ? "fr_FR" : "en_US"} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+    <meta property="twitter:domain" content="uxgoodpatterns.com" />
+    <meta property="twitter:url" content={canonicalURL} />
 
     <!-- Google Search Console -->
     <meta name="google-site-verification" content="LRl2AzVBmKI2eHLLFBBJOTzTs0luaOiW9PXM64Mhr1E" />

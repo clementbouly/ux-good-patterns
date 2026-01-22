@@ -7,12 +7,14 @@ import ScrollToTop from "@/components/ScrollToTop";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, image } = Astro.props;
+const lang = Astro.url.pathname.startsWith("/fr") ? "fr" : "en";
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} image={image} lang={lang}>
   <div class="flex min-h-screen flex-col bg-background bg-dotted dark:bg-dotted">
     <Header />
     <main class="container mx-auto flex-1 px-4 py-8">

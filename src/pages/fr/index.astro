@@ -1,8 +1,11 @@
 ---
 import PageLayout from "@/layouts/PageLayout.astro";
 import HomePage from "@/components/HomePage.astro";
+
+const title = "The Good, The Bad and The UX – Apprenez les patterns UX par l'exemple";
+const description = "Découvrez les bons et mauvais patterns UX à travers des comparaisons interactives côte à côte. Apprenez ce qui rend une interface intuitive ou frustrante avec des exemples concrets.";
 ---
 
-<PageLayout>
+<PageLayout title={title} description={description}>
   <HomePage />
 </PageLayout>
