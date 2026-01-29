@@ -99,6 +99,12 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
         "Use inline feedback for contextual actions instead of disconnected toast notifications",
       category: "Feedback",
     },
+    "dont-limit-user-input": {
+      title: "Don't Limit User Input",
+      description:
+        "Allow users to exceed character limits and show clear feedback instead of silently blocking their input.",
+      category: "Input",
+    },
   },
   fr: {
     "autofocus-modal": {
@@ -191,6 +197,12 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       description:
         "Utiliser un feedback inline pour les actions contextuelles plutôt que des toasts déconnectés",
       category: "Feedback",
+    },
+    "dont-limit-user-input": {
+      title: "Ne pas limiter la saisie utilisateur",
+      description:
+        "Permettre aux utilisateurs de dépasser la limite de caractères et afficher un feedback clair au lieu de bloquer silencieusement.",
+      category: "Input",
     },
   },
 };

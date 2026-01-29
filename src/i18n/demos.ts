@@ -162,6 +162,19 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     // verification-code-input
     "verification.yourCode": "Your code:",
     "verification.clickToCopy": "Click to copy",
+
+    // dont-limit-user-input
+    "inputLimit.articleTitle": "Article title",
+    "inputLimit.titlePlaceholder": "Enter a title...",
+    "inputLimit.description": "Description",
+    "inputLimit.descriptionPlaceholder": "Enter a description...",
+    "inputLimit.noWayToEnterMore": "No way to enter more text",
+    "inputLimit.textCutOff": "Text is cut off without warning",
+    "inputLimit.maxCharsLabel": "max {max} chars",
+    "inputLimit.charsOverLimit": "{over} characters over limit ({current}/{max})",
+    "inputLimit.defaultTitle": "My best article ever",
+    "inputLimit.defaultDescription":
+      "Design is about making things look good. Here are some tips that work for all types. Focus on the important stuff first.",
   },
   fr: {
     // Common
@@ -321,6 +334,19 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     // verification-code-input
     "verification.yourCode": "Votre code :",
     "verification.clickToCopy": "Cliquez pour copier",
+
+    // dont-limit-user-input
+    "inputLimit.articleTitle": "Titre de l'article",
+    "inputLimit.titlePlaceholder": "Entrez un titre...",
+    "inputLimit.description": "Description",
+    "inputLimit.descriptionPlaceholder": "Entrez une description...",
+    "inputLimit.noWayToEnterMore": "Impossible de saisir plus de texte",
+    "inputLimit.textCutOff": "Le texte est coupé sans avertissement",
+    "inputLimit.maxCharsLabel": "max {max} car",
+    "inputLimit.charsOverLimit": "{over} caractères en trop ({current}/{max})",
+    "inputLimit.defaultTitle": "Mon meilleur article",
+    "inputLimit.defaultDescription":
+      "Le design rend les choses belles et fonctionnelles. Voici des astuces pour tous les types de design. Concentrez-vous sur l'essentiel.",
   },
 };
 

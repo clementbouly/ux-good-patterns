@@ -14,6 +14,7 @@ import * as dropdownUsability from "./dropdown-usability";
 import * as displayOptions from "./display-options";
 import * as toastVsInlineFeedback from "./toast-vs-inline-feedback";
 import * as floatingActionButton from "./floating-action-button";
+import * as dontLimitUserInput from "./dont-limit-user-input";
 
 export const examples = [
   autofocusModal,
@@ -32,6 +33,7 @@ export const examples = [
   dropdownUsability,
   displayOptions,
   toastVsInlineFeedback,
+  dontLimitUserInput,
 ];
 
 export type ExampleMeta = {
