@@ -11,6 +11,7 @@ An open source collection of UX patterns with comparative examples. Each pattern
 - **Styles**: Tailwind CSS
 - **Components**: shadcn/ui
 - **Articles**: MDX with embedded interactive examples
+- **Development**: [Agentation](https://agentation.dev/) for AI-assisted development
 
 ## Installation
 

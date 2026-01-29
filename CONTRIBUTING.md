@@ -224,6 +224,16 @@ Verify that:
 4. Push the branch (`git push origin feature/new-pattern`)
 5. Open a Pull Request
 
+## Development Tools
+
+### Agentation
+
+This project uses [Agentation](https://agentation.dev/) to provide visual feedback when developing with AI coding assistants like [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+
+When running `npm run dev`, a toolbar appears at the bottom of the screen showing the current task status. This helps you follow along with what the AI is doing in real-time.
+
+The toolbar only appears in development mode and is not included in production builds.
+
 ## Questions?
 
 Open an issue on GitHub for any questions or suggestions.

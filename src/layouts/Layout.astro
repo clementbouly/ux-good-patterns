@@ -1,5 +1,6 @@
 ---
 import "@/index.css";
+import { AgentationWrapper } from "@/components/AgentationWrapper";
 
 interface Props {
   title?: string;
@@ -93,5 +94,6 @@ const favicon = isDev ? "/logo-dev.png" : "/logo.png";
     <!-- End Google Tag Manager (noscript) -->
 
     <slot />
+    {isDev && <AgentationWrapper client:only="react" />}
   </body>
 </html>
