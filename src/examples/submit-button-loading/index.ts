@@ -12,6 +12,8 @@ export const meta = {
   category: "Forms",
   tags: ["button", "loading", "form", "mobile"],
   createdAt: "2025-12-06",
+  aiSummary:
+    "When submitting forms, disable the button and show a spinner to prevent double submissions. Implementation: set disabled={isLoading}, replace button text with spinner or show spinner alongside text, re-enable on success or error. Apply to: form submissions, API calls, payments, file uploads.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "No disable" }];

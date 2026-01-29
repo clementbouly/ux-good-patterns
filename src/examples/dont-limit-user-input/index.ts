@@ -13,6 +13,8 @@ export const meta = {
   category: "Input",
   tags: ["input", "textarea", "character-limit", "validation", "feedback"],
   createdAt: "2026-01-29",
+  aiSummary:
+    "When inputs have character limits, let users exceed the limit and show visual feedback instead of blocking. Implementation: don't use maxLength attribute, show character counter (can go negative), highlight overflow text in red using overlay technique or rich-textarea library (~3kb). This lets users paste long text and trim it down.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Hard limit blocks input" }];

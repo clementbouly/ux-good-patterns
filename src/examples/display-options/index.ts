@@ -13,6 +13,8 @@ export const meta = {
   category: "Forms",
   tags: ["form", "select", "input", "accessibility"],
   createdAt: "2025-12-17",
+  aiSummary:
+    "For 2-5 mutually exclusive options, show them visibly instead of hiding in a dropdown. Implementation: use radio buttons for simple choices in forms, selectable cards for options needing descriptions, segmented control for binary/ternary toolbar-style choices. Reserve dropdowns for 6+ options or space-constrained layouts.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Dropdown with too few options" }];

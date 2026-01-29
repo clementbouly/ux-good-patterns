@@ -12,6 +12,8 @@ export const meta = {
   category: "Navigation",
   tags: ["scroll", "navigation", "button", "accessibility", "ux"],
   createdAt: "2025-12-13",
+  aiSummary:
+    "On long pages (>2 viewport heights), add a floating scroll-to-top button. Implementation: show after scrolling 300-500px (use scroll event listener), position fixed bottom-right, use window.scrollTo({ top: 0, behavior: 'smooth' }), fade in/out animation, use upward arrow icon, ensure keyboard accessible.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "No button" }];

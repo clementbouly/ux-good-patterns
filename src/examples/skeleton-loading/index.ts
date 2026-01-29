@@ -12,6 +12,8 @@ export const meta = {
   category: "Feedback",
   tags: ["loading", "skeleton", "spinner", "placeholder", "ux"],
   createdAt: "2025-12-07",
+  aiSummary:
+    "When loading content with predictable structure (lists, cards, profiles), show skeleton placeholders instead of a spinner. Implementation: match skeleton shapes to actual content dimensions, use CSS animate-pulse, show 3-5 skeleton items max, keep visible minimum 300ms to avoid flashing, fade transition to real content.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Spinner" }];

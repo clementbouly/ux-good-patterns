@@ -12,6 +12,8 @@ export const meta = {
   category: "Forms",
   tags: ["input", "verification", "paste", "OTP", "mobile"],
   createdAt: "2025-12-06",
+  aiSummary:
+    "When building OTP inputs with separate fields, support paste. Implementation: intercept onPaste event, extract digits with value.replace(/\\D/g, ''), distribute across fields programmatically, auto-focus last filled field. Consider using input-otp library which handles this automatically.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "No paste" }];

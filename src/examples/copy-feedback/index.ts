@@ -13,6 +13,8 @@ export const meta = {
   category: "Feedback",
   tags: ["copy", "clipboard", "feedback", "toast"],
   createdAt: "2025-12-06",
+  aiSummary:
+    "When implementing copy-to-clipboard, show inline feedback next to the button, not a toast. Implementation: swap icon from Copy to Check, optionally show 'Copied!' text, revert after 2s with setTimeout. Use navigator.clipboard.writeText() with try/catch for error handling.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "No feedback" }];

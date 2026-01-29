@@ -12,6 +12,8 @@ export const meta = {
   category: "Feedback",
   tags: ["toast", "feedback", "copy", "clipboard", "accessibility"],
   createdAt: "2025-12-26",
+  aiSummary:
+    "Show action feedback inline (next to the triggering element), not in distant toasts. Toasts violate proximity principle and are inaccessible to screen magnifier users. Implementation: for copy buttons show checkmark inline, for form fields show validation next to field. Reserve toasts only for background processes (file upload complete) or system notifications.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Toast" }];

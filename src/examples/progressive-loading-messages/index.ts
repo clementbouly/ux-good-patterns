@@ -12,6 +12,8 @@ export const meta = {
   category: "Feedback",
   tags: ["loading", "feedback", "progress", "status", "ux"],
   createdAt: "2025-12-08",
+  aiSummary:
+    "For long operations (>3s like AI generation, report building), show evolving status messages. Implementation: array of messages relevant to task, cycle every 1-2s with setInterval, don't loop (stay on last message if operation takes longer), end with 'Finalizing...' or 'Almost done...', animate transitions between messages.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Static 'Loading...'" }];

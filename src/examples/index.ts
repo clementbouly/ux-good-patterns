@@ -43,6 +43,7 @@ export type ExampleMeta = {
   category: string;
   tags: string[];
   createdAt: string; // ISO date format: YYYY-MM-DD
+  aiSummary?: string; // Concise summary for AI context generation
 };
 
 export type ExampleVariant = {

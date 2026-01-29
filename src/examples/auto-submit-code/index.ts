@@ -13,6 +13,8 @@ export const meta = {
   category: "Forms",
   tags: ["verification", "otp", "auto-submit", "input", "ux"],
   createdAt: "2025-12-07",
+  aiSummary:
+    "When building OTP/verification code inputs, trigger validation automatically when value.length === maxLength. Implementation: show spinner immediately after auto-submit, disable input during verification, on error clear input and refocus for retry, ensure verification is fast (<1s ideally).",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Manual submit" }];

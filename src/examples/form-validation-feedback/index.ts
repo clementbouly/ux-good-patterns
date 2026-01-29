@@ -13,6 +13,8 @@ export const meta = {
   category: "Forms",
   tags: ["form", "button", "accessibility", "disabled"],
   createdAt: "2025-12-08",
+  aiSummary:
+    "Keep submit buttons always enabled, validate on submit. Implementation: show inline error messages next to invalid fields, use red borders and error icons, add aria-invalid and aria-describedby for accessibility. Only disable button DURING submission (to prevent double-submit), not before.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Disabled button" }];

@@ -13,6 +13,8 @@ export const meta = {
   category: "Forms",
   tags: ["form", "input", "format", "mobile", "keyboard", "iban", "credit-card", "accessibility"],
   createdAt: "2025-12-08",
+  aiSummary:
+    "For structured inputs (credit card, IBAN, phone), auto-format with spaces as user types. Implementation: use inputmode='numeric' (not type='number' which adds spinners), store raw value without spaces, format on display, handle paste events to clean input, use placeholder showing expected format (e.g. '4242 4242 4242 4242'). Use type='tel' for phone numbers.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "Plain text input" }];

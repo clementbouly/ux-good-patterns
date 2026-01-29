@@ -38,9 +38,10 @@ export const meta = {
   id: "my-new-pattern",  // Must match folder name
   title: "Pattern Title",
   description: "Brief description of the pattern",
-  category: "Forms",  // One of: Forms, Navigation, Feedback, Accessibility, Performance, Modals
+  category: "Forms",  // One of: Forms, Navigation, Feedback, Accessibility, Performance, Modals, Input
   tags: ["tag1", "tag2"],
   createdAt: "YYYY-MM-DD",  // Today's date in ISO format
+  aiSummary: "Concise, actionable summary for AI assistants. Focus on WHEN to apply and HOW. Example: 'When building X, do Y. Don't do Z.'",
 };
 
 export const BadExamples = [

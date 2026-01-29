@@ -12,6 +12,8 @@ export const meta = {
   category: "Modals",
   tags: ["modal", "input", "accessibility", "mobile"],
   createdAt: "2025-12-06",
+  aiSummary:
+    "When opening a modal with a single input field (search, quick add), autofocus that input so users can type immediately. Implementation: use autoFocus prop or useEffect with inputRef.current?.focus(). Don't autofocus in confirmation modals (focus the confirm button instead) or modals with content to read first.",
 };
 
 export const BadExamples = [{ component: BadExample, label: "No autofocus" }];
