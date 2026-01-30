@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
 import { Label } from "@/components/ui/label";
-import { AlertTriangle } from "lucide-react";
 import { useDemoI18n } from "@/hooks/useI18n";
 import { cn } from "@/lib/utils";
+import { AlertTriangle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const TITLE_MAX_LENGTH = 15;
 const DESCRIPTION_MAX_LENGTH = 100;
@@ -45,7 +45,7 @@ function HighlightedInput({
         <span className="truncate text-base md:text-sm">
           <span>{validText}</span>
           {overflowText && (
-            <span className="text-destructive">{overflowText}</span>
+            <span className="bg-destructive/30">{overflowText}</span>
           )}
         </span>
       </div>
@@ -124,7 +124,7 @@ function HighlightedTextarea({
       >
         <span>{validText}</span>
         {overflowText && (
-          <span className="text-destructive">{overflowText}</span>
+          <span className="bg-destructive/30">{overflowText}</span>
         )}
       </div>
 
