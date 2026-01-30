@@ -5,12 +5,12 @@ description: "Best practices for verification code inputs, from email design to 
 ---
 
 import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+import { GoodExampleEmbed } from "@/components/articles/GoodExampleEmbed";
 import { EmailComparison } from "@/components/articles/EmailComparison";
-import { UltimateOtpDemo } from "@/components/articles/UltimateOtpDemo";
 
 # The Complete Guide to OTP UX
 
-One-Time Passwords (OTP) are everywhere: account verification, two-factor authentication, password resets. Yet, the UX around them is often an afterthought. This guide covers **4 key areas** to make your OTP flow seamless.
+One-Time Passwords (OTP) are everywhere: account verification, two-factor authentication, password resets. Yet, the UX around them is often an afterthought. This guide covers **3 key areas** to make your OTP flow seamless.
 
 ---
 
@@ -80,27 +80,6 @@ Once all digits are entered, why make users click "Verify"?
 
 ---
 
-## 4. Paste Button: The Hidden Accelerator
-
-On mobile, pasting requires multiple steps: long press → context menu → tap "Paste". A visible paste button reduces this to a single tap.
-
-<ExampleEmbed id="paste-otp-code" client:load />
-
-### The browser permission question
-
-Yes, the Clipboard API triggers a permission prompt. But:
-
-1. **It's one-time** — users won't see it again after accepting
-2. **It's contextual** — the prompt appears right after clicking "Paste"
-3. **It's still faster** than typing 6 digits manually
-
-### When to use it
-
-- **Desktop**: Highly recommended (email codes, password managers)
-- **Mobile**: Optional fallback — `autocomplete="one-time-code"` handles most cases
-
----
-
 ## The Ultimate OTP Flow
 
 Combine all patterns for the best experience:
@@ -108,8 +87,7 @@ Combine all patterns for the best experience:
 1. **Email**: Code prominently displayed, easy to copy
 2. **Input**: Full paste support (Ctrl+V fills all fields)
 3. **Behavior**: Auto-submit when complete
-4. **Fallback**: Visible paste button for power users
 
-<UltimateOtpDemo client:load />
+<GoodExampleEmbed id="auto-submit-code" client:load />
 
 The goal is simple: **minimize the time between receiving the code and being verified**.

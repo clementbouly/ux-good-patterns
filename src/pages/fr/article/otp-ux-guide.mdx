@@ -5,12 +5,12 @@ description: "Bonnes pratiques pour les champs de code de verification, de la co
 ---
 
 import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+import { GoodExampleEmbed } from "@/components/articles/GoodExampleEmbed";
 import { EmailComparison } from "@/components/articles/EmailComparison";
-import { UltimateOtpDemo } from "@/components/articles/UltimateOtpDemo";
 
 # Le guide complet de l'UX OTP
 
-Les mots de passe a usage unique (OTP) sont partout : verification de compte, authentification a deux facteurs, reinitialisation de mot de passe. Pourtant, l'UX qui les entoure est souvent negligee. Ce guide couvre **4 domaines cles** pour rendre votre flux OTP fluide.
+Les mots de passe a usage unique (OTP) sont partout : verification de compte, authentification a deux facteurs, reinitialisation de mot de passe. Pourtant, l'UX qui les entoure est souvent negligee. Ce guide couvre **3 domaines cles** pour rendre votre flux OTP fluide.
 
 ---
 
@@ -82,27 +82,6 @@ Une fois tous les chiffres saisis, pourquoi obliger les utilisateurs a cliquer s
 
 ---
 
-## 4. Bouton coller : L'accelerateur cache
-
-Sur mobile, coller necessite plusieurs etapes : appui long → menu contextuel → toucher "Coller". Un bouton coller visible reduit cela a un seul toucher.
-
-<ExampleEmbed id="paste-otp-code" client:load />
-
-### La question de la permission du navigateur
-
-Oui, l'API Clipboard declenche une demande de permission. Mais :
-
-1. **C'est une seule fois** — les utilisateurs ne la verront plus apres avoir accepte
-2. **C'est contextuel** — la demande apparait juste apres avoir clique sur "Coller"
-3. **C'est quand meme plus rapide** que de taper 6 chiffres manuellement
-
-### Quand l'utiliser
-
-- **Desktop** : Fortement recommande (codes email, gestionnaires de mots de passe)
-- **Mobile** : Solution de repli optionnelle — `autocomplete="one-time-code"` gere la plupart des cas
-
----
-
 ## Le flux OTP ultime
 
 Combinez tous les patterns pour la meilleure experience :
@@ -110,8 +89,7 @@ Combinez tous les patterns pour la meilleure experience :
 1. **Email** : Code affiche en evidence, facile a copier
 2. **Champ** : Support complet du coller (Ctrl+V remplit tous les champs)
 3. **Comportement** : Auto-soumission une fois complete
-4. **Repli** : Bouton coller visible pour les utilisateurs avances
 
-<UltimateOtpDemo client:load />
+<GoodExampleEmbed id="auto-submit-code" client:load />
 
 L'objectif est simple : **minimiser le temps entre la reception du code et la verification**.
