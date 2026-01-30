@@ -50,10 +50,6 @@ For structured inputs (credit card, IBAN, phone), auto-format with spaces as use
 
 Modals should close via X button, click outside overlay, AND Escape key. Implementation: most UI libraries (Radix, Headless UI) support this by default. Return focus to trigger element on close. Exception: for destructive actions or confirmations, disable click-outside but keep explicit Cancel/Confirm buttons.
 
-### Paste button for OTP code
-
-Add a visible 'Paste' button next to OTP inputs for discoverability. Implementation: use navigator.clipboard.readText() (requires HTTPS), handle permission/errors gracefully with try/catch, extract only digits from pasted content, combine with auto-submit for fastest flow. Keep Ctrl+V working as fallback.
-
 ### Progressive Loading Messages
 
 For long operations (>3s like AI generation, report building), show evolving status messages. Implementation: array of messages relevant to task, cycle every 1-2s with setInterval, don't loop (stay on last message if operation takes longer), end with 'Finalizing...' or 'Almost done...', animate transitions between messages.

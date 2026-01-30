@@ -8,7 +8,6 @@ import * as progressiveLoadingMessages from "./progressive-loading-messages";
 import * as formValidationFeedback from "./form-validation-feedback";
 import * as inputAutoFormat from "./input-auto-format";
 import * as scrollToTop from "./scroll-to-top";
-import * as pasteOtpCode from "./paste-otp-code";
 import * as modalClosing from "./modal-closing";
 import * as dropdownUsability from "./dropdown-usability";
 import * as displayOptions from "./display-options";
@@ -29,7 +28,6 @@ export const examples = [
   inputAutoFormat,
   scrollToTop,
   floatingActionButton,
-  pasteOtpCode,
   dropdownUsability,
   displayOptions,
   toastVsInlineFeedback,
