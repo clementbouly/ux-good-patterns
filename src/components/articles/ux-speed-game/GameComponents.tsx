@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { Check, Play, RotateCcw, X, ClipboardPaste } from "lucide-react";
+import { Check, Play, RotateCcw, X } from "lucide-react";
 import { formatTime } from "./utils";
 
 export function TimerDisplay({ time }: { time: number }) {
@@ -52,7 +52,6 @@ export function OtpInput({
   value,
   onChange,
   autoFocus = false,
-  showPasteButton = false,
   hasError = false,
   errorMessage = "Wrong code, try again",
   showShake = true,
@@ -60,23 +59,10 @@ export function OtpInput({
   value: string;
   onChange: (value: string) => void;
   autoFocus?: boolean;
-  showPasteButton?: boolean;
   hasError?: boolean;
   errorMessage?: string;
   showShake?: boolean;
 }) {
-  const handlePaste = async () => {
-    try {
-      const text = await navigator.clipboard.readText();
-      const digits = text.replace(/\D/g, "").slice(0, 6);
-      if (digits.length > 0) {
-        onChange(digits);
-      }
-    } catch {
-      // Clipboard permission denied
-    }
-  };
-
   return (
     <div className="flex flex-col items-center gap-2 py-2">
       <div
@@ -96,17 +82,6 @@ export function OtpInput({
             ))}
           </InputOTPGroup>
         </InputOTP>
-        {showPasteButton && (
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handlePaste}
-            aria-label="Paste code from clipboard"
-            title="Paste code"
-          >
-            <ClipboardPaste className="h-4 w-4" />
-          </Button>
-        )}
       </div>
       {hasError && (
         <p className="text-sm text-red-500 font-medium">{errorMessage}</p>

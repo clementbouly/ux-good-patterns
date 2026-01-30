@@ -32,19 +32,17 @@ type GameProps = {
 const VARIANT_CONFIG = {
   good: {
     autoFocus: true,
-    showPasteButton: true,
     showCopyButton: true,
     autoSubmit: true,
     restrictedModals: false,
     errorShake: true,
     errorAutoReset: true,
     errorMessage: "Wrong code, try again",
-    modalDescription: "Paste or type the 6-digit code — it auto-validates!",
+    modalDescription: "Type the 6-digit code — it auto-validates!",
     copyHint: null,
   },
   bad: {
     autoFocus: false,
-    showPasteButton: false,
     showCopyButton: false,
     autoSubmit: false,
     restrictedModals: true,
@@ -194,7 +192,6 @@ export function Game({ variant, onComplete }: GameProps) {
           value={otpValue}
           onChange={config.autoSubmit ? handleOtpChange : setOtpValue}
           autoFocus={config.autoFocus}
-          showPasteButton={config.showPasteButton}
           hasError={hasError}
           errorMessage={config.errorMessage}
           showShake={config.errorShake}
