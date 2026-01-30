@@ -57,9 +57,9 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       category: "Feedback",
     },
     "form-validation-feedback": {
-      title: "Form validation feedback",
+      title: "Avoid disabled submit buttons",
       description:
-        "Show validation errors inline next to the relevant fields instead of generic alerts",
+        "Keep submit buttons enabled and show clear error messages on submit instead of silently disabling",
       category: "Forms",
     },
     "input-auto-format": {
@@ -77,11 +77,6 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       description:
         "Hide FAB when scrolling down and show when scrolling up to reduce visual clutter",
       category: "Navigation",
-    },
-    "paste-otp-code": {
-      title: "Paste OTP code support",
-      description: "Allow users to paste verification codes directly into OTP inputs",
-      category: "Forms",
     },
     "dropdown-usability": {
       title: "Dropdown usability",
@@ -155,9 +150,9 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       category: "Feedback",
     },
     "form-validation-feedback": {
-      title: "Feedback de validation de formulaire",
+      title: "Éviter les boutons submit désactivés",
       description:
-        "Afficher les erreurs de validation à côté des champs concernés plutôt qu'en alerte générique",
+        "Garder les boutons de soumission actifs et afficher des messages d'erreur clairs au submit",
       category: "Formulaires",
     },
     "input-auto-format": {
@@ -175,11 +170,6 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       title: "Bouton d'action flottant (FAB)",
       description: "Masquer le FAB au scroll vers le bas et l'afficher au scroll vers le haut",
       category: "Navigation",
-    },
-    "paste-otp-code": {
-      title: "Support du collage de code OTP",
-      description: "Permettre aux utilisateurs de coller les codes de vérification directement",
-      category: "Formulaires",
     },
     "dropdown-usability": {
       title: "Ergonomie des dropdowns",
