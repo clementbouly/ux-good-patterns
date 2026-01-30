@@ -100,12 +100,6 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     "modal.onlyXButtonDesc":
       "This modal can only be closed by clicking the X button in the top right corner. Clicking outside the modal or pressing the Escape key won't work.",
 
-    // paste-otp-code
-    "paste.pasteFromClipboard": "Paste code from clipboard",
-    "paste.pasteCode": "Paste code",
-    "paste.clickPaste": "Click the paste button or use Ctrl+V",
-    "paste.typeManually": "Type the code manually or use Ctrl+V to paste",
-
     // progressive-loading-messages
     "progress.collecting": "Collecting your data...",
     "progress.analyzing": "Analyzing metrics...",
@@ -175,6 +169,36 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     "inputLimit.defaultTitle": "My best article ever",
     "inputLimit.defaultDescription":
       "Design is about making things look good. Here are some tips that work for all types. Focus on the important stuff first.",
+
+    // ux-speed-game article
+    "speedGame.hideDetails": "Hide details",
+    "speedGame.seeDetails": "See details",
+    "speedGame.badUx": "Bad UX",
+    "speedGame.goodUx": "Good UX",
+    "speedGame.versionA": "Version A",
+    "speedGame.versionB": "Version B",
+    "speedGame.results": "Results",
+    "speedGame.faster": "{time} faster",
+    "speedGame.improvement": "({percent}% improvement)",
+    "speedGame.unexpectedResult": "Interesting! You completed the bad UX version faster. Try again?",
+    "speedGame.frictionsTitle": "The 4 UX frictions explained",
+    "speedGame.frictionsIntro":
+      "Each friction adds milliseconds of cognitive load and extra clicks. Combined, they create a noticeably slower and more frustrating experience.",
+    "speedGame.bad": "Bad:",
+    "speedGame.good": "Good:",
+    "speedGame.learnMore": "Learn more",
+    "speedGame.friction1.title": "Modal input focus",
+    "speedGame.friction1.bad": "No auto-focus — user must click to type",
+    "speedGame.friction1.good": "Auto-focus on mount — ready to type immediately",
+    "speedGame.friction2.title": "Modal closing",
+    "speedGame.friction2.bad": "Only the X button works",
+    "speedGame.friction2.good": "X button + click outside + Escape key",
+    "speedGame.friction3.title": "Code copy",
+    "speedGame.friction3.bad": "Manual text selection required",
+    "speedGame.friction3.good": '"Copy" button with visual feedback',
+    "speedGame.friction4.title": "OTP validation",
+    "speedGame.friction4.bad": 'Manual "Validate" button click',
+    "speedGame.friction4.good": "Auto-submit when 6 digits entered",
   },
   fr: {
     // Common
@@ -272,12 +296,6 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     "modal.onlyXButtonDesc":
       "Cette modale ne peut être fermée qu'en cliquant sur le bouton X en haut à droite. Cliquer à l'extérieur ou appuyer sur Échap ne fonctionnera pas.",
 
-    // paste-otp-code
-    "paste.pasteFromClipboard": "Coller le code depuis le presse-papier",
-    "paste.pasteCode": "Coller le code",
-    "paste.clickPaste": "Cliquez sur coller ou utilisez Ctrl+V",
-    "paste.typeManually": "Tapez le code manuellement ou utilisez Ctrl+V",
-
     // progressive-loading-messages
     "progress.collecting": "Collecte de vos données...",
     "progress.analyzing": "Analyse des métriques...",
@@ -347,6 +365,36 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     "inputLimit.defaultTitle": "Mon meilleur article",
     "inputLimit.defaultDescription":
       "Le design rend les choses belles et fonctionnelles. Voici des astuces pour tous les types de design. Concentrez-vous sur l'essentiel.",
+
+    // ux-speed-game article
+    "speedGame.hideDetails": "Masquer les détails",
+    "speedGame.seeDetails": "Voir les détails",
+    "speedGame.badUx": "Mauvaise UX",
+    "speedGame.goodUx": "Bonne UX",
+    "speedGame.versionA": "Version A",
+    "speedGame.versionB": "Version B",
+    "speedGame.results": "Résultats",
+    "speedGame.faster": "{time} plus rapide",
+    "speedGame.improvement": "({percent}% d'amélioration)",
+    "speedGame.unexpectedResult": "Intéressant ! Vous avez terminé la mauvaise UX plus vite. Réessayer ?",
+    "speedGame.frictionsTitle": "Les 4 frictions UX expliquées",
+    "speedGame.frictionsIntro":
+      "Chaque friction ajoute des millisecondes de charge cognitive et des clics supplémentaires. Combinées, elles créent une expérience nettement plus lente et frustrante.",
+    "speedGame.bad": "Mauvais :",
+    "speedGame.good": "Bon :",
+    "speedGame.learnMore": "En savoir plus",
+    "speedGame.friction1.title": "Focus de l'input dans la modale",
+    "speedGame.friction1.bad": "Pas d'auto-focus — l'utilisateur doit cliquer pour taper",
+    "speedGame.friction1.good": "Auto-focus à l'ouverture — prêt à taper immédiatement",
+    "speedGame.friction2.title": "Fermeture de la modale",
+    "speedGame.friction2.bad": "Seul le bouton X fonctionne",
+    "speedGame.friction2.good": "Bouton X + clic extérieur + touche Échap",
+    "speedGame.friction3.title": "Copie du code",
+    "speedGame.friction3.bad": "Sélection manuelle du texte requise",
+    "speedGame.friction3.good": 'Bouton "Copier" avec feedback visuel',
+    "speedGame.friction4.title": "Validation OTP",
+    "speedGame.friction4.bad": 'Clic manuel sur le bouton "Valider"',
+    "speedGame.friction4.good": "Soumission auto quand 6 chiffres saisis",
   },
 };
 
