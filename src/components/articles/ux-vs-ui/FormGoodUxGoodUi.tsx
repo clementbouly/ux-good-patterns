@@ -250,12 +250,12 @@ export function FormGoodUxGoodUi({ translations: t, lang }: Props) {
         )}
       </div>
 
-      {/* Good UX: clear visual hierarchy */}
-      <div className="flex gap-2">
-        <Button type="submit">{t.submit}</Button>
+      {/* Good UX: clear visual hierarchy, primary action on the right */}
+      <div className="flex justify-end gap-2">
         <Button type="button" variant="outline">
           {t.cancel}
         </Button>
+        <Button type="submit">{t.submit}</Button>
       </div>
     </form>
   );

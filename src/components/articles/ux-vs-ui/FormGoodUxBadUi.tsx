@@ -209,8 +209,11 @@ export function FormGoodUxBadUi({ translations: t, lang }: Props) {
         )}
       </div>
 
-      {/* Good UX: visual hierarchy between buttons */}
-      <div style={{ display: "flex", gap: "8px" }}>
+      {/* Good UX: visual hierarchy between buttons, primary action on the right */}
+      <div style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}>
+        <button type="button" style={{ all: "revert" }}>
+          {t.cancel}
+        </button>
         <button
           type="submit"
           style={{
@@ -223,9 +226,6 @@ export function FormGoodUxBadUi({ translations: t, lang }: Props) {
           }}
         >
           {t.submit}
-        </button>
-        <button type="button" style={{ all: "revert" }}>
-          {t.cancel}
         </button>
       </div>
     </form>
