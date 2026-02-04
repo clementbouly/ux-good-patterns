@@ -1,0 +1,98 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "Understanding UX vs UI — By Example"
+description: "A hands-on demonstration of the difference between User Experience and User Interface through interactive form examples"
+---
+
+import { UxVsUiGrid } from "@/components/articles/ux-vs-ui";
+
+# Understanding UX vs UI — By Example
+
+The same form, four different implementations. Each cell combines a level of **UX** (how it works) and **UI** (how it looks).
+
+<div className="mb-6">
+<span className="inline-block bg-primary text-primary-foreground text-xs font-medium px-2 py-1 rounded mb-2">👇 Try it yourself</span>
+<p className="text-sm text-muted-foreground mt-1">Type in the email, select a country, write more than 20 characters in motivation, and notice the buttons.</p>
+</div>
+
+<UxVsUiGrid lang="en" client:load>
+
+## What's the Difference?
+
+- **UI** is how the product **looks** — colors, typography, spacing, visual polish
+- **UX** is how the product **works** — interactions, flows, error handling, user mental models
+
+A product can have beautiful UI but terrible UX (frustrating to use despite looking good). It can also have great UX but poor UI (works well but looks dated or inconsistent).
+
+The goal is to have **both**.
+
+---
+
+## What Makes Each Version Different?
+
+### Bad UX Patterns (top row)
+
+1. **Aggressive email validation**: Shows "Invalid email format" on every keystroke. Type "j" and you immediately see an error. This is jarring and unhelpful — the user hasn't finished typing yet.
+
+2. **No placeholders**: Empty fields with no hint about what to enter. Users must guess the expected format.
+
+3. **Long dropdown without search**: 30 countries in a plain dropdown. Users must scroll through the entire list to find their country. No way to type and filter.
+
+4. **Silent text truncation**: The motivation field has a 20-character limit, but it's enforced silently. Text simply stops appearing. No indication of the limit beforehand.
+
+5. **No button hierarchy**: Submit and Cancel look identical. Users must read the labels to distinguish the primary action from the secondary one.
+
+6. **Silent submit failure**: Clicking submit does nothing if fields are invalid — no feedback, no indication of what's wrong. Users are left wondering why nothing happened.
+
+### Good UX Patterns (bottom row)
+
+1. **Validation on blur**: Email is only validated when the user leaves the field. No premature errors while typing.
+
+2. **Helpful placeholders**: Examples show users what format is expected.
+
+3. **Searchable dropdown**: Users can type to filter countries. Finding "Switzerland" takes 2 keystrokes instead of 20 scroll actions.
+
+4. **Character limit shown upfront**: "(max 20 chars)" in the label tells users the constraint before they start typing.
+
+5. **Overflow text highlighted**: Text beyond the limit is highlighted in red, making it easy to see what to remove.
+
+6. **Clear button hierarchy**: Submit is visually prominent (filled). Cancel is secondary (outline). Users instantly know which action is primary.
+
+7. **Validation on submit**: Form cannot be submitted with errors — all fields are validated and errors are shown.
+
+8. **Required field indicators**: Asterisks (*) next to labels clearly show which fields are mandatory before users start filling the form.
+
+### Bad UI Patterns (left column)
+
+- Browser-default styling (`all: revert`)
+- No consistent spacing or typography
+- No focus states or visual feedback
+- Looks like a form from 1998
+
+### Good UI Patterns (right column)
+
+- Modern component library (shadcn/ui)
+- Consistent spacing, borders, and focus rings
+- Smooth animations and transitions
+- Professional, polished appearance
+
+---
+
+## Key Takeaways
+
+| Aspect | UX (Experience) | UI (Interface) |
+|--------|-----------------|----------------|
+| Focus | How it works | How it looks |
+| Concerns | Flows, timing, feedback, error handling | Colors, typography, spacing, visual polish |
+| Bad example | Validating while typing | Unstyled browser defaults |
+| Good example | Validating on blur | Modern design system |
+
+### The Ideal: Good UX + Good UI
+
+The bottom-right form combines both:
+- Thoughtful interaction patterns that respect user behavior
+- Polished visual design that communicates hierarchy and state
+
+This is what we should aim for. **A beautiful interface that frustrates users is a failure. A usable interface that looks amateur undermines trust.**
+
+</UxVsUiGrid>

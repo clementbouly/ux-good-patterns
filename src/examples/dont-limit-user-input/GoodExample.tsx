@@ -117,7 +117,7 @@ function HighlightedTextarea({
         ref={highlightRef}
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-0 overflow-hidden whitespace-pre-wrap wrap-break-word rounded-md border border-transparent px-3 py-2 text-base md:text-sm",
+          "pointer-events-none absolute inset-0 overflow-hidden whitespace-pre-wrap break-words rounded-md border border-transparent px-3 py-2 text-base md:text-sm",
           isOverLimit && "border-destructive",
           className
         )}

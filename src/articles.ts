@@ -8,6 +8,14 @@ export type Article = {
 
 export const articles: Article[] = [
   {
+    slug: "ux-vs-ui",
+    title: "Understanding UX vs UI — By Example",
+    description:
+      "A hands-on demonstration of the difference between User Experience and User Interface through interactive form examples",
+    tags: ["Fundamentals", "Forms", "Interactive"],
+    createdAt: "2026-02-04",
+  },
+  {
     slug: "linkedin-ux-mistakes",
     title: "5 UX Mistakes Even LinkedIn Makes",
     description:

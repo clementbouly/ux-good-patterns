@@ -1,0 +1,98 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "Comprendre la difference UX vs UI — Par l'exemple"
+description: "Une demonstration pratique de la difference entre Experience Utilisateur et Interface Utilisateur a travers des exemples de formulaires interactifs"
+---
+
+import { UxVsUiGrid } from "@/components/articles/ux-vs-ui";
+
+# Comprendre la difference UX vs UI — Par l'exemple
+
+Le meme formulaire, quatre implementations differentes. Chaque cellule combine un niveau d'**UX** (comment ca fonctionne) et d'**UI** (comment ca apparait).
+
+<div className="mb-6">
+<span className="inline-block bg-primary text-primary-foreground text-xs font-medium px-2 py-1 rounded mb-2">👇 Essayez par vous-même</span>
+<p className="text-sm text-muted-foreground mt-1">Tapez dans l'email, sélectionnez un pays, écrivez plus de 20 caractères dans motivation, et observez les boutons.</p>
+</div>
+
+<UxVsUiGrid lang="fr" client:load>
+
+## Quelle est la difference ?
+
+- **UI** c'est comment le produit **apparait** — couleurs, typographie, espacements, finition visuelle
+- **UX** c'est comment le produit **fonctionne** — interactions, flux, gestion des erreurs, modeles mentaux utilisateur
+
+Un produit peut avoir une belle UI mais une terrible UX (frustrant a utiliser malgre son apparence). Il peut aussi avoir une excellente UX mais une UI mediocre (fonctionne bien mais parait date ou incoherent).
+
+L'objectif est d'avoir **les deux**.
+
+---
+
+## Ce qui fait la difference
+
+### Patterns de mauvaise UX (ligne du haut)
+
+1. **Validation email agressive** : Affiche "Format d'email invalide" a chaque frappe. Tapez "j" et vous voyez immediatement une erreur. C'est perturbant et inutile — l'utilisateur n'a pas fini de taper.
+
+2. **Pas de placeholders** : Champs vides sans indication de ce qu'il faut entrer. L'utilisateur doit deviner le format attendu.
+
+3. **Long menu deroulant sans recherche** : 30 pays dans un simple menu deroulant. Les utilisateurs doivent faire defiler toute la liste pour trouver leur pays. Pas moyen de taper pour filtrer.
+
+4. **Troncature silencieuse du texte** : Le champ motivation a une limite de 20 caracteres, mais elle est appliquee silencieusement. Le texte s'arrete simplement d'apparaitre. Aucune indication de la limite au prealable.
+
+5. **Pas de hierarchie des boutons** : Envoyer et Annuler sont identiques visuellement. Les utilisateurs doivent lire les labels pour distinguer l'action principale de la secondaire.
+
+6. **Echec silencieux au submit** : Cliquer sur envoyer ne fait rien si les champs sont invalides — aucun feedback, aucune indication de ce qui ne va pas. L'utilisateur se demande pourquoi rien ne se passe.
+
+### Patterns de bonne UX (ligne du bas)
+
+1. **Validation au blur** : L'email n'est valide que quand l'utilisateur quitte le champ. Pas d'erreurs prematurees pendant la saisie.
+
+2. **Placeholders utiles** : Des exemples montrent aux utilisateurs le format attendu.
+
+3. **Menu deroulant avec recherche** : Les utilisateurs peuvent taper pour filtrer les pays. Trouver "Suisse" prend 2 frappes au lieu de 20 actions de defilement.
+
+4. **Limite de caracteres affichee** : "(max 20 car.)" dans le label indique la contrainte avant de commencer a taper.
+
+5. **Texte en trop surligne** : Le texte au-dela de la limite est surligne en rouge, ce qui permet de voir facilement quoi supprimer.
+
+6. **Hierarchie claire des boutons** : Envoyer est visuellement proéminent (rempli). Annuler est secondaire (contour). Les utilisateurs savent instantanement quelle action est principale.
+
+7. **Validation au submit** : Le formulaire ne peut pas etre soumis avec des erreurs — tous les champs sont valides et les erreurs sont affichees.
+
+8. **Indicateurs de champs requis** : Les asterisques (*) a cote des labels indiquent clairement quels champs sont obligatoires avant que l'utilisateur commence a remplir le formulaire.
+
+### Patterns de mauvaise UI (colonne de gauche)
+
+- Style par defaut du navigateur (`all: revert`)
+- Pas d'espacement ou de typographie coherente
+- Pas d'etats de focus ou de feedback visuel
+- Ressemble a un formulaire de 1998
+
+### Patterns de bonne UI (colonne de droite)
+
+- Bibliotheque de composants moderne (shadcn/ui)
+- Espacement, bordures et anneaux de focus coherents
+- Animations et transitions fluides
+- Apparence professionnelle et soignee
+
+---
+
+## Points cles
+
+| Aspect | UX (Experience) | UI (Interface) |
+|--------|-----------------|----------------|
+| Focus | Comment ca fonctionne | Comment ca apparait |
+| Preoccupations | Flux, timing, feedback, gestion des erreurs | Couleurs, typographie, espacement, finition visuelle |
+| Mauvais exemple | Valider pendant la saisie | Defauts du navigateur non styles |
+| Bon exemple | Valider au blur | Systeme de design moderne |
+
+### L'ideal : Bonne UX + Bonne UI
+
+Le formulaire en bas a droite combine les deux :
+- Des patterns d'interaction reflechis qui respectent le comportement utilisateur
+- Un design visuel soigne qui communique la hierarchie et l'etat
+
+C'est ce que nous devrions viser. **Une belle interface qui frustre les utilisateurs est un echec. Une interface utilisable qui parait amateur mine la confiance.**
+
+</UxVsUiGrid>
