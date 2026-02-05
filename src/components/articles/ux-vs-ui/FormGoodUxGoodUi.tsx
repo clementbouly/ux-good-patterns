@@ -103,7 +103,7 @@ export function FormGoodUxGoodUi({ translations: t, lang }: Props) {
   const [motivation, setMotivation] = useState("");
   const [motivationError, setMotivationError] = useState("");
 
-  const maxChars = 20;
+  const maxChars = 35;
   const charCount = motivation.length;
   const isOverLimit = charCount > maxChars;
 
@@ -225,7 +225,7 @@ export function FormGoodUxGoodUi({ translations: t, lang }: Props) {
 
       <div className="space-y-2">
         <Label htmlFor="motivation-good-good">
-          {t.motivation}{" "}
+          {t.motivationLabel}{" "}
           <span className="font-normal text-muted-foreground">({t.motivationMaxChars})</span>
         </Label>
         {/* Good UX: highlight overflow text */}
@@ -234,7 +234,7 @@ export function FormGoodUxGoodUi({ translations: t, lang }: Props) {
           value={motivation}
           onChange={setMotivation}
           maxLength={maxChars}
-          placeholder={t.motivationPlaceholder}
+          placeholder={t.motivationPlaceholderGoodUx}
           rows={3}
         />
         <div

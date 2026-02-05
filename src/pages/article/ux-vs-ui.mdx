@@ -12,7 +12,7 @@ The same form, four different implementations. Each cell combines a level of **U
 
 <div className="mb-6">
 <span className="inline-block bg-primary text-primary-foreground text-xs font-medium px-2 py-1 rounded mb-2">👇 Try it yourself</span>
-<p className="text-sm text-muted-foreground mt-1">Type in the email, select a country, write more than 20 characters in motivation, and notice the buttons.</p>
+<p className="text-sm text-muted-foreground mt-1">Type in the email, select a country, write more than 35 characters in motivation, and notice the buttons.</p>
 </div>
 
 <UxVsUiGrid lang="en" client:load>
@@ -34,7 +34,7 @@ The goal is to have **both**.
 
 1. **Aggressive email validation**: Shows "Invalid email format" on every keystroke. Type "j" and you immediately see an error. This is jarring and unhelpful — the user hasn't finished typing yet.
 
-2. **No placeholders**: Empty fields with no hint about what to enter. Users must guess the expected format.
+2. **Question in placeholder**: The motivation field uses the placeholder for the question instead of the label. Once users start typing, the question disappears — they can't refer back to what was asked.
 
 3. **Long dropdown without search**: 30 countries in a plain dropdown. Users must scroll through the entire list to find their country. No way to type and filter.
 

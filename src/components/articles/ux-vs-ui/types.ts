@@ -16,7 +16,9 @@ export type Translations = {
   countryNoResults: string;
   countryRequired: string;
   motivation: string;
+  motivationLabel: string;
   motivationPlaceholder: string;
+  motivationPlaceholderGoodUx: string;
   motivationMaxChars: string;
   motivationTooLong: string;
   submit: string;
@@ -39,8 +41,10 @@ export const enTranslations: Translations = {
   countryNoResults: "No country found.",
   countryRequired: "Please select a country",
   motivation: "Motivation",
+  motivationLabel: "Why do you want to join us?",
   motivationPlaceholder: "Why do you want to join?",
-  motivationMaxChars: "max 20 chars",
+  motivationPlaceholderGoodUx: "Try to conquer the world, Pinky!",
+  motivationMaxChars: "max 35 chars",
   motivationTooLong: "Text is too long",
   submit: "Submit",
   cancel: "Cancel",
@@ -62,8 +66,10 @@ export const frTranslations: Translations = {
   countryNoResults: "Aucun pays trouvé.",
   countryRequired: "Veuillez sélectionner un pays",
   motivation: "Motivation",
+  motivationLabel: "Pourquoi nous rejoindre ?",
   motivationPlaceholder: "Pourquoi voulez-vous nous rejoindre ?",
-  motivationMaxChars: "max 20 car.",
+  motivationPlaceholderGoodUx: "Tenter de conquérir le monde Minus !",
+  motivationMaxChars: "max 35 car.",
   motivationTooLong: "Le texte est trop long",
   submit: "Envoyer",
   cancel: "Annuler",

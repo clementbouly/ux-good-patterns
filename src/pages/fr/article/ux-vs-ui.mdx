@@ -12,7 +12,7 @@ Le meme formulaire, quatre implementations differentes. Chaque cellule combine u
 
 <div className="mb-6">
 <span className="inline-block bg-primary text-primary-foreground text-xs font-medium px-2 py-1 rounded mb-2">👇 Essayez par vous-même</span>
-<p className="text-sm text-muted-foreground mt-1">Tapez dans l'email, sélectionnez un pays, écrivez plus de 20 caractères dans motivation, et observez les boutons.</p>
+<p className="text-sm text-muted-foreground mt-1">Tapez dans l'email, sélectionnez un pays, écrivez plus de 35 caractères dans motivation, et observez les boutons.</p>
 </div>
 
 <UxVsUiGrid lang="fr" client:load>
@@ -34,7 +34,7 @@ L'objectif est d'avoir **les deux**.
 
 1. **Validation email agressive** : Affiche "Format d'email invalide" a chaque frappe. Tapez "j" et vous voyez immediatement une erreur. C'est perturbant et inutile — l'utilisateur n'a pas fini de taper.
 
-2. **Pas de placeholders** : Champs vides sans indication de ce qu'il faut entrer. L'utilisateur doit deviner le format attendu.
+2. **Question dans le placeholder** : Le champ motivation utilise le placeholder pour la question au lieu du label. Une fois que l'utilisateur commence a taper, la question disparait — impossible de s'y referer.
 
 3. **Long menu deroulant sans recherche** : 30 pays dans un simple menu deroulant. Les utilisateurs doivent faire defiler toute la liste pour trouver leur pays. Pas moyen de taper pour filtrer.
 

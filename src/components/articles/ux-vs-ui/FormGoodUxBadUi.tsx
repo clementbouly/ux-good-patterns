@@ -18,7 +18,7 @@ export function FormGoodUxBadUi({ translations: t, lang }: Props) {
   const [motivationError, setMotivationError] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const maxChars = 20;
+  const maxChars = 35;
   const charCount = motivation.length;
   const isOverLimit = charCount > maxChars;
 
@@ -184,14 +184,14 @@ export function FormGoodUxBadUi({ translations: t, lang }: Props) {
 
       <div style={{ marginBottom: "12px" }}>
         <label style={{ display: "block", marginBottom: "4px" }}>
-          {t.motivation}{" "}
+          {t.motivationLabel}{" "}
           <span style={{ fontWeight: "normal", color: "#666" }}>({t.motivationMaxChars})</span>
         </label>
         {/* Good UX: character counter, no hard limit */}
         <textarea
           value={motivation}
           onChange={(e) => setMotivation(e.target.value)}
-          placeholder={t.motivationPlaceholder}
+          placeholder={t.motivationPlaceholderGoodUx}
           rows={3}
           style={{ all: "revert", width: "100%", boxSizing: "border-box", resize: "none" }}
         />

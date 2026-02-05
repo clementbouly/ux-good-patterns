@@ -30,7 +30,7 @@ export function FormBadUxBadUi({ translations: t, lang }: Props) {
 
   const handleMotivationChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     // Bad UX: silently truncate at 20 characters
-    const value = e.target.value.slice(0, 20);
+    const value = e.target.value.slice(0, 35);
     setMotivation(value);
   };
 
@@ -79,10 +79,11 @@ export function FormBadUxBadUi({ translations: t, lang }: Props) {
 
       <div style={{ marginBottom: "12px" }}>
         <label style={{ display: "block", marginBottom: "4px" }}>{t.motivation}</label>
-        {/* Bad UX: no counter, silently truncated */}
+        {/* Bad UX: no counter, silently truncated, question in placeholder instead of label */}
         <textarea
           value={motivation}
           onChange={handleMotivationChange}
+          placeholder={t.motivationPlaceholder}
           rows={3}
           style={{ all: "revert", width: "100%", boxSizing: "border-box", resize: "none" }}
         />
