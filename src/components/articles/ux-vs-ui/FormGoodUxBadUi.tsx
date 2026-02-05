@@ -183,10 +183,7 @@ export function FormGoodUxBadUi({ translations: t, lang }: Props) {
       </div>
 
       <div style={{ marginBottom: "12px" }}>
-        <label style={{ display: "block", marginBottom: "4px" }}>
-          {t.motivationLabel}{" "}
-          <span style={{ fontWeight: "normal", color: "#666" }}>({t.motivationMaxChars})</span>
-        </label>
+        <label style={{ display: "block", marginBottom: "4px" }}>{t.motivationLabel}</label>
         {/* Good UX: character counter, no hard limit */}
         <textarea
           value={motivation}

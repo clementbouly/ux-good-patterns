@@ -224,10 +224,7 @@ export function FormGoodUxGoodUi({ translations: t, lang }: Props) {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="motivation-good-good">
-          {t.motivationLabel}{" "}
-          <span className="font-normal text-muted-foreground">({t.motivationMaxChars})</span>
-        </Label>
+        <Label htmlFor="motivation-good-good">{t.motivationLabel}</Label>
         {/* Good UX: highlight overflow text */}
         <HighlightedTextarea
           id="motivation-good-good"
