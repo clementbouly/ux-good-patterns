@@ -84,6 +84,7 @@ export function FormGoodUxBadUi({ translations: t, lang }: Props) {
 
   return (
     <form onSubmit={handleSubmit} style={{ all: "revert" }}>
+      <p style={{ fontSize: "12px", color: "#666", marginBottom: "8px" }}><span style={{ color: "red" }}>*</span> {t.requiredFieldsHint}</p>
       <div style={{ marginBottom: "12px" }}>
         <label style={{ display: "block", marginBottom: "4px" }}>{t.email} <span style={{ color: "red" }}>*</span></label>
         <input

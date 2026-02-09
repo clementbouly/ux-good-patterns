@@ -21,6 +21,7 @@ export type Translations = {
   motivationPlaceholderGoodUx: string;
   motivationMaxChars: string;
   motivationTooLong: string;
+  requiredFieldsHint: string;
   submit: string;
   cancel: string;
   submitSuccess: string;
@@ -46,6 +47,7 @@ export const enTranslations: Translations = {
   motivationPlaceholderGoodUx: "Try to conquer the world, Pinky!",
   motivationMaxChars: "max 35 chars",
   motivationTooLong: "Text is too long",
+  requiredFieldsHint: "Required fields",
   submit: "Submit",
   cancel: "Cancel",
   submitSuccess: "Form submitted successfully!",
@@ -71,6 +73,7 @@ export const frTranslations: Translations = {
   motivationPlaceholderGoodUx: "Tenter de conquérir le monde Minus !",
   motivationMaxChars: "max 35 car.",
   motivationTooLong: "Le texte est trop long",
+  requiredFieldsHint: "Champs obligatoires",
   submit: "Envoyer",
   cancel: "Annuler",
   submitSuccess: "Formulaire envoyé avec succès !",
