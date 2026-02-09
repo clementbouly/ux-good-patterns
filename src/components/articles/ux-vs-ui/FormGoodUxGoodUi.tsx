@@ -154,6 +154,7 @@ export function FormGoodUxGoodUi({ translations: t, lang }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <p className="text-xs text-muted-foreground"><span className="text-destructive">*</span> {t.requiredFieldsHint}</p>
       <div className="space-y-2">
         <Label htmlFor="email-good-good">{t.email} <span className="text-destructive">*</span></Label>
         <Input
