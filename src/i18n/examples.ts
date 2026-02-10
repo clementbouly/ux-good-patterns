@@ -30,9 +30,9 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       category: "Feedback",
     },
     "verification-code-input": {
-      title: "Verification code input",
+      title: "Verification code paste support",
       description:
-        "Use separate digit inputs for verification codes to improve clarity and mobile experience",
+        "Allow users to paste verification codes instead of typing digit by digit",
       category: "Forms",
     },
     "copy-feedback": {
@@ -121,8 +121,9 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       category: "Feedback",
     },
     "verification-code-input": {
-      title: "Champ de code de vérification",
-      description: "Utiliser des inputs séparés pour les codes de vérification pour plus de clarté",
+      title: "Support du copier-coller pour les codes de vérification",
+      description:
+        "Permettre aux utilisateurs de coller les codes de vérification au lieu de taper chaque chiffre un par un",
       category: "Formulaires",
     },
     "copy-feedback": {
