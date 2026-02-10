@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { X, Check, ArrowRight } from "lucide-react";
-import { type Example, type ExampleVariant } from "@/examples";
+import { type Example, type ExampleVariant, getExampleTranslation } from "@/examples";
 import { ShareButton } from "./ShareButton";
 import { useSearchParam } from "@/hooks/useSearchParam";
 import { isNew } from "@/lib/dateUtils";
@@ -77,6 +77,17 @@ export function ExampleCard({
   const [goodIndex, setGoodIndex] = useState(0);
   const [category] = useSearchParam("category");
 
+  const translation = useMemo(
+    () => getExampleTranslation(example.meta.id, lang),
+    [example.meta.id, lang]
+  );
+  const meta = {
+    ...example.meta,
+    title: translation?.title ?? example.meta.title,
+    description: translation?.description ?? example.meta.description,
+    category: translation?.category ?? example.meta.category,
+  };
+
   const CurrentBadExample = example.BadExamples[badIndex]?.component;
   const CurrentGoodExample = example.GoodExamples[goodIndex]?.component;
 
@@ -88,10 +99,10 @@ export function ExampleCard({
 
   const title = linkTitle ? (
     <a href={exampleUrl} className="block hover:underline">
-      <TitleTag className={titleClassName}>{example.meta.title}</TitleTag>
+      <TitleTag className={titleClassName}>{meta.title}</TitleTag>
     </a>
   ) : (
-    <TitleTag className={titleClassName}>{example.meta.title}</TitleTag>
+    <TitleTag className={titleClassName}>{meta.title}</TitleTag>
   );
 
   // Build share URL after hydration to avoid SSR mismatch
@@ -106,7 +117,7 @@ export function ExampleCard({
 
       <div className="mb-4">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium text-muted-foreground">{example.meta.category}</span>
+          <span className="text-xs font-medium text-muted-foreground">{meta.category}</span>
           {isNew(example.meta.createdAt) && (
             <span className="inline-flex items-center rounded-full bg-red-500 px-2 py-0.5 text-xs font-semibold text-white">
               {t("common.new")}
@@ -114,9 +125,9 @@ export function ExampleCard({
           )}
         </div>
         {title}
-        <p className="my-3 text-sm text-muted-foreground">{example.meta.description}</p>
+        <p className="my-3 text-sm text-muted-foreground">{meta.description}</p>
         <div className="mt-2 flex flex-wrap gap-1">
-          {example.meta.tags.map((tag) => (
+          {meta.tags.map((tag) => (
             <span
               key={tag}
               className="rounded bg-secondary px-2 py-0.5 text-xs text-secondary-foreground"

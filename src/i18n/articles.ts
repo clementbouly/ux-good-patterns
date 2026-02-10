@@ -12,6 +12,12 @@ type ArticleTranslations = {
 
 const articlesTranslations: Record<Lang, ArticleTranslations> = {
   en: {
+    "ux-vs-ui": {
+      title: "Understanding UX vs UI — By Example",
+      description:
+        "A hands-on demonstration of the difference between User Experience and User Interface through interactive form examples",
+      tags: ["Fundamentals", "Forms", "Interactive"],
+    },
     "linkedin-ux-mistakes": {
       title: "5 UX Mistakes Even LinkedIn Makes",
       description:
@@ -29,8 +35,20 @@ const articlesTranslations: Record<Lang, ArticleTranslations> = {
       description: "Experience firsthand how small UX frictions compound into major slowdowns",
       tags: ["Interactive", "Game", "Micro-interactions"],
     },
+    "checkbox-vs-toggle": {
+      title: "Checkbox vs Toggle Switch: When to Use Which",
+      description:
+        "A practical guide to choosing between checkboxes and toggle switches, with interactive examples",
+      tags: ["Forms", "Interactive"],
+    },
   },
   fr: {
+    "ux-vs-ui": {
+      title: "Comprendre la difference UX vs UI — Par l'exemple",
+      description:
+        "Une demonstration pratique de la difference entre Experience Utilisateur et Interface Utilisateur a travers des exemples de formulaires interactifs",
+      tags: ["Fondamentaux", "Formulaires", "Interactif"],
+    },
     "linkedin-ux-mistakes": {
       title: "5 erreurs UX que même LinkedIn commet",
       description:
@@ -48,6 +66,12 @@ const articlesTranslations: Record<Lang, ArticleTranslations> = {
       description:
         "Découvrez comment les petites frictions UX s'accumulent en ralentissements majeurs",
       tags: ["Interactif", "Jeu", "Micro-interactions"],
+    },
+    "checkbox-vs-toggle": {
+      title: "Checkbox vs Toggle Switch : lequel utiliser ?",
+      description:
+        "Un guide pratique pour choisir entre les cases à cocher et les interrupteurs, avec des exemples interactifs",
+      tags: ["Formulaires", "Interactif"],
     },
   },
 };

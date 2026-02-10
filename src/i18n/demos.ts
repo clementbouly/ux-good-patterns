@@ -199,6 +199,32 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     "speedGame.friction4.title": "OTP validation",
     "speedGame.friction4.bad": 'Manual "Validate" button click',
     "speedGame.friction4.good": "Auto-submit when 6 digits entered",
+
+    // toggle-immediate-effect
+    "toggle.videoSettings": "Video Settings",
+    "toggle.autoplay": "Autoplay",
+    "toggle.fullscreen": "Fullscreen",
+    "toggle.subtitles": "Subtitles",
+
+    // checkbox-grouped-selection
+    "checkbox.exportData": "Export your data",
+    "checkbox.accountSettings": "Account settings",
+    "checkbox.profileDetails": "Profile details",
+    "checkbox.contacts": "Contacts",
+    "checkbox.tags": "Tags",
+    "checkbox.filters": "Filters",
+    "checkbox.export": "Export",
+    "checkbox.exported": "Exported!",
+
+    // checkbox-hierarchical-options
+    "checkbox.selectCountries": "Select countries you've been to",
+    "checkbox.northAmerica": "North America",
+    "checkbox.usa": "USA",
+    "checkbox.mexico": "Mexico",
+    "checkbox.canada": "Canada",
+    "checkbox.guatemala": "Guatemala",
+    "checkbox.haiti": "Haiti",
+    "checkbox.cuba": "Cuba",
   },
   fr: {
     // Common
@@ -395,6 +421,32 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     "speedGame.friction4.title": "Validation OTP",
     "speedGame.friction4.bad": 'Clic manuel sur le bouton "Valider"',
     "speedGame.friction4.good": "Soumission auto quand 6 chiffres saisis",
+
+    // toggle-immediate-effect
+    "toggle.videoSettings": "Réglages vidéo",
+    "toggle.autoplay": "Lecture automatique",
+    "toggle.fullscreen": "Plein écran",
+    "toggle.subtitles": "Sous-titres",
+
+    // checkbox-grouped-selection
+    "checkbox.exportData": "Exporter vos données",
+    "checkbox.accountSettings": "Paramètres du compte",
+    "checkbox.profileDetails": "Détails du profil",
+    "checkbox.contacts": "Contacts",
+    "checkbox.tags": "Tags",
+    "checkbox.filters": "Filtres",
+    "checkbox.export": "Exporter",
+    "checkbox.exported": "Exporté !",
+
+    // checkbox-hierarchical-options
+    "checkbox.selectCountries": "Sélectionnez les pays que vous avez visités",
+    "checkbox.northAmerica": "Amérique du Nord",
+    "checkbox.usa": "États-Unis",
+    "checkbox.mexico": "Mexique",
+    "checkbox.canada": "Canada",
+    "checkbox.guatemala": "Guatemala",
+    "checkbox.haiti": "Haïti",
+    "checkbox.cuba": "Cuba",
   },
 };
 

@@ -18,6 +18,14 @@ When building OTP/verification code inputs, trigger validation automatically whe
 
 When opening a modal with a single input field (search, quick add), autofocus that input so users can type immediately. Implementation: use autoFocus prop or useEffect with inputRef.current?.focus(). Don't autofocus in confirmation modals (focus the confirm button instead) or modals with content to read first.
 
+### Checkboxes for grouped selection with submit
+
+Use checkboxes (not toggles) when selection requires explicit confirmation via a submit/action button. Checkboxes communicate deferred action: select then confirm. Toggles imply immediate effect, creating confusion when a submit step is needed.
+
+### Checkboxes for hierarchical selection
+
+Use checkboxes (not toggles) for hierarchical parent-child selections. Checkboxes support an indeterminate (mixed) state showing 'some but not all' children are selected. Toggle switches only support on/off, making partial selection invisible.
+
 ### Copy to clipboard feedback
 
 When implementing copy-to-clipboard, show inline feedback next to the button, not a toast. Implementation: swap icon from Copy to Check, optionally show 'Copied!' text, revert after 2s with setTimeout. Use navigator.clipboard.writeText() with try/catch for error handling.
@@ -69,6 +77,10 @@ When submitting forms, disable the button and show a spinner to prevent double s
 ### Toast vs Inline feedback
 
 Show action feedback inline (next to the triggering element), not in distant toasts. Toasts violate proximity principle and are inaccessible to screen magnifier users. Implementation: for copy buttons show checkmark inline, for form fields show validation next to field. Reserve toasts only for background processes (file upload complete) or system notifications.
+
+### Toggle switches for immediate settings
+
+Use toggle switches (not checkboxes) for independent settings that take immediate effect. Toggles communicate instant action like a light switch — no submit button needed. Checkboxes imply grouped selection with a deferred submit step.
 
 ### Verification code paste support
 

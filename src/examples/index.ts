@@ -14,6 +14,9 @@ import * as displayOptions from "./display-options";
 import * as toastVsInlineFeedback from "./toast-vs-inline-feedback";
 import * as floatingActionButton from "./floating-action-button";
 import * as dontLimitUserInput from "./dont-limit-user-input";
+import * as toggleImmediateEffect from "./toggle-immediate-effect";
+import * as checkboxGroupedSelection from "./checkbox-grouped-selection";
+import * as checkboxHierarchicalOptions from "./checkbox-hierarchical-options";
 
 export const examples = [
   autofocusModal,
@@ -32,6 +35,9 @@ export const examples = [
   displayOptions,
   toastVsInlineFeedback,
   dontLimitUserInput,
+  toggleImmediateEffect,
+  checkboxGroupedSelection,
+  checkboxHierarchicalOptions,
 ];
 
 export type ExampleMeta = {

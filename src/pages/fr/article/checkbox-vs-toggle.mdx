@@ -1,0 +1,85 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "Checkbox vs Toggle Switch : lequel utiliser ?"
+description: "Un guide pratique pour choisir entre les cases à cocher et les interrupteurs, avec des exemples interactifs"
+---
+
+import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+import { Sources, SourceRef } from "@/components/articles/Sources";
+
+# Checkbox vs Toggle Switch : lequel utiliser ?
+
+Les checkboxes et les toggle switches se ressemblent — les deux permettent d'activer ou désactiver des options. Mais ils communiquent des choses fondamentalement différentes aux utilisateurs. Utiliser le mauvais crée une confusion subtile qui érode la confiance envers votre interface.
+
+La distinction clé est simple : **les toggles sont pour l'effet immédiat, les checkboxes pour la sélection différée** <SourceRef id={1} client:load />.
+
+---
+
+## Règle 1 : Toggles pour les réglages immédiats et indépendants
+
+Les toggle switches fonctionnent comme des interrupteurs : on le bascule, et le changement prend effet immédiatement. Pas de bouton Enregistrer, pas d'étape de confirmation. L'utilisateur s'attend à un retour instantané.
+
+Ils sont idéaux pour :
+- Les paramètres d'application (mode sombre, notifications, lecture automatique)
+- Les feature flags contrôlés par l'utilisateur
+- Tout état on/off qui prend effet au moment de l'interaction
+
+<ExampleEmbed id="toggle-immediate-effect" client:load />
+
+Quand vous utilisez des checkboxes pour ces réglages, vous introduisez le doute. Est-ce que cocher la case a déjà activé la fonctionnalité ? Dois-je cliquer sur Enregistrer ? Le langage visuel du composant entre en conflit avec le comportement attendu.
+
+---
+
+## Règle 2 : Checkboxes pour la sélection groupée avec confirmation
+
+Les checkboxes viennent des formulaires papier — on coche ce qui s'applique, puis on rend le formulaire. Ce modèle mental tient toujours. Quand plusieurs options alimentent une seule action (soumettre, exporter, appliquer des filtres), les checkboxes sont le bon choix.
+
+<ExampleEmbed id="checkbox-grouped-selection" client:load />
+
+Les toggle switches dans ce contexte créent un faux sentiment d'immédiateté. Les utilisateurs peuvent penser que chaque toggle prend déjà effet, alors qu'en réalité rien ne se passe tant qu'ils n'ont pas cliqué sur le bouton d'action.
+
+---
+
+## Règle 3 : Checkboxes pour les options hiérarchiques
+
+Les checkboxes ont une capacité unique que les toggles n'ont pas : l'**état indéterminé**. Quand une option parente couvre partiellement ses enfants (certains sélectionnés, d'autres non), la checkbox peut afficher un troisième état visuel — ni entièrement cochée ni décochée.
+
+C'est essentiel pour les structures arborescentes, les systèmes de permissions et toute sélection imbriquée.
+
+<ExampleEmbed id="checkbox-hierarchical-options" client:load />
+
+Les toggle switches sont strictement binaires — on ou off. Ils n'ont aucun moyen d'exprimer "certains enfants sont sélectionnés, mais pas tous".
+
+---
+
+## Récapitulatif
+
+| Critère | Toggle Switch | Checkbox |
+|---------|:---:|:---:|
+| Effet immédiat | Oui | Non |
+| Nécessite un bouton de confirmation | Non | Oui |
+| Sélection multiple groupée | Non | Oui |
+| Supporte l'état indéterminé | Non | Oui |
+| Hiérarchique (parent/enfant) | Non | Oui |
+
+---
+
+## À retenir
+
+Le choix entre checkbox et toggle n'est pas esthétique — il est sémantique. Chaque composant porte des attentes sur son comportement. Quand ces attentes correspondent à la réalité, l'interface est intuitive. Quand ce n'est pas le cas, les utilisateurs hésitent, font des erreurs et perdent confiance.
+
+**Utilisez les toggles quand l'effet est immédiat. Utilisez les checkboxes quand l'action est différée ou hiérarchique.**
+
+<Sources
+  client:load
+  sources={[
+    {
+      id: 1,
+      authors: "Demcak, P.",
+      year: 2021,
+      title: "Checkbox vs Toggle Switch: 7 Use-Cases of Forms Design",
+      publication: "UXtweak Blog",
+      url: "https://blog.uxtweak.com/checkbox-vs-toggle-switch/"
+    }
+  ]}
+/>

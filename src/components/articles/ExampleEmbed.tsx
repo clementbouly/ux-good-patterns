@@ -1,11 +1,13 @@
 import { examples } from "@/examples";
 import { ExampleCard } from "@/components/ExampleCard";
+import { useI18n } from "@/hooks/useI18n";
 
 type ExampleEmbedProps = {
   id: string;
 };
 
 export function ExampleEmbed({ id }: ExampleEmbedProps) {
+  const { lang } = useI18n();
   const example = examples.find((e) => e.meta.id === id);
 
   if (!example) {
@@ -18,7 +20,7 @@ export function ExampleEmbed({ id }: ExampleEmbedProps) {
 
   return (
     <div className="not-prose -mx-6 md:mx-0">
-      <ExampleCard example={example} titleAs="h2" linkTitle={true} />
+      <ExampleCard example={example} titleAs="h2" linkTitle={true} lang={lang} />
     </div>
   );
 }

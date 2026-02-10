@@ -100,6 +100,24 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
         "Allow users to exceed character limits and show clear feedback instead of silently blocking their input.",
       category: "Input",
     },
+    "toggle-immediate-effect": {
+      title: "Toggle switches for immediate settings",
+      description:
+        "Use toggle switches for independent settings that take effect immediately, not checkboxes that imply deferred action.",
+      category: "Forms",
+    },
+    "checkbox-grouped-selection": {
+      title: "Checkboxes for grouped selection",
+      description:
+        "Use checkboxes when users select from a group of options that require explicit confirmation before taking effect.",
+      category: "Forms",
+    },
+    "checkbox-hierarchical-options": {
+      title: "Checkboxes for hierarchical selection",
+      description:
+        "Use checkboxes with indeterminate state for parent-child option hierarchies. Toggles cannot express partial selection.",
+      category: "Forms",
+    },
   },
   fr: {
     "autofocus-modal": {
@@ -194,6 +212,24 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       description:
         "Permettre aux utilisateurs de dépasser la limite de caractères et afficher un feedback clair au lieu de bloquer silencieusement.",
       category: "Input",
+    },
+    "toggle-immediate-effect": {
+      title: "Toggle switches pour les réglages immédiats",
+      description:
+        "Utiliser des toggle switches pour les réglages indépendants à effet immédiat, pas des checkboxes qui impliquent une action différée.",
+      category: "Formulaires",
+    },
+    "checkbox-grouped-selection": {
+      title: "Checkboxes pour la sélection groupée",
+      description:
+        "Utiliser des checkboxes quand les utilisateurs sélectionnent parmi un groupe d'options nécessitant une confirmation explicite.",
+      category: "Formulaires",
+    },
+    "checkbox-hierarchical-options": {
+      title: "Checkboxes pour la sélection hiérarchique",
+      description:
+        "Utiliser des checkboxes avec état indéterminé pour les hiérarchies parent-enfant. Les toggles ne peuvent pas exprimer une sélection partielle.",
+      category: "Formulaires",
     },
   },
 };

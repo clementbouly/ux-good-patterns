@@ -1,0 +1,85 @@
+---
+layout: "@/layouts/ArticleLayout.astro"
+title: "Checkbox vs Toggle Switch: When to Use Which"
+description: "A practical guide to choosing between checkboxes and toggle switches, with interactive examples"
+---
+
+import { ExampleEmbed } from "@/components/articles/ExampleEmbed";
+import { Sources, SourceRef } from "@/components/articles/Sources";
+
+# Checkbox vs Toggle Switch: When to Use Which
+
+Checkboxes and toggle switches look similar — both let users turn options on and off. But they communicate fundamentally different things to users. Using the wrong one creates subtle confusion that erodes trust in your interface.
+
+The core distinction is simple: **toggles are for immediate effect, checkboxes are for deferred selection** <SourceRef id={1} client:load />.
+
+---
+
+## Rule 1: Toggles for Immediate, Independent Settings
+
+Toggle switches work like light switches: flip it, and the change happens now. No save button, no confirmation step. The user expects instant feedback.
+
+This makes them ideal for:
+- App settings (dark mode, notifications, autoplay)
+- Feature flags that users control
+- Any on/off state that takes effect the moment you interact
+
+<ExampleEmbed id="toggle-immediate-effect" client:load />
+
+When you use checkboxes for these settings, you introduce doubt. Did checking the box already activate it? Do I need to click Save? The component's visual language conflicts with the expected behavior.
+
+---
+
+## Rule 2: Checkboxes for Grouped Selection with Submit
+
+Checkboxes originate from paper forms — you check what applies, then hand in the form. That mental model still holds. When multiple options feed into a single action (submit, export, apply filters), checkboxes are the right choice.
+
+<ExampleEmbed id="checkbox-grouped-selection" client:load />
+
+Toggle switches in this context create a false sense of immediacy. Users may think each toggle is already taking effect, when in reality nothing happens until they click the action button.
+
+---
+
+## Rule 3: Checkboxes for Hierarchical Options
+
+Checkboxes have a unique capability that toggles lack: the **indeterminate state**. When a parent option partially covers its children (some selected, some not), the checkbox can display a third visual state — neither fully checked nor unchecked.
+
+This is essential for tree structures, permission systems, and any nested selection.
+
+<ExampleEmbed id="checkbox-hierarchical-options" client:load />
+
+Toggle switches are strictly binary — on or off. They have no way to express "some but not all children are selected."
+
+---
+
+## Quick Reference
+
+| Criteria | Toggle Switch | Checkbox |
+|----------|:---:|:---:|
+| Immediate effect | Yes | No |
+| Needs a submit button | No | Yes |
+| Grouped multi-selection | No | Yes |
+| Supports indeterminate state | No | Yes |
+| Hierarchical (parent/child) | No | Yes |
+
+---
+
+## Key Takeaway
+
+The choice between checkbox and toggle is not aesthetic — it is semantic. Each component carries expectations about how it behaves. When those expectations match reality, the interface feels intuitive. When they don't, users hesitate, make errors, and lose confidence.
+
+**Use toggles when the effect is immediate. Use checkboxes when the action is deferred or hierarchical.**
+
+<Sources
+  client:load
+  sources={[
+    {
+      id: 1,
+      authors: "Demcak, P.",
+      year: 2021,
+      title: "Checkbox vs Toggle Switch: 7 Use-Cases of Forms Design",
+      publication: "UXtweak Blog",
+      url: "https://blog.uxtweak.com/checkbox-vs-toggle-switch/"
+    }
+  ]}
+/>

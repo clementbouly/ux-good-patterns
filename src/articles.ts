@@ -39,4 +39,12 @@ export const articles: Article[] = [
     tags: ["Interactive", "Game", "Micro-interactions"],
     createdAt: "2025-12-16",
   },
+  {
+    slug: "checkbox-vs-toggle",
+    title: "Checkbox vs Toggle Switch: When to Use Which",
+    description:
+      "A practical guide to choosing between checkboxes and toggle switches, with interactive examples",
+    tags: ["Forms", "Interactive"],
+    createdAt: "2026-02-10",
+  },
 ];

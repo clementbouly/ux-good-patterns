@@ -1,11 +1,15 @@
 import { Check } from "lucide-react";
 import { examples } from "@/examples";
+import { useI18n } from "@/hooks/useI18n";
+import { useTranslations } from "@/i18n";
 
 type GoodExampleEmbedProps = {
   id: string;
 };
 
 export function GoodExampleEmbed({ id }: GoodExampleEmbedProps) {
+  const { lang } = useI18n();
+  const t = useTranslations(lang);
   const example = examples.find((e) => e.meta.id === id);
 
   if (!example) {
@@ -28,7 +32,7 @@ export function GoodExampleEmbed({ id }: GoodExampleEmbedProps) {
         <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 dark:bg-green-950">
           <Check className="h-3 w-3 text-green-600 dark:text-green-400" />
         </span>
-        <span className="font-medium text-green-600 dark:text-green-400">Good example</span>
+        <span className="font-medium text-green-600 dark:text-green-400">{t("example.good")}</span>
       </div>
       <GoodExample />
     </div>
