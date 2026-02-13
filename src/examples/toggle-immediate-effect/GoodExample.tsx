@@ -32,7 +32,7 @@ export function GoodExample() {
 
   return (
     <fieldset className="grid gap-4">
-      <legend className="text-sm font-medium">{td("toggle.videoSettings")}</legend>
+      <legend className="text-sm font-medium mb-4">{td("toggle.videoSettings")}</legend>
       <div className="grid gap-3">
         {settings.map((setting) => (
           <div key={setting.id} className="flex items-center gap-2">

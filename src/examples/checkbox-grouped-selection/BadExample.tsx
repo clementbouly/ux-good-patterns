@@ -32,7 +32,7 @@ export function BadExample() {
 
   return (
     <fieldset className="grid gap-4">
-      <legend className="text-sm font-medium">{td("checkbox.exportData")}</legend>
+      <legend className="text-sm font-medium mb-4">{td("checkbox.exportData")}</legend>
       <div className="grid gap-3">
         {DATA_OPTIONS.map((key) => (
           <div key={key} className="flex items-center gap-2">
