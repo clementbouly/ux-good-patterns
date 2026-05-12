@@ -118,6 +118,12 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
         "Use checkboxes with indeterminate state for parent-child option hierarchies. Toggles cannot express partial selection.",
       category: "Forms",
     },
+    "date-of-birth-input": {
+      title: "Date of birth input",
+      description:
+        "Use three text fields (day, month, year) with auto-advance instead of native date pickers or long dropdowns.",
+      category: "Forms",
+    },
   },
   fr: {
     "autofocus-modal": {
@@ -229,6 +235,12 @@ const examplesTranslations: Record<Lang, ExampleTranslations> = {
       title: "Checkboxes pour la sélection hiérarchique",
       description:
         "Utiliser des checkboxes avec état indéterminé pour les hiérarchies parent-enfant. Les toggles ne peuvent pas exprimer une sélection partielle.",
+      category: "Formulaires",
+    },
+    "date-of-birth-input": {
+      title: "Saisie de la date de naissance",
+      description:
+        "Utiliser trois champs texte (jour, mois, année) avec auto-advance au lieu des date pickers natifs ou des longs dropdowns.",
       category: "Formulaires",
     },
   },

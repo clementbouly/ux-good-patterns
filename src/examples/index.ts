@@ -17,6 +17,7 @@ import * as dontLimitUserInput from "./dont-limit-user-input";
 import * as toggleImmediateEffect from "./toggle-immediate-effect";
 import * as checkboxGroupedSelection from "./checkbox-grouped-selection";
 import * as checkboxHierarchicalOptions from "./checkbox-hierarchical-options";
+import * as dateOfBirthInput from "./date-of-birth-input";
 
 export const examples = [
   autofocusModal,
@@ -38,6 +39,7 @@ export const examples = [
   toggleImmediateEffect,
   checkboxGroupedSelection,
   checkboxHierarchicalOptions,
+  dateOfBirthInput,
 ];
 
 export type ExampleMeta = {

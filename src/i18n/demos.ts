@@ -225,6 +225,21 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     "checkbox.guatemala": "Guatemala",
     "checkbox.haiti": "Haiti",
     "checkbox.cuba": "Cuba",
+
+    // date-of-birth-input
+    "dob.label": "Date of birth",
+    "dob.day": "Day",
+    "dob.month": "Month",
+    "dob.year": "Year",
+    "dob.dayPlaceholder": "DD",
+    "dob.monthPlaceholder": "MM",
+    "dob.yearPlaceholder": "YYYY",
+    "dob.invalidDay": "This day doesn't exist for the selected month",
+    "dob.invalidMonth": "Month must be between 1 and 12",
+    "dob.invalidYear": "Please enter a valid year",
+    "dob.valid": "Valid date",
+    "dob.badPlaceholder": "23/06/1986",
+    "dob.openCalendar": "Open calendar",
   },
   fr: {
     // Common
@@ -447,6 +462,21 @@ export const demoTranslations: Record<Lang, Record<string, string>> = {
     "checkbox.guatemala": "Guatemala",
     "checkbox.haiti": "Haïti",
     "checkbox.cuba": "Cuba",
+
+    // date-of-birth-input
+    "dob.label": "Date de naissance",
+    "dob.day": "Jour",
+    "dob.month": "Mois",
+    "dob.year": "Année",
+    "dob.dayPlaceholder": "JJ",
+    "dob.monthPlaceholder": "MM",
+    "dob.yearPlaceholder": "AAAA",
+    "dob.invalidDay": "Ce jour n'existe pas pour le mois sélectionné",
+    "dob.invalidMonth": "Le mois doit être entre 1 et 12",
+    "dob.invalidYear": "Veuillez entrer une année valide",
+    "dob.valid": "Date valide",
+    "dob.badPlaceholder": "23/06/1986",
+    "dob.openCalendar": "Ouvrir le calendrier",
   },
 };
 

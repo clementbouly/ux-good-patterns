@@ -35,7 +35,7 @@ export function ExamplePageContent({ exampleId }: ExamplePageContentProps) {
         </a>
       </Button>
 
-      <ExampleCard example={example} titleAs="h1" linkTitle={false} />
+      <ExampleCard example={example} titleAs="h1" linkTitle={false} lang={lang} />
     </>
   );
 }
